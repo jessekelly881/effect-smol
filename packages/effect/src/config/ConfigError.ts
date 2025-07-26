@@ -36,7 +36,7 @@ export type ConfigError = MissingData | SourceError | InvalidData
  */
 export class MissingData extends Data.TaggedError("ConfigError")<{
   readonly path: ReadonlyArray<string>
-  readonly fullPath?: string | undefined
+  readonly fullPath: string
   readonly cause?: unknown
 }> {
   /**
@@ -52,7 +52,7 @@ export class MissingData extends Data.TaggedError("ConfigError")<{
    */
   override get message(): string {
     const pathString = this.path.join(".")
-    const showFullPath = this.fullPath && this.fullPath !== pathString
+    const showFullPath = this.fullPath !== pathString
     return `Missing data at path: ${this.path.join(".")}${showFullPath ? ` (${this.fullPath})` : ""}`
   }
 }

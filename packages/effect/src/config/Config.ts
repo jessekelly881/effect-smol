@@ -5,13 +5,13 @@ import * as Cause from "../Cause.ts"
 import * as Arr from "../collections/Array.ts"
 import type * as Brand from "../data/Brand.ts"
 import * as Filter from "../data/Filter.ts"
-import type * as Option from "../data/Option.ts"
+import * as Option from "../data/Option.ts"
 import { hasProperty } from "../data/Predicate.ts"
 import * as Redacted_ from "../data/Redacted.ts"
 import * as Effect from "../Effect.ts"
 import * as Exit from "../Exit.ts"
 import type { LazyArg } from "../Function.ts"
-import { constant, dual } from "../Function.ts"
+import { dual } from "../Function.ts"
 import type { Pipeable } from "../interfaces/Pipeable.ts"
 import { PipeInspectableProto, YieldableProto } from "../internal/core.ts"
 import * as LogLevel_ from "../logging/LogLevel.ts"
@@ -274,7 +274,10 @@ export const isConfig = (u: unknown): u is Config<unknown> => hasProperty(u, Typ
  */
 export interface Config<out A> extends Pipeable, Effect.Yieldable<Config<A>, A, ConfigError> {
   readonly [TypeId]: TypeId
-  readonly parse: (context: ConfigProvider.Context) => Effect.Effect<A, ConfigError>
+  readonly parse: (context: ConfigProvider.ConfigProvider) => Effect.Effect<{
+    readonly value: A
+    readonly path: ReadonlyArray<string>
+  }, ConfigError>
 }
 
 /**
@@ -399,15 +402,26 @@ export interface Config<out A> extends Pipeable, Effect.Yieldable<Config<A>, A, 
  * @category Constructors
  */
 export const primitive: {
-  <A>(parse: (context: ConfigProvider.Context) => Effect.Effect<A, ConfigError>): Config<A>
-  <A>(name: string | undefined, parse: (context: ConfigProvider.Context) => Effect.Effect<A, ConfigError>): Config<A>
+  <A>(
+    parse: (provider: ConfigProvider.ConfigProvider) => Effect.Effect<{
+      readonly value: A
+      readonly path: ReadonlyArray<string>
+    }, ConfigError>
+  ): Config<A>
+  <A>(
+    name: string | undefined,
+    parse: (provider: ConfigProvider.ConfigProvider) => Effect.Effect<{
+      readonly value: A
+      readonly path: ReadonlyArray<string>
+    }, ConfigError>
+  ): Config<A>
 } = function<A>(): Config<A> {
   const self = Object.create(Proto)
   self.parse = typeof arguments[0] === "function"
     ? arguments[0]
     : arguments[0] === undefined
     ? arguments[1]
-    : (ctx: ConfigProvider.Context) => arguments[1](ctx.appendPath(arguments[0]!))
+    : (provider: ConfigProvider.ConfigProvider) => arguments[1](provider.appendPath(arguments[0]!))
   return self
 }
 
@@ -416,7 +430,10 @@ const Proto = {
   ...YieldableProto,
   [TypeId]: TypeId,
   asEffect(this: Config<unknown>) {
-    return Effect.flatMap(ConfigProvider.ConfigProvider.asEffect(), (_) => this.parse(_.context()))
+    return ConfigProvider.ConfigProvider.asEffect().pipe(
+      Effect.flatMap((provider) => this.parse(provider)),
+      Effect.map(({ value }) => value)
+    )
   },
   toJSON(this: Config<unknown>) {
     return {
@@ -517,20 +534,25 @@ export const fromFilter = <A, X>(
     readonly onFail: (value: string) => string
   }
 ): Config<A> =>
-  primitive(options.name, (ctx) =>
-    Effect.flatMap(ctx.load, (value) => {
-      const result = options.filter(value)
-      return Filter.isFail(result) ?
+  primitive(options.name, (p) =>
+    Effect.flatMap(p.load(p.path), (input) => {
+      const value = options.filter(input)
+      return Filter.isFail(value) ?
         Effect.fail(
           new InvalidData({
-            path: ctx.currentPath,
-            description: options.onFail(value)
+            path: p.path,
+            description: options.onFail(input)
           })
         ) :
-        Effect.succeed(result)
+        Effect.succeed({ value, path: p.path })
     }))
 
-const String_ = (name?: string): Config<string> => primitive(name, (ctx) => ctx.load)
+const String_ = (name?: string): Config<string> =>
+  primitive(name, (p) =>
+    Effect.map(p.load(p.path), (value) => ({
+      value,
+      path: p.path
+    })))
 
 export {
   /**
@@ -592,6 +614,7 @@ const Number_ = (name?: string): Config<number> =>
     },
     onFail: (value) => `Expected a number, but received: ${value}`
   })
+
 export {
   /**
    * Constructs a config that parses a number value from a string.
@@ -701,6 +724,7 @@ const BigInt_ = (name?: string): Config<bigint> =>
     filter: Filter.try((s) => BigInt(s)),
     onFail: (value) => `Expected a bigint, but received: ${value}`
   })
+
 export {
   /**
    * Constructs a config that parses BigInt values from environment variables.
@@ -1267,10 +1291,10 @@ export const Redacted: {
     config = arguments[0] ?? String_() as Config<A>
     options = arguments[1]
   }
-  return primitive(name, (ctx) =>
+  return primitive(name, (p) =>
     Effect.map(
-      config.parse(ctx),
-      (value) => Redacted_.make(value, options)
+      config.parse(p),
+      ({ path, value }) => ({ value: Redacted_.make(value, options), path })
     ))
 }
 
@@ -1432,20 +1456,25 @@ const Array_ = <A>(name: string, config: Config<A>, options?: {
   const delimiter = options?.separator ?? ","
   return primitive(
     name,
-    Effect.fnUntraced(function*(ctx) {
-      const loadCandidates = yield* ctx.load.pipe(
+    Effect.fnUntraced(function*(p) {
+      const loadCandidates = yield* p.load(p.path).pipe(
         Effect.map((value) =>
-          value.split(delimiter).map((value, i): ConfigProvider.Candidate => ({
+          value.split(delimiter).map((content, i) => ({
             key: i.toString(),
-            context: ctx.setPath([...ctx.currentPath, i.toString()]).withValue(value)
+            provider: p.setPath([...p.path, i.toString()], { content })
           }))
         ),
         Effect.orElseSucceed(Arr.empty)
       )
-      const candidates = (yield* ctx.listCandidates).filter(({ key }) => intRegex.test(key))
-      const allEntries = [...loadCandidates, ...candidates]
-      if (allEntries.length === 0) return []
-      return yield* Effect.forEach(allEntries, ({ context }) => config.parse(context))
+      const listCandidates = (yield* p.list(p.path))
+        .filter(({ key }) => intRegex.test(key))
+        .filter(({ key }, i) => key === i.toString())
+      const allEntries = [...listCandidates, ...loadCandidates]
+      const value = Arr.empty<A>()
+      for (const entry of allEntries) {
+        value.push((yield* config.parse(entry.provider)).value)
+      }
+      return { value, path: p.path }
     })
   )
 }
@@ -1475,31 +1504,31 @@ export const Record = <A>(name: string, config: Config<A>, options?: {
   const keyValueSeparator = options?.keyValueSeparator ?? "="
   return primitive(
     name,
-    Effect.fnUntraced(function*(ctx) {
-      const loadEntries = yield* ctx.load.pipe(
+    Effect.fnUntraced(function*(p) {
+      const loadEntries = yield* p.load(p.path).pipe(
         Effect.map((value) =>
-          value.split(delimiter).flatMap((pair): Array<ConfigProvider.Candidate> => {
+          value.split(delimiter).flatMap((pair) => {
             const parts = pair.split(keyValueSeparator, 2)
             if (parts.length !== 2) return []
             const key = parts[0].trim()
-            const value = parts[1].trim()
             return [{
               key,
-              context: ctx.setPath([...ctx.currentPath, key]).withValue(value)
+              provider: p.setPath([...p.path, key], {
+                content: parts[1].trim()
+              })
             }]
           })
         ),
         Effect.orElseSucceed(Arr.empty)
       )
-      const entries = yield* ctx.listCandidates
-      const allEntries = [...loadEntries, ...entries]
-      const out: Record<string, A> = {}
-      if (allEntries.length === 0) return out
-      for (const { context, key } of allEntries) {
-        const parsedValue = yield* config.parse(context)
-        out[key] = parsedValue
+      const listEntries = yield* p.list(p.path)
+      const allEntries = [...loadEntries, ...listEntries]
+      const value: Record<string, A> = {}
+      for (const { key, provider } of allEntries) {
+        const parsed = yield* config.parse(provider)
+        value[key] = parsed.value
       }
-      return out
+      return { value, path: p.path }
     })
   )
 }
@@ -1510,7 +1539,7 @@ export const Record = <A>(name: string, config: Config<A>, options?: {
  * @since 4.0.0
  * @category Constructors
  */
-export const succeed = <A>(value: A): Config<A> => primitive(constant(Effect.succeed(value)))
+export const succeed = <A>(value: A): Config<A> => primitive((p) => Effect.succeed({ value, path: p.path }))
 
 /**
  * Constructs a config that succeeds with the result of evaluating the provided
@@ -1519,7 +1548,8 @@ export const succeed = <A>(value: A): Config<A> => primitive(constant(Effect.suc
  * @since 4.0.0
  * @category Constructors
  */
-export const sync = <A>(evaluate: LazyArg<A>): Config<A> => primitive(constant(Effect.sync(evaluate)))
+export const sync = <A>(evaluate: LazyArg<A>): Config<A> =>
+  primitive((p) => Effect.sync(() => ({ value: evaluate(), path: p.path })))
 
 /**
  * Constructs a config from a tuple / struct / arguments of configs.
@@ -1559,12 +1589,12 @@ export const all = <const Arg extends Iterable<Config<any>> | Record<string, Con
 
 const tuple = <A>(...configs: ReadonlyArray<Config<A>>): Config<Array<A>> =>
   primitive(Effect.fnUntraced(function*(ctx) {
-    const values = new Array<A>(configs.length)
+    const value = new Array<A>(configs.length)
     const failures: Array<Cause.Failure<ConfigError>> = []
     for (let i = 0; i < configs.length; i++) {
       const result = yield* Effect.exit(configs[i].parse(ctx))
       if (Exit.isSuccess(result)) {
-        values[i] = result.value
+        value[i] = result.value.value
       } else {
         // eslint-disable-next-line no-restricted-syntax
         failures.push(...result.cause.failures)
@@ -1573,7 +1603,7 @@ const tuple = <A>(...configs: ReadonlyArray<Config<A>>): Config<Array<A>> =>
     if (failures.length > 0) {
       return yield* Effect.failCause(Cause.fromFailures(failures))
     }
-    return values
+    return { value, path: ctx.path }
   }))
 
 /**
@@ -1602,7 +1632,16 @@ export const map: {
   <A, B>(
     self: Config<A>,
     f: (a: NoInfer<A>, path: ReadonlyArray<string>) => B | Effect.Effect<B, ConfigError>
-  ): Config<B> => primitive((ctx) => Effect.andThen(self.parse(ctx), (v) => f(v, ctx.lastChildPath)) as any)
+  ): Config<B> =>
+    primitive((p) =>
+      Effect.flatMap(
+        self.parse(p),
+        ({ path, value }) => {
+          const b = f(value, path)
+          return Effect.isEffect(b) ? Effect.map(b, (value) => ({ value, path })) : Effect.succeed({ value: b, path })
+        }
+      )
+    )
 )
 
 /**
@@ -1624,19 +1663,19 @@ export const filter: {
     readonly filter: Filter.Filter<NoInfer<A>, B, X> | Filter.FilterEffect<NoInfer<A>, B, X, ConfigError>
     readonly onFail: (value: X) => string
   }): Config<B> =>
-    primitive((ctx) =>
-      Effect.flatMap(self.parse(ctx), (value) => {
+    primitive((p) =>
+      Effect.flatMap(self.parse(p), ({ path, value }) => {
         const result = options.filter(value)
         const effect = Effect.isEffect(result) ? result : Effect.succeed(result)
-        return Effect.flatMap(effect, (result) =>
-          Filter.isFail(result) ?
+        return Effect.flatMap(effect, (value) =>
+          Filter.isFail(value) ?
             Effect.fail(
               new InvalidData({
-                path: ctx.lastChildPath,
-                description: options.onFail(result.fail)
+                path,
+                description: options.onFail(value.fail)
               })
             ) :
-            Effect.succeed(result))
+            Effect.succeed({ value, path }))
       })
     )
 )
@@ -1663,15 +1702,16 @@ export const trimmed = (self: Config<string>): Config<string> => map(self, Str.t
 export const nonEmpty = <A extends { readonly length: number } | { readonly size: number } | Record<string, any>>(
   self: Config<A>
 ): Config<A> =>
-  primitive((ctx) =>
-    Effect.flatMap(self.parse(ctx), (value: any) => {
-      const nonEmpty = typeof value.length === "number" && value.length > 0 ||
-        typeof value.size === "number" && value.size > 0 ||
-        Object.keys(value).length > 0
-      return nonEmpty ? Effect.succeed(value) : Effect.fail(
+  primitive((p) =>
+    Effect.flatMap(self.parse(p), ({ path, value }) => {
+      const thing = value as any
+      const nonEmpty = typeof thing.length === "number" && thing.length > 0 ||
+        typeof thing.size === "number" && thing.size > 0 ||
+        Object.keys(thing).length > 0
+      return nonEmpty ? Effect.succeed({ value, path }) : Effect.fail(
         new MissingData({
-          path: ctx.lastChildPath,
-          fullPath: ctx.provider.formatPath(ctx.lastChildPath)
+          path,
+          fullPath: p.formatPath(path)
         })
       )
     })
@@ -1692,13 +1732,13 @@ export const orElseFilter: {
   }): Config<A | B>
 } = dual(2, <A, E, B>(self: Config<A>, options: {
   readonly filter: Filter.Filter<ConfigError, E>
-  readonly orElse: (e: E) => Config<B>
+  readonly orElse: (e: E) => Config<A | B>
 }): Config<A | B> =>
-  primitive((ctx) =>
+  primitive((p) =>
     Effect.catchFilter(
-      self.parse(ctx),
+      self.parse(p),
       options.filter,
-      (e) => options.orElse(e).parse(ctx)
+      (e) => options.orElse(e).parse(p)
     )
   ))
 
@@ -1711,20 +1751,14 @@ export const orElse: {
   <A, B>(self: Config<A>, orElse: (e: ConfigError) => Config<B>): Config<A | B>
 } = dual(
   2,
-  <A, B>(self: Config<A>, orElse: (e: ConfigError) => Config<B>): Config<A | B> =>
-    primitive((ctx) =>
-      Effect.catch(
-        self.parse(ctx),
-        (e) =>
-          orElse(e).parse(ctx).pipe(
-            Effect.catchCause((cause) =>
-              Effect.failCause(Cause.merge(
-                Cause.fail(e),
-                cause
-              ))
-            )
-          )
-      )
+  <A, B>(self: Config<A>, orElse: (e: ConfigError) => Config<A | B>): Config<A | B> =>
+    primitive((p) =>
+      Effect.catch(self.parse(p), (e) =>
+        Effect.catchCause(orElse(e).parse(p), (cause) =>
+          Effect.failCause(Cause.merge(
+            Cause.fail(e),
+            cause
+          ))))
     )
 )
 
@@ -1738,11 +1772,11 @@ export const withDefault: {
 } = dual(
   2,
   <A, const B>(self: Config<A>, defaultValue: B): Config<A | B> =>
-    primitive((ctx) =>
+    primitive((p) =>
       Effect.catchCauseFilter(
-        self.parse(ctx),
+        self.parse(p),
         filterMissingDataOnly,
-        () => Effect.succeed(defaultValue)
+        () => Effect.succeed({ value: defaultValue as A | B, path: p.path })
       )
     )
 )
@@ -1752,11 +1786,11 @@ export const withDefault: {
  * @category Fallbacks
  */
 export const option = <A>(self: Config<A>): Config<Option.Option<A>> =>
-  primitive((ctx) =>
+  primitive((p) =>
     Effect.catchCauseFilter(
-      Effect.asSome(self.parse(ctx)),
+      Effect.map(self.parse(p), ({ path, value }) => ({ value: Option.some(value), path })),
       filterMissingDataOnly,
-      () => Effect.succeedNone
+      () => Effect.succeed({ value: Option.none<A>(), path: p.path })
     )
   )
 

@@ -24,46 +24,21 @@ import { type ConfigError, filterMissingDataOnly, MissingData, SourceError } fro
  */
 export interface ConfigProvider extends Pipeable {
   readonly load: (path: ReadonlyArray<string>) => Effect.Effect<string, ConfigError>
-  readonly listCandidates: (path: ReadonlyArray<string>) => Effect.Effect<
+  readonly list: (path: ReadonlyArray<string>) => Effect.Effect<
     Array<{
       readonly key: string
-      readonly path: ReadonlyArray<string>
+      readonly provider: ConfigProvider
     }>,
     ConfigError
   >
+
+  readonly path: ReadonlyArray<string>
+  readonly setPath: (path: ReadonlyArray<string>, options?: {
+    readonly content?: string | undefined
+  }) => ConfigProvider
+  readonly appendPath: (path: string) => ConfigProvider
   readonly formatPath: (path: ReadonlyArray<string>) => string
   readonly transformPath: (path: string) => string
-  readonly prefix: ReadonlyArray<string>
-  readonly context: () => Context
-}
-
-/**
- * @since 4.0.0
- * @category Models
- */
-export interface Context {
-  readonly provider: ConfigProvider
-  readonly load: Effect.Effect<string, ConfigError>
-  readonly listCandidates: Effect.Effect<Array<Candidate>, ConfigError>
-
-  readonly currentPath: ReadonlyArray<string>
-  readonly appendPath: (path: string) => Context
-  readonly setPath: (path: ReadonlyArray<string>) => Context
-
-  readonly contentCache: Map<ReadonlyArray<string>, string>
-  readonly withValue: (value: string) => Context
-
-  lastChildContext?: Context | undefined
-  readonly lastChildPath: ReadonlyArray<string>
-}
-
-/**
- * @since 4.0.0
- * @category Models
- */
-export interface Candidate {
-  readonly key: string
-  readonly context: Context
 }
 
 /**
@@ -81,7 +56,7 @@ export const ConfigProvider: ServiceMap.Reference<ConfigProvider> = ServiceMap.R
  */
 export const make = (options: {
   readonly load: (path: ReadonlyArray<string>) => Effect.Effect<string, ConfigError>
-  readonly listCandidates?: (path: ReadonlyArray<string>) => Effect.Effect<
+  readonly list?: (path: ReadonlyArray<string>) => Effect.Effect<
     Array<{
       readonly key: string
       readonly path: ReadonlyArray<string>
@@ -93,14 +68,21 @@ export const make = (options: {
 }): ConfigProvider =>
   makeProto({
     load: options.load,
-    listCandidates: options.listCandidates ?? defaultLoadEntries,
+    list: options.list ?
+      function(this: ConfigProvider, path) {
+        return Effect.map(options.list!(path), (entries) =>
+          entries.map(({ key, path }) => ({
+            key,
+            provider: this.setPath(path)
+          })))
+      } :
+      defaultLoadEntries,
     formatPath: options.formatPath ?? defaultFormatPath,
     transformPath: options.transformPath ?? identity,
-    prefix: emptyArr
+    path: []
   })
 
-const emptyArr: Array<never> = []
-const defaultLoadEntries = constant(Effect.succeed(emptyArr))
+const defaultLoadEntries = constant(Effect.succeed([]))
 const defaultFormatPath = (path: ReadonlyArray<string>): string => path.join(".")
 
 /**
@@ -138,27 +120,23 @@ export const layerAdd = <E = never, R = never>(
 
 const makeProto = (options: {
   readonly load: (path: ReadonlyArray<string>) => Effect.Effect<string, ConfigError>
-  readonly listCandidates: (path: ReadonlyArray<string>) => Effect.Effect<
+  readonly list: (path: ReadonlyArray<string>) => Effect.Effect<
     Array<{
       readonly key: string
-      readonly path: ReadonlyArray<string>
+      readonly provider: ConfigProvider
     }>,
     ConfigError
   >
   readonly formatPath: (path: ReadonlyArray<string>) => string
   readonly transformPath: (path: string) => string
-  readonly prefix: ReadonlyArray<string>
-  readonly context?: () => Context
+  readonly path: ReadonlyArray<string>
 }): ConfigProvider => {
   const self = Object.create(Proto)
   self.load = options.load
-  self.listCandidates = options.listCandidates
+  self.list = options.list
+  self.path = options.path
   self.formatPath = options.formatPath
   self.transformPath = options.transformPath
-  self.prefix = options.prefix
-  if (options.context) {
-    self.context = options.context
-  }
   return self
 }
 
@@ -166,65 +144,28 @@ const Proto = {
   ...PipeInspectableProto,
   toJSON(this: ConfigProvider) {
     return {
-      _id: "ConfigProvider"
+      _id: "ConfigProvider",
+      path: this.path
     }
   },
-  context(this: ConfigProvider): Context {
-    return makeContext({
-      provider: this,
-      currentPath: this.prefix
-    })
-  }
-}
-
-const makeContext = (options: {
-  readonly provider: ConfigProvider
-  readonly currentPath: ReadonlyArray<string>
-  readonly contentCache?: Map<ReadonlyArray<string>, string>
-}): Context => {
-  const self = Object.create(ContextProto)
-  self.contentCache = options.contentCache ?? new Map()
-  self.provider = options.provider
-  self.currentPath = options.currentPath
-  return self
-}
-
-const ContextProto = {
-  setPath(this: Context, path: ReadonlyArray<string>): Context {
-    const next = makeContext({
+  setPath(this: ConfigProvider, path: ReadonlyArray<string>, options?: {
+    readonly content?: string | undefined
+  }): ConfigProvider {
+    return makeProto({
       ...this,
-      currentPath: path
-    })
-    this.lastChildContext = next
-    return next
-  },
-  get lastChildPath(): ReadonlyArray<string> {
-    return (this as any).lastChildContext?.currentPath ?? (this as any).currentPath
-  },
-  appendPath(this: Context, path: string): Context {
-    return this.setPath([...this.currentPath, this.provider.transformPath(path)])
-  },
-  withValue(this: Context, value: string): Context {
-    this.contentCache.set(this.currentPath, value)
-    return this
-  },
-  get load(): Effect.Effect<string, ConfigError> {
-    return Effect.suspend(() => {
-      const self = this as any as Context
-      if (self.contentCache.has(self.currentPath)) {
-        return Effect.succeed(self.contentCache.get(self.currentPath)!)
-      }
-      return self.provider.load(self.currentPath)
+      load: typeof options?.content === "string" ?
+        ((path_) => {
+          if (path.join(".") === path_.join(".")) {
+            return Effect.succeed(options.content!)
+          }
+          return this.load(path_)
+        }) :
+        this.load,
+      path
     })
   },
-  get listCandidates(): Effect.Effect<Array<Candidate>, ConfigError> {
-    const self = this as any as Context
-    return self.provider.listCandidates(self.currentPath).pipe(
-      Effect.map(Arr.map(({ key, path }) => ({
-        key,
-        context: self.setPath(path)
-      })))
-    )
+  appendPath(this: ConfigProvider, path: string): ConfigProvider {
+    return this.setPath([...this.path, this.transformPath(path)])
   }
 }
 
@@ -255,7 +196,7 @@ export const fromEnv = (options?: {
         }
         return Effect.succeed(value)
       }),
-    listCandidates: (path) =>
+    list: (path) =>
       Effect.sync(() => {
         const prefix = path.join(delimiter)
         const pathPartial = path.slice()
@@ -313,8 +254,8 @@ export const fromJson = (env: unknown): ConfigProvider => {
           ? Effect.fail(new MissingData({ path, fullPath: path.join(".") }))
           : Effect.succeed(toStringUnknown(value))
       }),
-    listCandidates(this: ConfigProvider, path) {
-      return Effect.sync(() => {
+    list: (path) =>
+      Effect.sync(() => {
         const value = valueAtPath(path)
         if (!value || typeof value !== "object") {
           return []
@@ -332,7 +273,6 @@ export const fromJson = (env: unknown): ConfigProvider => {
           path: [...path, key]
         }))
       })
-    }
   })
 }
 
@@ -346,7 +286,7 @@ export const mapPath: {
 } = dual(2, (self: ConfigProvider, f: (pathSegment: string) => string): ConfigProvider =>
   makeProto({
     ...self,
-    prefix: self.prefix.map(f),
+    path: self.path.map(f),
     transformPath: (p) => f(self.transformPath(p))
   }))
 
@@ -366,7 +306,7 @@ export const nested: {
 } = dual(2, (self: ConfigProvider, prefix: string): ConfigProvider =>
   makeProto({
     ...self,
-    prefix: [self.transformPath(prefix), ...self.prefix]
+    path: [prefix, ...self.path]
   }))
 
 /**
@@ -377,7 +317,7 @@ export const orElse: {
   (that: ConfigProvider): (self: ConfigProvider) => ConfigProvider
   (self: ConfigProvider, that: ConfigProvider): ConfigProvider
 } = dual(2, (self: ConfigProvider, that: ConfigProvider): ConfigProvider =>
-  make({
+  makeProto({
     ...self,
     load: (path) =>
       Effect.catchCauseFilter(
@@ -388,9 +328,9 @@ export const orElse: {
             Effect.catchCause((causeB) => Effect.failCause(Cause.merge(causeA, causeB)))
           )
       ),
-    listCandidates: (path) =>
-      self.listCandidates(path).pipe(
-        Effect.flatMap((values) => values.length > 0 ? Effect.succeed(values) : that.listCandidates(path))
+    list: (path) =>
+      self.list(path).pipe(
+        Effect.flatMap((values) => values.length > 0 ? Effect.succeed(values) : that.list(path))
       )
   }))
 
@@ -461,7 +401,7 @@ export const fileTree: (options?: {
         Effect.mapError(mapError(path)),
         Effect.map(Str.trim)
       ),
-    listCandidates: (path) =>
+    list: (path) =>
       fs.readDirectory(formatPath(path)).pipe(
         Effect.mapError(mapError(path)),
         Effect.map(Arr.map((file) => ({

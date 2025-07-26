@@ -1,6 +1,6 @@
 import { describe, it } from "@effect/vitest"
 import { assertFailure, assertSuccess, deepStrictEqual, strictEqual } from "@effect/vitest/utils"
-import { Cause, Effect, pipe } from "effect"
+import { Cause, Effect, Exit, pipe } from "effect"
 import { Config, ConfigError, ConfigProvider } from "effect/config"
 import { Brand, Filter, Option, Redacted } from "effect/data"
 import type { LogLevel } from "effect/logging"
@@ -18,7 +18,7 @@ const assertConfigError = <A>(
   error: ConfigError.ConfigError
 ) => {
   const configProvider = ConfigProvider.fromEnv({ environment: env })
-  const result = Effect.runSyncExit(config.parse(configProvider.context()))
+  const result = Effect.runSyncExit(config.parse(configProvider))
   assertFailure(result, Cause.fail(error))
 }
 
@@ -28,7 +28,7 @@ const assertConfigErrors = <A>(
   errors: Array<ConfigError.ConfigError>
 ) => {
   const configProvider = ConfigProvider.fromEnv({ environment: env })
-  const result = Effect.runSyncExit(config.parse(configProvider.context()))
+  const result = Exit.map(Effect.runSyncExit(config.parse(configProvider)), ({ value }) => value)
   assertFailure(result, Cause.fromFailures(errors.map(Cause.failureFail)))
 }
 
@@ -38,7 +38,7 @@ const assertConfig = <A>(
   a: A
 ) => {
   const configProvider = ConfigProvider.fromEnv({ environment: env })
-  const result = Effect.runSyncExit(config.parse(configProvider.context()))
+  const result = Exit.map(Effect.runSyncExit(config.parse(configProvider)), ({ value }) => value)
   assertSuccess(result, a)
 }
 
@@ -660,10 +660,10 @@ describe("Config", () => {
   })
 
   it("array double nested", () => {
-    const provider = ConfigProvider.fromEnv({ environment: { "NESTED_NESTED2_ARRAY": "1,2,3" } }).pipe(
+    const provider = ConfigProvider.fromEnv({ environment: { "nested_NESTED2_ARRAY": "1,2,3" } }).pipe(
       ConfigProvider.nested("nested2"),
-      ConfigProvider.nested("nested"),
-      ConfigProvider.constantCase
+      ConfigProvider.constantCase,
+      ConfigProvider.nested("nested")
     )
     const result = Effect.runSync(Effect.provide(
       Config.Array("ARRAY", Config.Integer()).asEffect(),
