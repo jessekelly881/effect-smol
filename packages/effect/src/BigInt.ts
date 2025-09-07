@@ -6,13 +6,13 @@
  * @since 2.0.0
  */
 
-import * as Combiner from "../data/Combiner.ts"
-import * as equivalence from "../data/Equivalence.ts"
-import * as order from "../data/Order.ts"
-import type { Ordering } from "../data/Ordering.ts"
-import * as predicate from "../data/Predicate.ts"
-import * as Reducer from "../data/Reducer.ts"
-import { dual } from "../Function.ts"
+import * as Combiner from "./data/Combiner.ts"
+import * as equivalence from "./data/Equivalence.ts"
+import * as order from "./data/Order.ts"
+import type { Ordering } from "./data/Ordering.ts"
+import * as predicate from "./data/Predicate.ts"
+import * as Reducer from "./data/Reducer.ts"
+import { dual } from "./Function.ts"
 
 /**
  * Reference to the global BigInt constructor.
