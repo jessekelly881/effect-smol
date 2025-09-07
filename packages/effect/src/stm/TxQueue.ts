@@ -17,9 +17,9 @@ import * as Effect from "../Effect.ts"
 import { dual } from "../Function.ts"
 import type { Inspectable } from "../interfaces/Inspectable.ts"
 import { NodeInspectSymbol, toJson } from "../interfaces/Inspectable.ts"
-import * as TxChunk from "../transactions/TxChunk.ts"
-import * as TxRef from "../transactions/TxRef.ts"
 import type * as Types from "../types/Types.ts"
+import * as TxChunk from "./TxChunk.ts"
+import * as TxRef from "./TxRef.ts"
 
 /**
  * Represents the state of a transactional queue with sophisticated lifecycle management.

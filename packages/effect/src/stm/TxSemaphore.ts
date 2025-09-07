@@ -8,7 +8,7 @@ import { NodeInspectSymbol, toJson } from "../interfaces/Inspectable.ts"
 import type { Pipeable } from "../interfaces/Pipeable.ts"
 import { pipeArguments } from "../interfaces/Pipeable.ts"
 import type * as Scope from "../Scope.ts"
-import * as TxRef from "../transactions/TxRef.ts"
+import * as TxRef from "./TxRef.ts"
 
 const TypeId = "~effect/transactions/TxSemaphore"
 

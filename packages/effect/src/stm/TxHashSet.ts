@@ -10,8 +10,8 @@ import type { Inspectable } from "../interfaces/Inspectable.ts"
 import { format, NodeInspectSymbol, toJson } from "../interfaces/Inspectable.ts"
 import type { Pipeable } from "../interfaces/Pipeable.ts"
 import { pipeArguments } from "../interfaces/Pipeable.ts"
-import * as TxRef from "../transactions/TxRef.ts"
 import type { NoInfer } from "../types/Types.ts"
+import * as TxRef from "./TxRef.ts"
 
 const TypeId = "~effect/transactions/TxHashSet"
 

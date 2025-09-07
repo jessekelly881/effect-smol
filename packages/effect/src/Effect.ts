@@ -105,7 +105,7 @@ import type { Schedule } from "./Schedule.ts"
 import type { Scheduler } from "./Scheduler.ts"
 import type { Scope } from "./Scope.ts"
 import * as ServiceMap from "./ServiceMap.ts"
-import type { TxRef } from "./transactions/TxRef.ts"
+import type { TxRef } from "./stm/TxRef.ts"
 import type { TypeLambda } from "./types/HKT.ts"
 import type {
   Concurrency,
