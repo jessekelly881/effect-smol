@@ -44,7 +44,7 @@ export * as Boolean from "./Boolean.ts"
  *
  * @since 2.0.0
  */
-export * as Number from "./Number.ts"
+export * as Number from "../Number.ts"
 
 /**
  * This module provides utility functions for working with RegExp in TypeScript.

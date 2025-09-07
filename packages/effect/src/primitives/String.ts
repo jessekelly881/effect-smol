@@ -15,7 +15,7 @@ import * as predicate from "../data/Predicate.ts"
 import * as Reducer from "../data/Reducer.ts"
 import { dual } from "../Function.ts"
 import * as readonlyArray from "../internal/array.ts"
-import * as number from "../primitives/Number.ts"
+import * as number from "../Number.ts"
 
 /**
  * Reference to the global `String` constructor.
