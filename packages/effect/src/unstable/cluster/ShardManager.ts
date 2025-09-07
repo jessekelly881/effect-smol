@@ -1,6 +1,7 @@
 /**
  * @since 4.0.0
  */
+import * as Clock from "../../Clock.ts"
 import * as Arr from "../../collections/Array.ts"
 import * as Iterable from "../../collections/Iterable.ts"
 import * as MutableHashMap from "../../collections/MutableHashMap.ts"
@@ -23,7 +24,6 @@ import * as Schedule from "../../Schedule.ts"
 import * as Schema from "../../schema/Schema.ts"
 import type { Scope } from "../../Scope.ts"
 import * as ServiceMap from "../../ServiceMap.ts"
-import * as Clock from "../../time/Clock.ts"
 import * as Rpc from "../rpc/Rpc.ts"
 import * as RpcClient from "../rpc/RpcClient.ts"
 import * as RpcGroup from "../rpc/RpcGroup.ts"

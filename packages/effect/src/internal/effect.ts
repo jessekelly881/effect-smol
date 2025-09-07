@@ -1,4 +1,5 @@
 import type * as Cause from "../Cause.ts"
+import type * as Clock from "../Clock.ts"
 import * as Arr from "../collections/Array.ts"
 import * as Filter from "../data/Filter.ts"
 import * as Option from "../data/Option.ts"
@@ -33,7 +34,6 @@ import {
 import * as Scheduler from "../Scheduler.ts"
 import type * as Scope from "../Scope.ts"
 import * as ServiceMap from "../ServiceMap.ts"
-import type * as Clock from "../time/Clock.ts"
 import type { Concurrency, ExcludeTag, ExtractTag, NoInfer, NotFunction, Simplify, Tags } from "../types/Types.ts"
 import { internalCall } from "../Utils.ts"
 import type { Primitive } from "./core.ts"

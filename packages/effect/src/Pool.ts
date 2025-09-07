@@ -2,6 +2,7 @@
  * @since 2.0.0
  */
 import type * as Cause from "./Cause.ts"
+import { Clock } from "./Clock.ts"
 import * as Iterable from "./collections/Iterable.ts"
 import { hasProperty } from "./data/Predicate.ts"
 import * as Duration from "./Duration.ts"
@@ -14,7 +15,6 @@ import * as Queue from "./Queue.ts"
 import { UnhandledLogLevel } from "./References.ts"
 import * as Scope from "./Scope.ts"
 import * as ServiceMap from "./ServiceMap.ts"
-import { Clock } from "./time/Clock.ts"
 
 const TypeId = "~effect/Pool"
 

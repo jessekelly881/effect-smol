@@ -31,6 +31,7 @@
  *
  * @since 2.0.0
  */
+import * as Cron from "./Cron.ts"
 import { hasProperty } from "./data/Predicate.ts"
 import * as Result from "./data/Result.ts"
 import * as Duration from "./Duration.ts"
@@ -41,7 +42,6 @@ import { type Pipeable, pipeArguments } from "./interfaces/Pipeable.ts"
 import { isEffect } from "./internal/core.ts"
 import * as effect from "./internal/effect.ts"
 import * as Pull from "./stream/Pull.ts"
-import * as Cron from "./time/Cron.ts"
 import type * as DateTime from "./time/DateTime.ts"
 import type { Contravariant, Covariant } from "./types/Types.ts"
 

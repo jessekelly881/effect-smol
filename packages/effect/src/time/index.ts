@@ -62,12 +62,12 @@
  *
  * @since 2.0.0
  */
-export * as Clock from "./Clock.ts"
+export * as Clock from "../Clock.ts"
 
 /**
  * @since 2.0.0
  */
-export * as Cron from "./Cron.ts"
+export * as Cron from "../Cron.ts"
 
 /**
  * @since 3.6.0
