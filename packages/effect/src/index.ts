@@ -747,6 +747,11 @@ export * as ServiceMap from "./ServiceMap.ts"
 /**
  * @since 2.0.0
  */
+export * as Symbol from "./Symbol.ts"
+
+/**
+ * @since 2.0.0
+ */
 export * as SynchronizedRef from "./SynchronizedRef.ts"
 
 /**
