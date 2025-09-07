@@ -2453,7 +2453,7 @@ export const histogram = (name: string, options: {
  * ```ts
  * import { Effect } from "effect"
  * import { Metric } from "effect/observability"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  * import { Data } from "effect/data"
  *
  * class SummaryError extends Data.TaggedError("SummaryError")<{
@@ -2577,7 +2577,7 @@ export const summaryWithTimestamp = (name: string, options: {
  * ```ts
  * import { Effect } from "effect"
  * import { Metric } from "effect/observability"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  * import { Data } from "effect/data"
  *
  * class TimerError extends Data.TaggedError("TimerError")<{

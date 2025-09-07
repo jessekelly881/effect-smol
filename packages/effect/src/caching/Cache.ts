@@ -27,7 +27,7 @@ const TypeId = "~effect/caching/Cache"
  * ```ts
  * import { Effect } from "effect"
  * import { Cache } from "effect/caching"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  *
  * // Basic cache with string keys and number values
  * const program = Effect.gen(function*() {
@@ -49,7 +49,7 @@ const TypeId = "~effect/caching/Cache"
  * ```ts
  * import { Effect } from "effect"
  * import { Cache } from "effect/caching"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  *
  * // Cache with error handling
  * const program = Effect.gen(function*() {
@@ -74,7 +74,7 @@ const TypeId = "~effect/caching/Cache"
  * import { Effect } from "effect"
  * import { Cache } from "effect/caching"
  * import { Data } from "effect/data"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  *
  * // Cache with complex key types and TTL
  * class UserId extends Data.Class<{ id: number }> {}
@@ -127,7 +127,7 @@ export interface Entry<A, E> {
  * ```ts
  * import { Effect, Exit } from "effect"
  * import { Cache } from "effect/caching"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  *
  * // Cache with different TTL for success vs failure
  * const program = Effect.gen(function*() {
@@ -965,7 +965,7 @@ export const invalidateWhen: {
  * import { Effect } from "effect"
  * import { Cache } from "effect/caching"
  * import { TestClock } from "effect/testing"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  *
  * // Refresh resets TTL (Time To Live)
  * const program = Effect.gen(function*() {

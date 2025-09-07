@@ -1,8 +1,8 @@
 import { describe, it } from "@effect/vitest"
 import { assertFalse, assertTrue, assertUndefined, deepStrictEqual, strictEqual, throws } from "@effect/vitest/utils"
 import { pipe } from "effect"
+import * as Duration from "effect/Duration"
 import { Equal } from "effect/interfaces"
-import { Duration } from "effect/time"
 
 describe("Duration", () => {
   it("fromDurationInputUnsafe", () => {

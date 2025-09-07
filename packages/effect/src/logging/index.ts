@@ -161,7 +161,7 @@ export * as Console from "./Console.ts"
  * ```ts
  * import { Logger } from "effect/logging"
  * import { Effect } from "effect"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  *
  * const batchedLogger = Logger.batched(Logger.formatJson, {
  *   window: Duration.seconds(5),

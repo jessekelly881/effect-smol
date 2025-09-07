@@ -10,7 +10,7 @@
  * ```ts
  * import { Effect } from "effect"
  * import { Schedule } from "effect"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  *
  * // Retry with exponential backoff
  * const retryPolicy = Schedule.exponential("100 millis", 2.0)
@@ -97,7 +97,7 @@ export interface Schedule<out Output, in Input = unknown, out Error = never, out
  * ```ts
  * import { Effect } from "effect"
  * import { Schedule } from "effect"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  *
  * // Usage of the Schedule namespace for creating schedules
  *
@@ -133,7 +133,7 @@ export declare namespace Schedule {
    * ```ts
    * import { Effect } from "effect"
    * import { Schedule } from "effect"
-   * import { Duration } from "effect/time"
+   * import { Duration } from "effect"
    *
    * // Understanding Schedule variance:
    * // - Output: covariant (can be a subtype)
@@ -203,7 +203,7 @@ export declare namespace Schedule {
    * ```ts
    * import { Effect } from "effect"
    * import { Schedule } from "effect"
-   * import { Duration } from "effect/time"
+   * import { Duration } from "effect"
    * import { Console } from "effect/logging"
    *
    * // Custom schedule that uses input metadata
@@ -247,7 +247,7 @@ export declare namespace Schedule {
    * ```ts
    * import { Effect } from "effect"
    * import { Schedule } from "effect"
-   * import { Duration } from "effect/time"
+   * import { Duration } from "effect"
    * import { Console } from "effect/logging"
    *
    * // Custom schedule that logs metadata including output
@@ -1937,7 +1937,7 @@ export const eitherWith: {
  * ```ts
  * import { Effect } from "effect"
  * import { Schedule } from "effect"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  * import { Console } from "effect/logging"
  *
  * const program = Effect.gen(function*() {
@@ -2279,7 +2279,7 @@ export const map: {
  * ```ts
  * import { Effect } from "effect"
  * import { Schedule } from "effect"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  * import { Console } from "effect/logging"
  *
  * // Modify delays based on output - increase delay on high iteration counts
@@ -3244,7 +3244,7 @@ export const ensureInput = <T>() =>
  * @example
  * ```ts
  * import { Schedule } from "effect"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  *
  * // ensureOutput is a type-level function for compile-time constraints
  * // It ensures that a schedule's output type matches the specified type

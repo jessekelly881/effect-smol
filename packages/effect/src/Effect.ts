@@ -3667,7 +3667,7 @@ export const timed: <A, E, R>(self: Effect<A, E, R>) => Effect<[duration: Durati
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  *
  * // Multiple effects with different delays
  * const effect1 = Effect.delay(Effect.succeed("Fast"), Duration.millis(100))
@@ -3706,7 +3706,7 @@ export const raceAll: <Eff extends Effect<any, any, any>>(
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  *
  * // Multiple effects with different delays and potential failures
  * const effect1 = Effect.delay(Effect.succeed("First"), Duration.millis(200))
@@ -10637,7 +10637,7 @@ export const trackDefects: {
  * ```ts
  * import { Effect } from "effect"
  * import { Metric } from "effect/observability"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  *
  * const executionTimer = Metric.timer("execution_time")
  *
@@ -10655,7 +10655,7 @@ export const trackDefects: {
  * ```ts
  * import { Effect } from "effect"
  * import { Metric } from "effect/observability"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  *
  * // Track execution time in milliseconds using custom mapping
  * const durationGauge = Metric.gauge("execution_millis")

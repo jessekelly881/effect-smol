@@ -129,7 +129,7 @@ export * as Cause from "./Cause.ts"
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { Clock } from "effect/time"
+ * import { Clock } from "effect"
  *
  * // Get current time in milliseconds
  * const getCurrentTime = Clock.currentTimeMillis
@@ -149,7 +149,7 @@ export * as Cause from "./Cause.ts"
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { Clock } from "effect/time"
+ * import { Clock } from "effect"
  *
  * // Using Clock service directly
  * const program = Effect.gen(function* () {
@@ -708,7 +708,7 @@ export * as Runtime from "./Runtime.ts"
  * ```ts
  * import { Effect } from "effect"
  * import { Schedule } from "effect"
- * import { Duration } from "effect/time"
+ * import { Duration } from "effect"
  *
  * // Retry with exponential backoff
  * const retryPolicy = Schedule.exponential("100 millis", 2.0)
