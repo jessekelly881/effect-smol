@@ -15,7 +15,7 @@ import { format, type Inspectable, NodeInspectSymbol } from "./interfaces/Inspec
 import { type Pipeable, pipeArguments } from "./interfaces/Pipeable.ts"
 import * as dateTime from "./internal/dateTime.ts"
 import * as N from "./Number.ts"
-import * as String from "./primitives/String.ts"
+import * as String from "./String.ts"
 import type { Mutable } from "./types/Types.ts"
 
 const TypeId = "~effect/time/Cron"

@@ -34,4 +34,4 @@ export * as RegExp from "./RegExp.ts"
  *
  * @since 2.0.0
  */
-export * as String from "./String.ts"
+export * as String from "../String.ts"

@@ -9,10 +9,10 @@ import { dual } from "../../Function.ts"
 import * as Equal from "../../interfaces/Equal.ts"
 import * as Hash from "../../interfaces/Hash.ts"
 import { type Redactable, symbolRedactable } from "../../interfaces/Inspectable.ts"
-import * as String from "../../primitives/String.ts"
 import * as Schema from "../../schema/Schema.ts"
 import * as Transformation from "../../schema/Transformation.ts"
 import * as ServiceMap from "../../ServiceMap.ts"
+import * as String from "../../String.ts"
 import type { Mutable } from "../../types/Types.ts"
 
 /**

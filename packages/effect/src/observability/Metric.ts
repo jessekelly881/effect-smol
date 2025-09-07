@@ -153,8 +153,8 @@ import { pipeArguments } from "../interfaces/Pipeable.ts"
 import * as InternalEffect from "../internal/effect.ts"
 import * as InternalMetric from "../internal/metric.ts"
 import * as Layer from "../Layer.ts"
-import * as _String from "../primitives/String.ts"
 import * as ServiceMap from "../ServiceMap.ts"
+import * as _String from "../String.ts"
 import type { Contravariant, Covariant } from "../types/Types.ts"
 
 /**

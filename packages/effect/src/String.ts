@@ -6,16 +6,16 @@
  * @since 2.0.0
  */
 
-import type { NonEmptyArray } from "../collections/Array.ts"
-import * as equivalence from "../data/Equivalence.ts"
-import * as order from "../data/Order.ts"
-import type * as Ordering from "../data/Ordering.ts"
-import type { Refinement } from "../data/Predicate.ts"
-import * as predicate from "../data/Predicate.ts"
-import * as Reducer from "../data/Reducer.ts"
-import { dual } from "../Function.ts"
-import * as readonlyArray from "../internal/array.ts"
-import * as number from "../Number.ts"
+import type { NonEmptyArray } from "./collections/Array.ts"
+import * as equivalence from "./data/Equivalence.ts"
+import * as order from "./data/Order.ts"
+import type * as Ordering from "./data/Ordering.ts"
+import type { Refinement } from "./data/Predicate.ts"
+import * as predicate from "./data/Predicate.ts"
+import * as Reducer from "./data/Reducer.ts"
+import { dual } from "./Function.ts"
+import * as readonlyArray from "./internal/array.ts"
+import * as number from "./Number.ts"
 
 /**
  * Reference to the global `String` constructor.

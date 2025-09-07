@@ -2,8 +2,8 @@
  * @since 2.0.0
  */
 
-import * as equivalence from "../data/Equivalence.ts"
-import * as predicate from "../data/Predicate.ts"
+import * as equivalence from "./data/Equivalence.ts"
+import * as predicate from "./data/Predicate.ts"
 
 /**
  * Tests if a value is a `symbol`.

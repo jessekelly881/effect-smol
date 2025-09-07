@@ -17,12 +17,12 @@ import * as Hash from "../../interfaces/Hash.ts"
 import { type Inspectable } from "../../interfaces/Inspectable.ts"
 import type { Pipeable } from "../../interfaces/Pipeable.ts"
 import { PipeInspectableProto } from "../../internal/core.ts"
-import * as String$ from "../../primitives/String.ts"
 import type * as Annotations from "../../schema/Annotations.ts"
 import type * as AST from "../../schema/AST.ts"
 import * as Issue from "../../schema/Issue.ts"
 import * as Schema from "../../schema/Schema.ts"
 import * as Transformation from "../../schema/Transformation.ts"
+import * as String$ from "../../String.ts"
 
 const TypeId = "~effect/http/UrlParams"
 
