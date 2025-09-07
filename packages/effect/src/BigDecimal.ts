@@ -14,15 +14,15 @@
  * @since 2.0.0
  */
 
-import * as equivalence from "../data/Equivalence.ts"
-import * as order from "../data/Order.ts"
-import type { Ordering } from "../data/Ordering.ts"
-import { hasProperty } from "../data/Predicate.ts"
-import { dual } from "../Function.ts"
-import * as Equal from "../interfaces/Equal.ts"
-import * as Hash from "../interfaces/Hash.ts"
-import { type Inspectable, NodeInspectSymbol } from "../interfaces/Inspectable.ts"
-import { type Pipeable, pipeArguments } from "../interfaces/Pipeable.ts"
+import * as equivalence from "./data/Equivalence.ts"
+import * as order from "./data/Order.ts"
+import type { Ordering } from "./data/Ordering.ts"
+import { hasProperty } from "./data/Predicate.ts"
+import { dual } from "./Function.ts"
+import * as Equal from "./interfaces/Equal.ts"
+import * as Hash from "./interfaces/Hash.ts"
+import { type Inspectable, NodeInspectSymbol } from "./interfaces/Inspectable.ts"
+import { type Pipeable, pipeArguments } from "./interfaces/Pipeable.ts"
 
 const DEFAULT_PRECISION = 100
 const FINITE_INT_REGEX = /^[+-]?\d+$/
