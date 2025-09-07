@@ -47,6 +47,15 @@ export {
 export * as BigDecimal from "./BigDecimal.ts"
 
 /**
+ * This module provides utility functions and type class instances for working with the `boolean` type in TypeScript.
+ * It includes functions for basic boolean operations, as well as type class instances for
+ * `Equivalence` and `Order`.
+ *
+ * @since 2.0.0
+ */
+export * as Boolean from "./Boolean.ts"
+
+/**
  * This module provides utilities for working with `Cause`, a data type that represents
  * the different ways an `Effect` can fail. It includes structured error handling with
  * typed errors, defects, and interruptions.
