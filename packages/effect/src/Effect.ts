@@ -10767,7 +10767,7 @@ export class Transaction extends ServiceMap.Key<
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { TxRef } from "effect/transactions"
+ * import * as TxRef from "effect/stm/TxRef"
  *
  * const program = Effect.gen(function* () {
  *   const ref1 = yield* TxRef.make(0)
@@ -10799,7 +10799,7 @@ export const atomic = <A, E, R>(
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { TxRef } from "effect/transactions"
+ * import * as TxRef from "effect/stm/TxRef"
  *
  * const program = Effect.atomicWith((txState) =>
  *   Effect.gen(function* () {
@@ -10859,7 +10859,7 @@ export const atomicWith = <A, E, R>(
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { TxRef } from "effect/transactions"
+ * import * as TxRef from "effect/stm/TxRef"
  *
  * const program = Effect.gen(function* () {
  *   const ref1 = yield* TxRef.make(0)
@@ -10902,7 +10902,7 @@ export const transaction = <A, E, R>(
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { TxRef } from "effect/transactions"
+ * import * as TxRef from "effect/stm/TxRef"
  *
  * const program = Effect.transactionWith((txState) =>
  *   Effect.gen(function* () {
@@ -11027,7 +11027,7 @@ function clearTransaction(state: Transaction["Service"]) {
  *
  * ```ts
  * import { Effect } from "effect"
- * import * as TxRef from "effect/transactions/TxRef"
+ * import * as TxRef from "effect/stm/TxRef"
  *
  * const program = Effect.gen(function*() {
  *   // create a transactional reference
@@ -11036,7 +11036,7 @@ function clearTransaction(state: Transaction["Service"]) {
  *   // forks a fiber that increases the value of `ref` every 100 millis
  *   yield* Effect.fork(Effect.forever(
  *     // update to transactional value
- *     TxRef.update(ref, (n) => n + 1).pipe(Effect.delay("100 millis"))
+ *     TxRef.update(ref, (n: number) => n + 1).pipe(Effect.delay("100 millis"))
  *   ))
  *
  *   // the following will retry 10 times until the `ref` value is 10
