@@ -2,6 +2,7 @@
  * @since 4.0.0
  */
 import * as Option from "../../data/Option.ts"
+import * as Duration from "../../Duration.ts"
 import * as Effect from "../../Effect.ts"
 import * as PrimaryKey from "../../interfaces/PrimaryKey.ts"
 import * as Layer from "../../Layer.ts"
@@ -10,7 +11,6 @@ import * as Schema from "../../schema/Schema.ts"
 import type { Scope } from "../../Scope.ts"
 import * as Cron from "../../time/Cron.ts"
 import * as DateTime from "../../time/DateTime.ts"
-import * as Duration from "../../time/Duration.ts"
 import * as Rpc from "../rpc/Rpc.ts"
 import * as ClusterSchema from "./ClusterSchema.ts"
 import { Persisted, Uninterruptible } from "./ClusterSchema.ts"

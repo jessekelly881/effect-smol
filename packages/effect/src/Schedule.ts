@@ -33,6 +33,7 @@
  */
 import { hasProperty } from "./data/Predicate.ts"
 import * as Result from "./data/Result.ts"
+import * as Duration from "./Duration.ts"
 import type { Effect } from "./Effect.ts"
 import type { LazyArg } from "./Function.ts"
 import { constant, constTrue, dual, identity } from "./Function.ts"
@@ -42,7 +43,6 @@ import * as effect from "./internal/effect.ts"
 import * as Pull from "./stream/Pull.ts"
 import * as Cron from "./time/Cron.ts"
 import type * as DateTime from "./time/DateTime.ts"
-import * as Duration from "./time/Duration.ts"
 import type { Contravariant, Covariant } from "./types/Types.ts"
 
 /** @internal */

@@ -89,4 +89,4 @@ export * as DateTime from "./DateTime.ts"
  *
  * @since 2.0.0
  */
-export * as Duration from "./Duration.ts"
+export * as Duration from "../Duration.ts"

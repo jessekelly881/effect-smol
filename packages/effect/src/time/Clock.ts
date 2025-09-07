@@ -58,10 +58,10 @@
  *
  * @since 2.0.0
  */
+import type * as Duration from "../Duration.ts"
 import type { Effect } from "../Effect.ts"
 import * as effect from "../internal/effect.ts"
 import type * as ServiceMap from "../ServiceMap.ts"
-import type * as Duration from "../time/Duration.ts"
 
 /**
  * Represents a time-based clock which provides functionality related to time
