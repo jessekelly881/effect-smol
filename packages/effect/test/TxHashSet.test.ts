@@ -1,6 +1,6 @@
 import { assert, describe, it } from "@effect/vitest"
+import { Effect } from "effect"
 import { HashSet } from "effect/collections"
-import * as Effect from "effect/Effect"
 import { Equal, Hash } from "effect/interfaces"
 import { TxHashSet } from "effect/stm"
 

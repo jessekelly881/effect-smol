@@ -1,4 +1,4 @@
-import * as Boolean from "effect/Boolean"
+import { Boolean } from "effect"
 import { describe, it } from "vitest"
 import { strictEqual } from "../utils/assert.ts"
 

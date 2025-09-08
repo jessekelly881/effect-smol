@@ -1,7 +1,5 @@
 import { assert, describe, it } from "@effect/vitest"
-import { Fiber, Queue } from "effect"
-import * as Effect from "effect/Effect"
-import * as Exit from "effect/Exit"
+import { Effect, Exit, Fiber, Queue } from "effect"
 import { Channel } from "effect/stream"
 
 describe("Channel", () => {

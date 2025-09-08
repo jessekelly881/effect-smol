@@ -1,8 +1,5 @@
 import { assert, describe, it } from "@effect/vitest"
-import * as Effect from "effect/Effect"
-import * as Exit from "effect/Exit"
-import * as RcRef from "effect/RcRef"
-import * as Scope from "effect/Scope"
+import { Effect, Exit, RcRef, Scope } from "effect"
 
 describe("RcRef", () => {
   it.effect("deallocation", () =>

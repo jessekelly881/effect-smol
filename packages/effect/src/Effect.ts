@@ -89,7 +89,13 @@ import * as internalSchedule from "./internal/schedule.ts"
 import type * as Layer from "./Layer.ts"
 import type { Logger } from "./logging/Logger.ts"
 import type { LogLevel } from "./logging/LogLevel.ts"
-import * as Metric from "./observability/Metric.ts"
+import * as Metric from "./Metric.ts"
+import { CurrentLogAnnotations, CurrentLogSpans } from "./References.ts"
+import type { Schedule } from "./Schedule.ts"
+import type { Scheduler } from "./Scheduler.ts"
+import type { Scope } from "./Scope.ts"
+import * as ServiceMap from "./ServiceMap.ts"
+import type { TxRef } from "./stm/TxRef.ts"
 import type {
   AnySpan,
   ParentSpan,
@@ -99,13 +105,7 @@ import type {
   SpanOptionsNoTrace,
   TraceOptions,
   Tracer
-} from "./observability/Tracer.ts"
-import { CurrentLogAnnotations, CurrentLogSpans } from "./References.ts"
-import type { Schedule } from "./Schedule.ts"
-import type { Scheduler } from "./Scheduler.ts"
-import type { Scope } from "./Scope.ts"
-import * as ServiceMap from "./ServiceMap.ts"
-import type { TxRef } from "./stm/TxRef.ts"
+} from "./Tracer.ts"
 import type { TypeLambda } from "./types/HKT.ts"
 import type {
   Concurrency,

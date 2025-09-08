@@ -1,7 +1,5 @@
 import { assert, describe, it } from "@effect/vitest"
-import * as Duration from "effect/Duration"
-import * as Effect from "effect/Effect"
-import * as Exit from "effect/Exit"
+import { Duration, Effect, Exit } from "effect"
 import * as TestClock from "effect/testing/TestClock"
 
 describe("TestClock", () => {

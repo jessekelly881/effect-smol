@@ -13,9 +13,9 @@
 import type { ReadonlyRecord } from "./data/Record.ts"
 import { constTrue } from "./Function.ts"
 import type { LogLevel } from "./logging/LogLevel.ts"
-import { DisablePropagation, type SpanLink, Tracer } from "./observability/Tracer.ts"
 import { MaxOpsBeforeYield } from "./Scheduler.ts"
 import * as ServiceMap from "./ServiceMap.ts"
+import { DisablePropagation, type SpanLink, Tracer } from "./Tracer.ts"
 
 export {
   /**

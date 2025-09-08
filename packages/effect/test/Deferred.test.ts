@@ -1,9 +1,6 @@
 import { assert, describe, it } from "@effect/vitest"
-import { Deferred } from "effect"
-import * as Cause from "effect/Cause"
+import { Cause, Deferred, Effect, Exit } from "effect"
 import { UndefinedOr } from "effect/data"
-import * as Effect from "effect/Effect"
-import * as Exit from "effect/Exit"
 
 describe("Deferred", () => {
   describe("success", () => {

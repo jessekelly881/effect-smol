@@ -1,7 +1,5 @@
-import * as Effect from "effect/Effect"
-import { pipe } from "effect/Function"
-import * as Ref from "effect/Ref"
-import type * as Scope from "effect/Scope"
+import { Effect, pipe, Ref } from "effect"
+import type { Scope } from "effect"
 
 interface Counter {
   acquire(): Effect.Effect<number, never, Scope.Scope>

@@ -1,12 +1,8 @@
 import { assert, describe, expect, it } from "@effect/vitest"
-import { Fiber, ServiceMap } from "effect"
-import * as Request from "effect/batching/Request"
-import * as Resolver from "effect/batching/RequestResolver"
-import * as Cause from "effect/Cause"
+import { Cause, Effect, Exit, Fiber, ServiceMap } from "effect"
+import { Request, RequestResolver as Resolver } from "effect/batching"
 import { Array } from "effect/collections"
 import { Data } from "effect/data"
-import * as Effect from "effect/Effect"
-import * as Exit from "effect/Exit"
 import { flow, pipe } from "effect/Function"
 
 class Counter extends ServiceMap.Key<Counter, { count: number }>()("Counter") {}

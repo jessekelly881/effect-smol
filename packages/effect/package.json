@@ -92,7 +92,6 @@
       "./interfaces": "./dist/interfaces/index.js",
       "./logging": "./dist/logging/index.js",
       "./match": "./dist/match/index.js",
-      "./observability": "./dist/observability/index.js",
       "./platform": "./dist/platform/index.js",
       "./primitives": "./dist/primitives/index.js",
       "./resources": "./dist/resources/index.js",

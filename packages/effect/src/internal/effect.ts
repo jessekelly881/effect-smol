@@ -19,8 +19,7 @@ import { pipeArguments } from "../interfaces/Pipeable.ts"
 import type * as Console from "../logging/Console.ts"
 import type * as Logger from "../logging/Logger.ts"
 import type * as LogLevel from "../logging/LogLevel.ts"
-import type * as Metric from "../observability/Metric.ts"
-import * as Tracer from "../observability/Tracer.ts"
+import type * as Metric from "../Metric.ts"
 import {
   CurrentConcurrency,
   CurrentLogAnnotations,
@@ -34,6 +33,7 @@ import {
 import * as Scheduler from "../Scheduler.ts"
 import type * as Scope from "../Scope.ts"
 import * as ServiceMap from "../ServiceMap.ts"
+import * as Tracer from "../Tracer.ts"
 import type { Concurrency, ExcludeTag, ExtractTag, NoInfer, NotFunction, Simplify, Tags } from "../types/Types.ts"
 import { internalCall } from "../Utils.ts"
 import type { Primitive } from "./core.ts"
