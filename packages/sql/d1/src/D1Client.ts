@@ -3,7 +3,7 @@
  */
 import type { D1Database, D1PreparedStatement } from "@cloudflare/workers-types"
 import * as Cache from "effect/caching/Cache"
-import * as Config from "effect/config/Config"
+import * as Config from "effect/Config"
 import * as Duration from "effect/Duration"
 import * as Effect from "effect/Effect"
 import { identity } from "effect/Function"

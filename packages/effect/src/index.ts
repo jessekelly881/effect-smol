@@ -170,6 +170,16 @@ export * as Cause from "./Cause.ts"
 export * as Clock from "./Clock.ts"
 
 /**
+ * @since 4.0.0
+ */
+export * as Config from "./Config.ts"
+
+/**
+ * @since 4.0.0
+ */
+export * as ConfigProvider from "./ConfigProvider.ts"
+
+/**
  * @since 2.0.0
  */
 export * as Cron from "./Cron.ts"
