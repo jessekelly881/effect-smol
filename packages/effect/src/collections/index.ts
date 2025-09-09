@@ -67,7 +67,7 @@ export * as Array from "./Array.ts"
  * @example
  * ```ts
  * import { Chunk } from "effect/collections"
-import { Effect } from "effect"
+ * import { Effect } from "effect"
  *
  * // Working with Effects
  * const processChunk = (chunk: Chunk.Chunk<number>) =>

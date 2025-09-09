@@ -65,6 +65,11 @@ export * as BigInt from "./BigInt.ts"
 export * as Boolean from "./Boolean.ts"
 
 /**
+ * @since 4.0.0
+ */
+export * as Cache from "./Cache.ts"
+
+/**
  * This module provides utilities for working with `Cause`, a data type that represents
  * the different ways an `Effect` can fail. It includes structured error handling with
  * typed errors, defects, and interruptions.
@@ -860,9 +865,7 @@ export * as Runtime from "./Runtime.ts"
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Schedule } from "effect"
- * import { Duration } from "effect"
+ * import { Effect, Schedule, Duration } from "effect"
  *
  * // Retry with exponential backoff
  * const retryPolicy = Schedule.exponential("100 millis", 2.0)
