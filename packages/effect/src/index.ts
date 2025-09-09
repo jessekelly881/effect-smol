@@ -533,7 +533,7 @@ export * as ManagedRuntime from "./ManagedRuntime.ts"
  *
  * ```ts
  * import { Effect } from "effect"
- * import { Metric } from "effect/observability"
+ * import { Metric } from "effect"
  *
  * // Create metrics
  * const requestCount = Metric.counter("http_requests_total", {
@@ -563,7 +563,7 @@ export * as ManagedRuntime from "./ManagedRuntime.ts"
  *
  * ```ts
  * import { Effect } from "effect"
- * import { Metric } from "effect/observability"
+ * import { Metric } from "effect"
  *
  * const requestCount = Metric.counter("requests", {
  *   description: "Number of requests by endpoint and method"
@@ -592,7 +592,7 @@ export * as ManagedRuntime from "./ManagedRuntime.ts"
  *
  * ```ts
  * import { Effect } from "effect"
- * import { Metric } from "effect/observability"
+ * import { Metric } from "effect"
  * import { Schedule } from "effect"
  *
  * // Business metrics

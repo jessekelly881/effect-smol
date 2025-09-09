@@ -10324,7 +10324,7 @@ export const withLogSpan = dual<
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { Metric } from "effect/observability"
+ * import { Metric } from "effect"
  *
  * const counter = Metric.counter("effect_executions", {
  *   description: "Counts effect executions"
@@ -10344,7 +10344,7 @@ export const withLogSpan = dual<
  * @example
  * ```ts
  * import { Effect, Exit } from "effect"
- * import { Metric } from "effect/observability"
+ * import { Metric } from "effect"
  *
  * // Track different exit types with custom mapping
  * const exitTracker = Metric.frequency("exit_types", {
@@ -10405,7 +10405,7 @@ export const track: {
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { Metric } from "effect/observability"
+ * import { Metric } from "effect"
  *
  * const successCounter = Metric.counter("successes").pipe(
  *   Metric.withConstantInput(1)
@@ -10424,7 +10424,7 @@ export const track: {
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { Metric } from "effect/observability"
+ * import { Metric } from "effect"
  *
  * // Track successful request sizes
  * const requestSizeGauge = Metric.gauge("request_size_bytes")
@@ -10482,7 +10482,7 @@ export const trackSuccesses: {
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { Metric } from "effect/observability"
+ * import { Metric } from "effect"
  *
  * const errorCounter = Metric.counter("errors").pipe(
  *   Metric.withConstantInput(1)
@@ -10501,7 +10501,7 @@ export const trackSuccesses: {
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { Metric } from "effect/observability"
+ * import { Metric } from "effect"
  *
  * // Track error types using frequency metric
  * const errorTypeFrequency = Metric.frequency("error_types")
@@ -10559,7 +10559,7 @@ export const trackErrors: {
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { Metric } from "effect/observability"
+ * import { Metric } from "effect"
  *
  * const defectCounter = Metric.counter("defects").pipe(
  *   Metric.withConstantInput(1)
@@ -10578,7 +10578,7 @@ export const trackErrors: {
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { Metric } from "effect/observability"
+ * import { Metric } from "effect"
  *
  * // Track defect types using frequency metric
  * const defectTypeFrequency = Metric.frequency("defect_types")
@@ -10636,7 +10636,7 @@ export const trackDefects: {
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { Metric } from "effect/observability"
+ * import { Metric } from "effect"
  * import { Duration } from "effect"
  *
  * const executionTimer = Metric.timer("execution_time")
@@ -10654,7 +10654,7 @@ export const trackDefects: {
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { Metric } from "effect/observability"
+ * import { Metric } from "effect"
  * import { Duration } from "effect"
  *
  * // Track execution time in milliseconds using custom mapping

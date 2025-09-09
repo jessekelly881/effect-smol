@@ -228,7 +228,7 @@ export const TracerSpanAnnotations = ServiceMap.Reference<ReadonlyRecord<string,
  * ```ts
  * import { Effect } from "effect"
  * import { References } from "effect"
- * import { Tracer } from "effect/observability"
+ * import { Tracer } from "effect"
  *
  * const spanLinksExample = Effect.gen(function* () {
  *   // Get current links (empty by default)
