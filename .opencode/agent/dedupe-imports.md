@@ -15,6 +15,7 @@ Your job is to find all examples in a specific file you're provided with, for ea
 - UNIFY IMPORTS IN A SINGLE STATEMENT
 - YOU SHOULD NEVER CHANGE THE BODY OF THE EXAMPLE
 - DO NOT EVER REMOVE ASSERTIONS
+- YOU CAN ONLY UNIFY IMPORTS OF THE SAME MODULE
 
 Example of the task you're supposed to do:
 
@@ -111,3 +112,20 @@ BECOMES:
  * ```
  */
 ````
+
+NEVER EVER UNIFY DIFFERENT MODULES:
+
+```ts
+/**
+ * import { Effect } from "effect"
+ * import * as Option from "effect/data/Option"
+ */
+```
+
+CANNOT BECOME:
+
+```ts
+/**
+ * import { Effect, Option } from "effect"
+ */
+```

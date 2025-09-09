@@ -463,8 +463,7 @@ export const fromIterable = <A>(collection: Iterable<A>): Option<A> => {
  *
  * @example
  * ```ts
- * import { Result } from "effect/data"
- * import { Option } from "effect/data"
+ * import { Result, Option } from "effect/data"
  *
  * console.log(Option.getSuccess(Result.succeed("ok")))
  * // Output: { _id: 'Option', _tag: 'Some', value: 'ok' }
@@ -498,8 +497,7 @@ export const getSuccess: <A, E>(self: Result<A, E>) => Option<A> = result.getSuc
  *
  * @example
  * ```ts
- * import { Result } from "effect/data"
- * import { Option } from "effect/data"
+ * import { Result, Option } from "effect/data"
  *
  * console.log(Option.getFailure(Result.succeed("ok")))
  * // Output: { _id: 'Option', _tag: 'None' }
@@ -659,8 +657,7 @@ export const orElseSome: {
  *
  * @example
  * ```ts
- * import { Result } from "effect/data"
- * import { Option } from "effect/data"
+ * import { Result, Option } from "effect/data"
  *
  * const primary = Option.some("primary")
  * const fallback = () => Option.some("fallback")
@@ -1808,8 +1805,7 @@ export const toArray = <A>(self: Option<A>): Array<A> => isNone(self) ? [] : [se
  *
  * @example
  * ```ts
- * import { Result } from "effect/data"
- * import { Option } from "effect/data"
+ * import { Result, Option } from "effect/data"
  *
  * const parseNumber = (s: string): Result.Result<number, string> => {
  *   const n = Number(s)

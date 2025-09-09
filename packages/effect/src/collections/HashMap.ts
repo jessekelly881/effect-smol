@@ -321,8 +321,8 @@ export const get: {
  * @example
  * ```ts
  * import * as HashMap from "effect/collections/HashMap"
-import { Hash } from "effect/interfaces"
  * import * as Option from "effect/data/Option"
+ * import { Hash } from "effect/interfaces"
  *
  * // Useful when implementing custom equality for complex keys
  * const userMap = HashMap.make(
@@ -423,7 +423,7 @@ export const has: {
  * @example
  * ```ts
  * import * as HashMap from "effect/collections/HashMap"
-import { Hash } from "effect/interfaces"
+ * import { Hash } from "effect/interfaces"
  *
  * // Create a map with case-sensitive keys
  * const userMap = HashMap.make(
@@ -735,10 +735,13 @@ export const mutate: {
  * The update function will be invoked with the current value of the key if it
  * exists, or `None` if no such value exists.
  *
+ * This function will always either update or insert a value into the `HashMap`.
+ *
  * @example
  * ```ts
  * import * as HashMap from "effect/collections/HashMap"
  * import * as Option from "effect/data/Option"
+ * import { Hash } from "effect/interfaces"
  *
  * const map = HashMap.make(["a", 1], ["b", 2])
  *
@@ -771,8 +774,8 @@ export const modifyAt: {
  * @example
  * ```ts
  * import * as HashMap from "effect/collections/HashMap"
-import { Hash } from "effect/interfaces"
  * import * as Option from "effect/data/Option"
+ * import { Hash } from "effect/interfaces"
  *
  * // Useful when working with precomputed hashes for performance
  * const counters = HashMap.make(["downloads", 100], ["views", 250])

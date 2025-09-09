@@ -56,7 +56,7 @@
  * @example
  * ```ts
  * import { Chunk } from "effect/collections"
-import { Effect } from "effect"
+ * import { Effect } from "effect"
  *
  * // Working with Effects
  * const processChunk = (chunk: Chunk.Chunk<number>) =>
@@ -212,7 +212,7 @@ const emptyArray: ReadonlyArray<never> = []
  * @example
  * ```ts
  * import { Chunk } from "effect/collections"
-import * as Equivalence from "effect/data/Equivalence"
+ * import * as Equivalence from "effect/data/Equivalence"
  *
  * const chunk1 = Chunk.make(1, 2, 3)
  * const chunk2 = Chunk.make(1, 2, 3)
@@ -614,7 +614,7 @@ export const fromArrayUnsafe = <A>(self: ReadonlyArray<A>): Chunk<A> =>
  * @example
  * ```ts
  * import { Chunk } from "effect/collections"
-import * as Array from "effect/collections/Array"
+ * import * as Array from "effect/collections/Array"
  *
  * const nonEmptyArray = Array.make(1, 2, 3, 4, 5)
  * const chunk = Chunk.fromNonEmptyArrayUnsafe(nonEmptyArray)
@@ -1799,7 +1799,7 @@ export const size = <A>(self: Chunk<A>): number => self.length
  * @example
  * ```ts
  * import { Chunk } from "effect/collections"
-import * as Order from "effect/data/Order"
+ * import * as Order from "effect/data/Order"
  *
  * const numbers = Chunk.make(3, 1, 4, 1, 5, 9, 2, 6)
  * const sorted = Chunk.sort(numbers, Order.number)
@@ -1832,7 +1832,7 @@ export const sort: {
  * @example
  * ```ts
  * import { Chunk } from "effect/collections"
-import * as Order from "effect/data/Order"
+ * import * as Order from "effect/data/Order"
  *
  * const people = Chunk.make(
  *   { name: "Alice", age: 30 },

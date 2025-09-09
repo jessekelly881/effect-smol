@@ -402,8 +402,7 @@ export const toChannel = <A, E, R>(
  * @example
  * ```ts
  * import { Stream } from "effect/stream"
- * import { Effect } from "effect"
- * import { Queue } from "effect"
+ * import { Effect, Queue } from "effect"
  *
  * const stream = Stream.callback<number>((queue) => {
  *   // Emit values to the stream
@@ -587,9 +586,8 @@ export const failSync = <E>(evaluate: LazyArg<E>): Stream<never, E> => fromChann
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
+ * import { Effect, Cause } from "effect"
  * import { Stream } from "effect/stream"
- * import { Cause } from "effect"
  *
  * const cause = Cause.fail("Database connection failed")
  * const stream = Stream.failCause(cause)
@@ -614,9 +612,8 @@ export const die = (defect: unknown): Stream<never> => fromChannel(Channel.die(d
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
+ * import { Effect, Cause } from "effect"
  * import { Stream } from "effect/stream"
- * import { Cause } from "effect"
  *
  * const stream = Stream.failCauseSync(() =>
  *   Cause.fail("Connection timeout after retries")
@@ -736,8 +733,7 @@ export const fromArrayEffect = <A, E, R>(effect: Effect.Effect<ReadonlyArray<A>,
  * @example
  * ```ts
  * import { Stream } from "effect/stream"
- * import { Effect } from "effect"
- * import { Queue } from "effect"
+ * import { Effect, Queue } from "effect"
  *
  * const program = Effect.gen(function* () {
  *   const queue = yield* Queue.unbounded<number>()
@@ -762,9 +758,8 @@ export const fromQueue = <A, E>(queue: Queue.Dequeue<A, E>): Stream<A, Exclude<E
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
+ * import { Effect, PubSub } from "effect"
  * import { Stream } from "effect/stream"
- * import { PubSub } from "effect"
  *
  * const program = Effect.gen(function* () {
  *   const pubsub = yield* PubSub.unbounded<number>()
@@ -864,9 +859,8 @@ export const fromSchedule = <O, E, R>(schedule: Schedule.Schedule<O, unknown, E,
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
+ * import { Effect, PubSub } from "effect"
  * import { Stream } from "effect/stream"
- * import { PubSub } from "effect"
  *
  * const program = Effect.gen(function* () {
  *   const pubsub = yield* PubSub.unbounded<number>()
@@ -1512,9 +1506,8 @@ export const filter: {
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
+ * import { Effect, Cause } from "effect"
  * import { Stream } from "effect/stream"
- * import { Cause } from "effect"
  *
  * const failingStream = Stream.make(1, 2).pipe(
  *   Stream.concat(Stream.fail("Oops!")),
@@ -1589,9 +1582,8 @@ export const mapError: {
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
+ * import { Effect, Cause } from "effect"
  * import { Stream } from "effect/stream"
- * import { Cause } from "effect"
  *
  * const failingStream = Stream.fail("NetworkError")
  *
@@ -2978,8 +2970,7 @@ export const runDrain = <A, E, R>(self: Stream<A, E, R>): Effect.Effect<void, E,
  * @example
  * ```ts
  * import { Stream } from "effect/stream"
- * import { Effect } from "effect"
- * import { Scope } from "effect"
+ * import { Effect, Scope } from "effect"
  *
  * const stream = Stream.make(1, 2, 3)
  * const program = Effect.scoped(
