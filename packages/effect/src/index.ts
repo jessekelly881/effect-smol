@@ -817,6 +817,22 @@ export * as Ref from "./Ref.ts"
 export * as References from "./References.ts"
 
 /**
+ * @since 2.0.0
+ */
+export * as Request from "./Request.ts"
+
+/**
+ * This module provides utilities for creating and managing request resolvers,
+ * which are responsible for efficiently batching and executing requests.
+ *
+ * A `RequestResolver<A>` handles the execution of requests of type `A` and
+ * supports features like batching, caching, and resource management.
+ *
+ * @since 2.0.0
+ */
+export * as RequestResolver from "./RequestResolver.ts"
+
+/**
  * This module provides utility functions for working with RegExp in TypeScript.
  *
  * @since 2.0.0

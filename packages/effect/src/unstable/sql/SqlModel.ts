@@ -2,11 +2,11 @@
  * @since 4.0.0
  * @category models
  */
-import * as RequestResolver from "../../batching/RequestResolver.ts"
 import type * as Cause from "../../Cause.ts"
 import type { DurationInput } from "../../Duration.ts"
 import * as Effect from "../../Effect.ts"
 import { identity } from "../../Function.ts"
+import * as RequestResolver from "../../RequestResolver.ts"
 import type * as Schema from "../../schema/Schema.ts"
 import type { Scope } from "../../Scope.ts"
 import type * as Model from "../schema/Model.ts"

@@ -1,6 +1,5 @@
 import { assert, describe, expect, it } from "@effect/vitest"
-import { Cause, Effect, Exit, Fiber, ServiceMap } from "effect"
-import { Request, RequestResolver as Resolver } from "effect/batching"
+import { Cause, Effect, Exit, Fiber, Request, RequestResolver as Resolver, ServiceMap } from "effect"
 import { Array } from "effect/collections"
 import { Data } from "effect/data"
 import { flow, pipe } from "effect/Function"

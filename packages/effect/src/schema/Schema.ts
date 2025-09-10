@@ -3,7 +3,6 @@
  */
 
 import type { StandardSchemaV1 } from "@standard-schema/spec"
-import * as Request from "../batching/Request.ts"
 import * as Cause_ from "../Cause.ts"
 import * as Arr from "../collections/Array.ts"
 import type { Brand } from "../data/Brand.ts"
@@ -28,6 +27,7 @@ import type { Pipeable } from "../interfaces/Pipeable.ts"
 import { pipeArguments } from "../interfaces/Pipeable.ts"
 import * as core from "../internal/core.ts"
 import * as InternalEffect from "../internal/effect.ts"
+import * as Request from "../Request.ts"
 import * as Scheduler from "../Scheduler.ts"
 import * as Annotations from "./Annotations.ts"
 import * as AST from "./AST.ts"

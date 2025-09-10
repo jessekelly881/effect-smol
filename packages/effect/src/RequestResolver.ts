@@ -1,30 +1,30 @@
 /**
  * @since 2.0.0
  */
-import * as Cache from "../Cache.ts"
-import type { NonEmptyArray } from "../collections/Array.ts"
-import * as Arr from "../collections/Array.ts"
-import * as Iterable from "../collections/Iterable.ts"
-import * as MutableHashMap from "../collections/MutableHashMap.ts"
-import { hasProperty } from "../data/Predicate.ts"
-import type * as Duration from "../Duration.ts"
-import * as Effect from "../Effect.ts"
-import * as Exit from "../Exit.ts"
-import { constTrue, dual, identity } from "../Function.ts"
-import { type Pipeable, pipeArguments } from "../interfaces/Pipeable.ts"
-import { exitFail, exitSucceed } from "../internal/core.ts"
-import * as effect from "../internal/effect.ts"
-import * as internal from "../internal/request.ts"
-import type * as Schema from "../schema/Schema.ts"
-import type { Scope } from "../Scope.ts"
-import * as ServiceMap from "../ServiceMap.ts"
-import * as Tracer from "../Tracer.ts"
-import type * as Types from "../types/Types.ts"
-import type * as Persistable from "../unstable/persistence/Persistable.ts"
-import * as Persistence from "../unstable/persistence/Persistence.ts"
+import * as Cache from "./Cache.ts"
+import type { NonEmptyArray } from "./collections/Array.ts"
+import * as Arr from "./collections/Array.ts"
+import * as Iterable from "./collections/Iterable.ts"
+import * as MutableHashMap from "./collections/MutableHashMap.ts"
+import { hasProperty } from "./data/Predicate.ts"
+import type * as Duration from "./Duration.ts"
+import * as Effect from "./Effect.ts"
+import * as Exit from "./Exit.ts"
+import { constTrue, dual, identity } from "./Function.ts"
+import { type Pipeable, pipeArguments } from "./interfaces/Pipeable.ts"
+import { exitFail, exitSucceed } from "./internal/core.ts"
+import * as effect from "./internal/effect.ts"
+import * as internal from "./internal/request.ts"
 import type * as Request from "./Request.ts"
+import type * as Schema from "./schema/Schema.ts"
+import type { Scope } from "./Scope.ts"
+import * as ServiceMap from "./ServiceMap.ts"
+import * as Tracer from "./Tracer.ts"
+import type * as Types from "./types/Types.ts"
+import type * as Persistable from "./unstable/persistence/Persistable.ts"
+import * as Persistence from "./unstable/persistence/Persistence.ts"
 
-const TypeId = "~effect/batching/RequestResolver"
+const TypeId = "~effect/RequestResolver"
 
 /**
  * The `RequestResolver<A, R>` interface requires an environment `R` and handles
@@ -49,7 +49,7 @@ const TypeId = "~effect/batching/RequestResolver"
  * @example
  * ```ts
  * import { Effect, Exit } from "effect"
- * import { RequestResolver, Request } from "effect/batching"
+ * import { RequestResolver, Request } from "effect"
  *
  * interface GetUserRequest extends Request.Request<string, Error> {
  *   readonly _tag: "GetUserRequest"
@@ -162,7 +162,7 @@ const defaultKey = (_request: unknown): unknown => defaultKeyObject
  * @example
  * ```ts
  * import { Effect, Exit } from "effect"
- * import { RequestResolver, Request } from "effect/batching"
+ * import { RequestResolver, Request } from "effect"
  *
  * // Define a request type
  * interface GetUserRequest extends Request.Request<string, Error> {
@@ -206,7 +206,7 @@ export const make = <A extends Request.Any>(
  * @example
  * ```ts
  * import { Effect, Exit } from "effect"
- * import { RequestResolver, Request } from "effect/batching"
+ * import { RequestResolver, Request } from "effect"
  *
  * interface GetUserByRole extends Request.Request<string, Error> {
  *   readonly _tag: "GetUserByRole"
@@ -261,7 +261,7 @@ const hashGroupKey = <A, K>(get: (entry: Request.Entry<A>) => K) => {
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { RequestResolver, Request } from "effect/batching"
+ * import { RequestResolver, Request } from "effect"
  *
  * interface GetSquareRequest extends Request.Request<number> {
  *   readonly _tag: "GetSquareRequest"
@@ -303,7 +303,7 @@ export const fromFunction = <A extends Request.Any>(
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { RequestResolver, Request } from "effect/batching"
+ * import { RequestResolver, Request } from "effect"
  *
  * interface GetDoubleRequest extends Request.Request<number> {
  *   readonly _tag: "GetDoubleRequest"
@@ -346,7 +346,7 @@ export const fromFunctionBatched = <A extends Request.Any>(
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { RequestResolver, Request } from "effect/batching"
+ * import { RequestResolver, Request } from "effect"
  *
  * interface GetUserFromAPIRequest extends Request.Request<string> {
  *   readonly _tag: "GetUserFromAPIRequest"
@@ -404,7 +404,7 @@ export const fromEffect = <A extends Request.Any>(
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { RequestResolver, Request } from "effect/batching"
+ * import { RequestResolver, Request } from "effect"
  *
  * interface GetUser extends Request.Request<string, Error> {
  *   readonly _tag: "GetUser"
@@ -481,7 +481,7 @@ export const fromEffectTagged = <A extends Request.Any & { readonly _tag: string
  * @example
  * ```ts
  * import { Effect, Exit } from "effect"
- * import { RequestResolver, Request } from "effect/batching"
+ * import { RequestResolver, Request } from "effect"
  *
  * interface GetDataRequest extends Request.Request<string> {
  *   readonly _tag: "GetDataRequest"
@@ -527,7 +527,7 @@ export const setDelayEffect: {
  * @example
  * ```ts
  * import { Effect, Exit } from "effect"
- * import { RequestResolver, Request } from "effect/batching"
+ * import { RequestResolver, Request } from "effect"
  *
  * interface GetDataRequest extends Request.Request<string> {
  *   readonly _tag: "GetDataRequest"
@@ -571,7 +571,7 @@ export const setDelay: {
  * @example
  * ```ts
  * import { Effect, Exit } from "effect"
- * import { RequestResolver, Request } from "effect/batching"
+ * import { RequestResolver, Request } from "effect"
  *
  * interface GetDataRequest extends Request.Request<string> {
  *   readonly _tag: "GetDataRequest"
@@ -634,7 +634,7 @@ export const around: {
  * @example
  * ```ts
  * import { Effect } from "effect"
- * import { RequestResolver, Request } from "effect/batching"
+ * import { RequestResolver, Request } from "effect"
  *
  * // A resolver that will never complete
  * const neverResolver = RequestResolver.never
@@ -663,7 +663,7 @@ export const never: RequestResolver<never> = make(() => Effect.never)
  * @example
  * ```ts
  * import { Effect, Exit } from "effect"
- * import { RequestResolver, Request } from "effect/batching"
+ * import { RequestResolver, Request } from "effect"
  *
  * interface GetDataRequest extends Request.Request<string> {
  *   readonly _tag: "GetDataRequest"
@@ -708,7 +708,7 @@ export const batchN: {
  * @example
  * ```ts
  * import { Effect, Exit } from "effect"
- * import { RequestResolver, Request } from "effect/batching"
+ * import { RequestResolver, Request } from "effect"
  *
  * interface GetUserRequest extends Request.Request<string> {
  *   readonly _tag: "GetUserRequest"
@@ -765,7 +765,7 @@ export const grouped: {
  * @example
  * ```ts
  * import { Effect, Exit } from "effect"
- * import { RequestResolver, Request } from "effect/batching"
+ * import { RequestResolver, Request } from "effect"
  *
  * interface GetDataRequest extends Request.Request<string> {
  *   readonly _tag: "GetDataRequest"
@@ -823,7 +823,7 @@ export const race: {
  * @example
  * ```ts
  * import { Effect, Exit } from "effect"
- * import { RequestResolver, Request } from "effect/batching"
+ * import { RequestResolver, Request } from "effect"
  *
  * interface GetDataRequest extends Request.Request<string> {
  *   readonly _tag: "GetDataRequest"

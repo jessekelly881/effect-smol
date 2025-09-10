@@ -67,8 +67,6 @@
  *
  * @since 2.0.0
  */
-import type * as Request from "./batching/Request.ts"
-import type { RequestResolver } from "./batching/RequestResolver.ts"
 import type * as Cause from "./Cause.ts"
 import type { Clock } from "./Clock.ts"
 import type * as Arr from "./collections/Array.ts"
@@ -91,6 +89,8 @@ import type { Logger } from "./logging/Logger.ts"
 import type { LogLevel } from "./logging/LogLevel.ts"
 import * as Metric from "./Metric.ts"
 import { CurrentLogAnnotations, CurrentLogSpans } from "./References.ts"
+import type * as Request from "./Request.ts"
+import type { RequestResolver } from "./RequestResolver.ts"
 import type { Schedule } from "./Schedule.ts"
 import type { Scheduler } from "./Scheduler.ts"
 import type { Scope } from "./Scope.ts"

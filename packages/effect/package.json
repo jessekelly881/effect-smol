@@ -29,7 +29,6 @@
   "exports": {
     "./package.json": "./package.json",
     ".": "./src/index.ts",
-    "./batching": "./src/batching/index.ts",
     "./caching": "./src/caching/index.ts",
     "./collections": "./src/collections/index.ts",
     "./concurrency": "./src/concurrency/index.ts",
