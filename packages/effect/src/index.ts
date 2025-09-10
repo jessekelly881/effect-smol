@@ -911,6 +911,106 @@ export * as Scheduler from "./Scheduler.ts"
 export * as Scope from "./Scope.ts"
 
 /**
+ * This module provides utilities for working with scoped caching in Effect applications.
+ * A `ScopedCache` is similar to a regular cache but ensures that cached values are properly
+ * cleaned up when their associated scope is closed. This is essential for managing cached
+ * resources that need proper cleanup, such as database connections, file handles, or other
+ * resources with lifecycles.
+ *
+ * The `ScopedCache` data type represents a concurrent-safe, asynchronous cache that stores
+ * the results of effects within a scope. When a value is not present in the cache, the cache
+ * will compute the value using a provided lookup function, store the result in the current
+ * scope, and return it. When the scope is closed, all cached values are automatically
+ * cleaned up.
+ *
+ * ## Key Features
+ *
+ * - **Scoped resource management**: Cached values are tied to scopes for automatic cleanup
+ * - **Concurrent-safe**: Multiple fibers can safely access the cache simultaneously
+ * - **Asynchronous**: Supports caching of effects that may fail or take time
+ * - **Configurable capacity**: Control memory usage with maximum entry limits
+ * - **TTL support**: Automatic expiration of cached entries after a time-to-live
+ * - **Resource-safe**: Proper cleanup when scopes are closed or operations are interrupted
+ *
+ * @example
+ * ```ts
+ * import { ScopedCache, Effect, Duration, Scope } from "effect"
+ *
+ * // Mock database connection interface
+ * interface Connection {
+ *   readonly url: string
+ *   close(): void
+ * }
+ *
+ * // Mock connection factory
+ * const createConnection = (dbUrl: string): Connection => ({
+ *   url: dbUrl,
+ *   close: () => console.log(`Closing connection to ${dbUrl}`)
+ * })
+ *
+ * // Create a scoped cache for database connections
+ * const connectionCache = ScopedCache.make({
+ *   capacity: 10,
+ *   lookup: (dbUrl: string) =>
+ *     Effect.acquireRelease(
+ *       Effect.sync(() => createConnection(dbUrl)),
+ *       (conn) => Effect.sync(() => conn.close())
+ *     )
+ * })
+ *
+ * // Use the cache within a scope
+ * const program = Effect.scoped(
+ *   Effect.gen(function* () {
+ *     const cache = yield* connectionCache
+ *
+ *     // First call creates and caches the connection
+ *     const conn1 = yield* ScopedCache.get(cache, "postgresql://localhost/db1")
+ *
+ *     // Second call returns cached connection
+ *     const conn2 = yield* ScopedCache.get(cache, "postgresql://localhost/db1")
+ *
+ *     // Use connections...
+ *     // All connections will be automatically closed when scope ends
+ *   })
+ * )
+ * ```
+ *
+ * @example
+ * ```ts
+ * import { ScopedCache, Effect, Duration } from "effect"
+ *
+ * // Create a cache with TTL for API responses
+ * const apiCache = ScopedCache.make({
+ *   capacity: 50,
+ *   timeToLive: Duration.minutes(5),
+ *   lookup: (endpoint: string) =>
+ *     Effect.scoped(
+ *       Effect.acquireRelease(
+ *         Effect.tryPromise(() => fetch(endpoint).then(res => res.json())),
+ *         () => Effect.void // cleanup if needed
+ *       )
+ *     )
+ * })
+ *
+ * const program = Effect.scoped(
+ *   Effect.gen(function* () {
+ *     const cache = yield* apiCache
+ *
+ *     // Cache API responses within the scope
+ *     const data1 = yield* ScopedCache.get(cache, "/api/users")
+ *     const data2 = yield* ScopedCache.get(cache, "/api/posts")
+ *
+ *     // Within 5 minutes, same requests return cached data
+ *     const cached = yield* ScopedCache.get(cache, "/api/users")
+ *   })
+ * )
+ * ```
+ *
+ * @since 2.0.0
+ */
+export * as ScopedCache from "./ScopedCache.ts"
+
+/**
  * @since 2.0.0
  */
 export * as ScopedRef from "./ScopedRef.ts"

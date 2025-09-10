@@ -83,7 +83,6 @@
       "./package.json": "./package.json",
       ".": "./dist/index.js",
       "./batching": "./dist/batching/index.js",
-      "./caching": "./dist/caching/index.js",
       "./collections": "./dist/collections/index.js",
       "./data": "./dist/data/index.js",
       "./encoding": "./dist/encoding/index.js",
