@@ -3,13 +3,14 @@
  */
 import type { NonEmptyArray } from "effect/collections/Array"
 import * as Config from "effect/Config"
-import * as Duration from "effect/Duration"
+import { Duration, Function } from "effect/data"
 import * as Effect from "effect/Effect"
-import { identity } from "effect/Function"
 import * as Layer from "effect/Layer"
 import type * as Scope from "effect/Scope"
 import * as Persistence from "effect/unstable/persistence/Persistence"
 import * as IoRedis from "ioredis"
+
+const { identity } = Function
 
 export {
   /**

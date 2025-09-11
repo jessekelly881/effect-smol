@@ -1,6 +1,7 @@
 import { NodeHttpServer } from "@effect/platform-node"
 import { assert, describe, expect, it } from "@effect/vitest"
-import { Duration, Effect, Fiber, Layer, Tracer } from "effect"
+import { Effect, Fiber, Layer, Tracer } from "effect"
+import { Duration } from "effect/data"
 import { Schema } from "effect/schema"
 import { Stream } from "effect/stream"
 import {

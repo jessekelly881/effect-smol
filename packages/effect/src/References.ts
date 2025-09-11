@@ -10,8 +10,8 @@
  *
  * @since 4.0.0
  */
+import { constTrue } from "./data/Function.ts"
 import type { ReadonlyRecord } from "./data/Record.ts"
-import { constTrue } from "./Function.ts"
 import type { LogLevel } from "./logging/LogLevel.ts"
 import { MaxOpsBeforeYield } from "./Scheduler.ts"
 import * as ServiceMap from "./ServiceMap.ts"

@@ -2,12 +2,10 @@
  * @since 1.0.0
  */
 
-import * as Cause from "effect/Cause"
+import { Cause, Duration, Exit } from "effect/data"
+import { flow, pipe } from "effect/data/Function"
 import { isObject } from "effect/data/Predicate"
-import * as Duration from "effect/Duration"
 import * as Effect from "effect/Effect"
-import * as Exit from "effect/Exit"
-import { flow, pipe } from "effect/Function"
 import * as Layer from "effect/Layer"
 import * as Schedule from "effect/Schedule"
 import * as Schema from "effect/schema/Schema"

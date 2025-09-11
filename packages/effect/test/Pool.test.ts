@@ -1,6 +1,7 @@
 import { assert, describe, it } from "@effect/vitest"
 import { deepStrictEqual, strictEqual } from "@effect/vitest/utils"
-import { Deferred, Duration, Effect, Exit, Fiber, pipe, Pool, Ref, Schedule, Scope } from "effect"
+import { Deferred, Effect, Fiber, pipe, Pool, Ref, Schedule, Scope } from "effect"
+import { Duration, Exit } from "effect/data"
 import { TestClock } from "effect/testing"
 
 describe("Pool", () => {

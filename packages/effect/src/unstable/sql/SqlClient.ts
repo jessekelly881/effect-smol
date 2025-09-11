@@ -2,10 +2,10 @@
  * @since 4.0.0
  */
 import { Clock } from "../../Clock.ts"
+import * as Exit from "../../data/Exit.ts"
 import * as Option from "../../data/Option.ts"
 import type { ReadonlyRecord } from "../../data/Record.ts"
 import * as Effect from "../../Effect.ts"
-import * as Exit from "../../Exit.ts"
 import type * as Queue from "../../Queue.ts"
 import * as Scope from "../../Scope.ts"
 import * as ServiceMap from "../../ServiceMap.ts"

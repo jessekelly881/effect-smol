@@ -3,10 +3,10 @@
  */
 import * as Clock from "../../Clock.ts"
 import * as Arr from "../../collections/Array.ts"
-import * as Duration from "../../Duration.ts"
+import * as Duration from "../../data/Duration.ts"
+import * as Exit from "../../data/Exit.ts"
+import { identity } from "../../data/Function.ts"
 import * as Effect from "../../Effect.ts"
-import * as Exit from "../../Exit.ts"
-import { identity } from "../../Function.ts"
 import * as PrimaryKey from "../../interfaces/PrimaryKey.ts"
 import * as Layer from "../../Layer.ts"
 import * as Schema from "../../schema/Schema.ts"

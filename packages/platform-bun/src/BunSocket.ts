@@ -1,9 +1,9 @@
 /**
  * @since 1.0.0
  */
-import type * as Duration from "effect/Duration"
+import type { Duration } from "effect/data"
+import { flow } from "effect/data/Function"
 import type { Effect } from "effect/Effect"
-import { flow } from "effect/Function"
 import * as Layer from "effect/Layer"
 import * as Socket from "effect/unstable/socket/Socket"
 

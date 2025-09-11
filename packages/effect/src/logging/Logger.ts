@@ -103,13 +103,13 @@
  * })
  * ```
  */
-import type * as Cause from "../Cause.ts"
 import * as Array from "../collections/Array.ts"
+import type * as Cause from "../data/Cause.ts"
+import type * as Duration from "../data/Duration.ts"
+import { dual } from "../data/Function.ts"
 import * as Predicate from "../data/Predicate.ts"
-import type * as Duration from "../Duration.ts"
 import type * as Effect from "../Effect.ts"
 import type * as Fiber from "../Fiber.ts"
-import { dual } from "../Function.ts"
 import * as Inspectable from "../interfaces/Inspectable.ts"
 import type { Pipeable } from "../interfaces/Pipeable.ts"
 import { isEffect, withFiber } from "../internal/core.ts"

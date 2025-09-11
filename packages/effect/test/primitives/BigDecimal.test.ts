@@ -8,7 +8,7 @@ import {
   strictEqual,
   throws
 } from "@effect/vitest/utils"
-import { BigDecimal } from "effect"
+import { BigDecimal } from "effect/data"
 import { Equal } from "effect/interfaces"
 import { FastCheck as fc } from "effect/testing"
 

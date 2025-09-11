@@ -2,10 +2,10 @@
  * @since 4.0.0
  */
 import * as Arr from "../../collections/Array.ts"
+import { compose, dual, identity } from "../../data/Function.ts"
 import type { ReadonlyRecord } from "../../data/Record.ts"
 import * as UndefinedOr from "../../data/UndefinedOr.ts"
 import * as Effect from "../../Effect.ts"
-import { compose, dual, identity } from "../../Function.ts"
 import * as Layer from "../../Layer.ts"
 import type { ParseOptions } from "../../schema/AST.ts"
 import * as Schema from "../../schema/Schema.ts"

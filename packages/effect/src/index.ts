@@ -27,90 +27,12 @@ export {
    * @since 2.0.0
    */
   pipe
-} from "./Function.ts"
-
-/**
- * This module provides utility functions and type class instances for working with the `BigDecimal` type in TypeScript.
- * It includes functions for basic arithmetic operations, as well as type class instances for `Equivalence` and `Order`.
- *
- * A `BigDecimal` allows storing any real number to arbitrary precision; which avoids common floating point errors
- * (such as 0.1 + 0.2 ≠ 0.3) at the cost of complexity.
- *
- * Internally, `BigDecimal` uses a `BigInt` object, paired with a 64-bit integer which determines the position of the
- * decimal point. Therefore, the precision *is not* actually arbitrary, but limited to 2<sup>63</sup> decimal places.
- *
- * It is not recommended to convert a floating point number to a decimal directly, as the floating point representation
- * may be unexpected.
- *
- * @since 2.0.0
- */
-export * as BigDecimal from "./BigDecimal.ts"
-
-/**
- * This module provides utility functions and type class instances for working with the `bigint` type in TypeScript.
- * It includes functions for basic arithmetic operations, as well as type class instances for
- * `Equivalence` and `Order`.
- *
- * @since 2.0.0
- */
-export * as BigInt from "./BigInt.ts"
-
-/**
- * This module provides utility functions and type class instances for working with the `boolean` type in TypeScript.
- * It includes functions for basic boolean operations, as well as type class instances for
- * `Equivalence` and `Order`.
- *
- * @since 2.0.0
- */
-export * as Boolean from "./Boolean.ts"
+} from "./data/Function.ts"
 
 /**
  * @since 4.0.0
  */
 export * as Cache from "./Cache.ts"
-
-/**
- * This module provides utilities for working with `Cause`, a data type that represents
- * the different ways an `Effect` can fail. It includes structured error handling with
- * typed errors, defects, and interruptions.
- *
- * A `Cause` can represent:
- * - **Fail**: A typed, expected error that can be handled
- * - **Die**: An unrecoverable defect (like a programming error)
- * - **Interrupt**: A fiber interruption
- *
- * @example
- * ```ts
- * import { Cause, Effect } from "effect"
- *
- * // Creating different types of causes
- * const failCause = Cause.fail("Something went wrong")
- * const dieCause = Cause.die(new Error("Unexpected error"))
- * const interruptCause = Cause.interrupt(123)
- *
- * // Working with effects that can fail
- * const program = Effect.fail("user error").pipe(
- *   Effect.catchCause((cause) => {
- *     if (Cause.hasFail(cause)) {
- *       const error = Cause.filterError(cause)
- *       console.log("Expected error:", error)
- *     }
- *     return Effect.succeed("handled")
- *   })
- * )
- *
- * // Analyzing failure types
- * const analyzeCause = (cause: Cause.Cause<string>) => {
- *   if (Cause.hasFail(cause)) return "Has user error"
- *   if (Cause.hasDie(cause)) return "Has defect"
- *   if (Cause.hasInterrupt(cause)) return "Was interrupted"
- *   return "Unknown cause"
- * }
- * ```
- *
- * @since 2.0.0
- */
-export * as Cause from "./Cause.ts"
 
 /**
  * The `Clock` module provides functionality for time-based operations in Effect applications.
@@ -185,16 +107,6 @@ export * as Config from "./Config.ts"
 export * as ConfigProvider from "./ConfigProvider.ts"
 
 /**
- * @since 2.0.0
- */
-export * as Cron from "./Cron.ts"
-
-/**
- * @since 3.6.0
- */
-export * as DateTime from "./DateTime.ts"
-
-/**
  * This module provides utilities for working with `Deferred`, a powerful concurrency
  * primitive that represents an asynchronous variable that can be set exactly once.
  * Multiple fibers can await the same `Deferred` and will all be notified when it
@@ -267,23 +179,6 @@ export * as DateTime from "./DateTime.ts"
 export * as Deferred from "./Deferred.ts"
 
 /**
- * This module provides utilities for working with durations of time. A `Duration`
- * is an immutable data type that represents a span of time with high precision,
- * supporting operations from nanoseconds to weeks.
- *
- * Durations support:
- * - **High precision**: Nanosecond-level accuracy using BigInt
- * - **Multiple formats**: Numbers (millis), BigInt (nanos), tuples, strings
- * - **Arithmetic operations**: Add, subtract, multiply, divide
- * - **Comparisons**: Equal, less than, greater than
- * - **Conversions**: Between different time units
- * - **Human-readable formatting**: Pretty printing and parsing
- *
- * @since 2.0.0
- */
-export * as Duration from "./Duration.ts"
-
-/**
  * The `Effect` module is the core of the Effect library, providing a powerful and expressive
  * way to model and compose asynchronous, concurrent, and effectful computations.
  *
@@ -353,19 +248,6 @@ export * as Duration from "./Duration.ts"
  * @since 2.0.0
  */
 export * as Effect from "./Effect.ts"
-
-/**
- * The `Exit` type represents the result of running an Effect computation.
- * An `Exit<A, E>` can either be:
- * - `Success`: Contains a value of type `A`
- * - `Failure`: Contains a `Cause<E>` describing why the effect failed
- *
- * `Exit` is used internally by the Effect runtime and can be useful for
- * handling the results of Effect computations in a more explicit way.
- *
- * @since 2.0.0
- */
-export * as Exit from "./Exit.ts"
 
 /**
  * This module provides utilities for working with `Fiber`, the fundamental unit of
@@ -459,11 +341,6 @@ export * as FiberMap from "./FiberMap.ts"
  * @since 2.0.0
  */
 export * as FiberSet from "./FiberSet.ts"
-
-/**
- * @since 2.0.0
- */
-export * as Function from "./Function.ts"
 
 /**
  * A `Layer<ROut, E, RIn>` describes how to build one or more services in your
@@ -703,15 +580,6 @@ export * as Metric from "./Metric.ts"
  * @category data-structures
  */
 export * as MutableRef from "./MutableRef.ts"
-
-/**
- * This module provides utility functions and type class instances for working with the `number` type in TypeScript.
- * It includes functions for basic arithmetic operations, as well as type class instances for
- * `Equivalence` and `Order`.
- *
- * @since 2.0.0
- */
-export * as Number from "./Number.ts"
 
 /**
  * @since 2.0.0
@@ -982,20 +850,6 @@ export * as ScopedRef from "./ScopedRef.ts"
  * @since 4.0.0
  */
 export * as ServiceMap from "./ServiceMap.ts"
-
-/**
- * This module provides utility functions and type class instances for working with the `string` type in TypeScript.
- * It includes functions for basic string manipulation, as well as type class instances for
- * `Equivalence` and `Order`.
- *
- * @since 2.0.0
- */
-export * as String from "./String.ts"
-
-/**
- * @since 2.0.0
- */
-export * as Symbol from "./Symbol.ts"
 
 /**
  * @since 2.0.0

@@ -1,4 +1,4 @@
-import { BigInt } from "effect"
+import { BigInt } from "effect/data"
 import { describe, it } from "vitest"
 import { strictEqual } from "../utils/assert.ts"
 

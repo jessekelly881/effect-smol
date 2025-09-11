@@ -1,5 +1,5 @@
-import { Number, pipe, String } from "effect"
-import { Tuple } from "effect/data"
+import { pipe } from "effect"
+import { Number, String, Tuple } from "effect/data"
 import { Schema } from "effect/schema"
 import { describe, it } from "vitest"
 import { deepStrictEqual, strictEqual } from "../utils/assert.ts"

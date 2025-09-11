@@ -1,9 +1,10 @@
 import { assert, describe, it } from "@effect/vitest"
-import { Cause, Effect, Exit, Fiber, Schedule, Scope, ServiceMap } from "effect"
-import { Data, Filter, Option, Result } from "effect/data"
-import { constFalse, constTrue, pipe } from "effect/Function"
+import { Effect, Fiber, Schedule, Scope, ServiceMap } from "effect"
+import { Cause, Data, Exit, Filter, Function, Option, Result } from "effect/data"
 import { TxRef } from "effect/stm"
 import { TestClock } from "effect/testing"
+
+const { constFalse, constTrue, pipe } = Function
 
 class ATag extends ServiceMap.Key<ATag, "A">()("ATag") {}
 

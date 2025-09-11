@@ -29,9 +29,9 @@
  *
  * @since 2.0.0
  */
+import { dual, identity } from "./data/Function.ts"
 import type * as Option from "./data/Option.ts"
 import * as Effect from "./Effect.ts"
-import { dual, identity } from "./Function.ts"
 import { PipeInspectableProto } from "./internal/core.ts"
 import * as MutableRef from "./MutableRef.ts"
 import type { Invariant } from "./types/Types.ts"

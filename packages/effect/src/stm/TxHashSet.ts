@@ -3,9 +3,9 @@
  */
 
 import * as HashSet from "../collections/HashSet.ts"
+import { dual } from "../data/Function.ts"
 import type { Predicate, Refinement } from "../data/Predicate.ts"
 import * as Effect from "../Effect.ts"
-import { dual } from "../Function.ts"
 import type { Inspectable } from "../interfaces/Inspectable.ts"
 import { format, NodeInspectSymbol, toJson } from "../interfaces/Inspectable.ts"
 import type { Pipeable } from "../interfaces/Pipeable.ts"

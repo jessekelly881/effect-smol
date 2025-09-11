@@ -1,14 +1,14 @@
 /**
  * @since 2.0.0
  */
-import * as Cause from "./Cause.ts"
+import * as Cause from "./data/Cause.ts"
+import * as Exit from "./data/Exit.ts"
 import * as Filter from "./data/Filter.ts"
+import { dual } from "./data/Function.ts"
 import * as Predicate from "./data/Predicate.ts"
 import * as Deferred from "./Deferred.ts"
 import * as Effect from "./Effect.ts"
-import * as Exit from "./Exit.ts"
 import * as Fiber from "./Fiber.ts"
-import { dual } from "./Function.ts"
 import type * as Inspectable from "./interfaces/Inspectable.ts"
 import { type Pipeable } from "./interfaces/Pipeable.ts"
 import { PipeInspectableProto } from "./internal/core.ts"

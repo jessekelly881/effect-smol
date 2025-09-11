@@ -1,7 +1,7 @@
 /**
  * @since 1.0.0
  */
-import type * as Duration from "effect/Duration"
+import type * as Duration from "effect/data/Duration"
 import type * as Effect from "effect/Effect"
 import type * as Layer from "effect/Layer"
 import type * as Schema from "effect/schema/Schema"

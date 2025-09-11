@@ -33,15 +33,15 @@
  *
  * @since 3.8.0
  */
-import type { Cause } from "./Cause.ts"
 import * as Arr from "./collections/Array.ts"
 import * as Iterable from "./collections/Iterable.ts"
 import * as MutableList from "./collections/MutableList.ts"
+import type { Cause } from "./data/Cause.ts"
+import type { Exit, Failure } from "./data/Exit.ts"
 import * as Filter from "./data/Filter.ts"
+import { constant, constTrue, dual, identity } from "./data/Function.ts"
 import { hasProperty } from "./data/Predicate.ts"
 import type { Effect } from "./Effect.ts"
-import type { Exit, Failure } from "./Exit.ts"
-import { constant, constTrue, dual, identity } from "./Function.ts"
 import type { Inspectable } from "./interfaces/Inspectable.ts"
 import * as core from "./internal/core.ts"
 import { PipeInspectableProto } from "./internal/core.ts"

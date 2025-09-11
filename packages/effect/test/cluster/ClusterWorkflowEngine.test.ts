@@ -1,5 +1,6 @@
 import { assert, describe, expect, it } from "@effect/vitest"
-import { Cause, DateTime, Effect, Exit, Fiber, Layer, ServiceMap } from "effect"
+import { Effect, Fiber, Layer, ServiceMap } from "effect"
+import { Cause, DateTime, Exit } from "effect/data"
 import { Schema } from "effect/schema"
 import { TestClock } from "effect/testing"
 import {

@@ -25,8 +25,8 @@
  * @since 2.0.0
  * @category utilities
  */
-import type { LazyArg } from "../Function.ts"
-import { dual } from "../Function.ts"
+import type { LazyArg } from "./Function.ts"
+import { dual } from "./Function.ts"
 import * as Reducer_ from "./Reducer.ts"
 
 /**

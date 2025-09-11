@@ -9,12 +9,12 @@
  *
  * @since 2.0.0
  */
+import type * as Effect from "../Effect.ts"
+import * as core from "../internal/core.ts"
+import * as effect from "../internal/effect.ts"
+import type { NoInfer } from "../types/Types.ts"
 import type * as Cause from "./Cause.ts"
-import type * as Filter from "./data/Filter.ts"
-import type * as Effect from "./Effect.ts"
-import * as core from "./internal/core.ts"
-import * as effect from "./internal/effect.ts"
-import type { NoInfer } from "./types/Types.ts"
+import type * as Filter from "./Filter.ts"
 
 const TypeId = core.ExitTypeId
 

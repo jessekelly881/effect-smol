@@ -32,14 +32,14 @@
  */
 import * as Arr from "./collections/Array.ts"
 import * as MutableList from "./collections/MutableList.ts"
+import * as Exit from "./data/Exit.ts"
+import type { LazyArg } from "./data/Function.ts"
+import { dual, identity } from "./data/Function.ts"
+import { nextPow2 } from "./data/Number.ts"
 import * as Deferred from "./Deferred.ts"
 import * as Effect from "./Effect.ts"
-import * as Exit from "./Exit.ts"
-import type { LazyArg } from "./Function.ts"
-import { dual, identity } from "./Function.ts"
 import { type Pipeable, pipeArguments } from "./interfaces/Pipeable.ts"
 import * as MutableRef from "./MutableRef.ts"
-import { nextPow2 } from "./Number.ts"
 import * as Scope from "./Scope.ts"
 import type { Covariant, Invariant } from "./types/Types.ts"
 

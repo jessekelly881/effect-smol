@@ -3,9 +3,9 @@
  */
 import * as Uuid from "uuid"
 import type { Brand } from "../../data/Brand.ts"
+import * as DateTime from "../../data/DateTime.ts"
 import * as Option from "../../data/Option.ts"
 import * as Predicate from "../../data/Predicate.ts"
-import * as DateTime from "../../DateTime.ts"
 import * as Effect from "../../Effect.ts"
 import * as Getter from "../../schema/Getter.ts"
 import * as Schema from "../../schema/Schema.ts"

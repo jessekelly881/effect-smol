@@ -2,18 +2,18 @@
  * @since 2.0.0
  */
 // @effect-diagnostics returnEffectInGen:off
-import * as Cause from "../Cause.ts"
 import * as Arr from "../collections/Array.ts"
 import * as MutableHashMap from "../collections/MutableHashMap.ts"
+import * as Cause from "../data/Cause.ts"
+import * as Duration from "../data/Duration.ts"
+import * as Exit from "../data/Exit.ts"
 import type * as Filter from "../data/Filter.ts"
+import type { LazyArg } from "../data/Function.ts"
+import { constant, constTrue, constVoid, dual, identity } from "../data/Function.ts"
 import * as Option from "../data/Option.ts"
 import { hasProperty } from "../data/Predicate.ts"
-import * as Duration from "../Duration.ts"
 import * as Effect from "../Effect.ts"
-import * as Exit from "../Exit.ts"
 import * as Fiber from "../Fiber.ts"
-import type { LazyArg } from "../Function.ts"
-import { constant, constTrue, constVoid, dual, identity } from "../Function.ts"
 import { type Pipeable, pipeArguments } from "../interfaces/Pipeable.ts"
 import type * as PubSub from "../PubSub.ts"
 import * as Queue from "../Queue.ts"

@@ -1,7 +1,7 @@
 /**
  * @since 1.0.0
  */
-import { identity } from "effect/Function"
+import { identity } from "effect/data/Function"
 import type { Pipeable } from "effect/interfaces/Pipeable"
 import { pipeArguments } from "effect/interfaces/Pipeable"
 import type { Covariant } from "effect/types/Types"

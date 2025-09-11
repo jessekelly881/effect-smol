@@ -1,9 +1,9 @@
 /**
  * @since 4.0.0
  */
-import type { DurationInput } from "../../Duration.ts"
+import type { DurationInput } from "../../data/Duration.ts"
+import type * as Exit from "../../data/Exit.ts"
 import type * as Effect from "../../Effect.ts"
-import type * as Exit from "../../Exit.ts"
 import * as PrimaryKey from "../../interfaces/PrimaryKey.ts"
 import * as Request from "../../Request.ts"
 import * as Schema from "../../schema/Schema.ts"

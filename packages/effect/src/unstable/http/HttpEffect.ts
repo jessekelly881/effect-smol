@@ -1,12 +1,12 @@
 /**
  * @since 4.0.0
  */
-import type { Cause } from "../../Cause.ts"
+import type { Cause } from "../../data/Cause.ts"
+import * as Exit from "../../data/Exit.ts"
+import { dual } from "../../data/Function.ts"
 import * as UndefinedOr from "../../data/UndefinedOr.ts"
 import * as Effect from "../../Effect.ts"
-import * as Exit from "../../Exit.ts"
 import * as Fiber from "../../Fiber.ts"
-import { dual } from "../../Function.ts"
 import { effectIsExit } from "../../internal/effect.ts"
 import * as Layer from "../../Layer.ts"
 import * as Scope from "../../Scope.ts"

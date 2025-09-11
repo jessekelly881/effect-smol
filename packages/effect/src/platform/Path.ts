@@ -1,8 +1,8 @@
 /**
  * @since 4.0.0
  */
+import { identity } from "../data/Function.ts"
 import * as Effect from "../Effect.ts"
-import { identity } from "../Function.ts"
 import * as Layer from "../Layer.ts"
 import * as ServiceMap from "../ServiceMap.ts"
 import { BadArgument } from "./PlatformError.ts"

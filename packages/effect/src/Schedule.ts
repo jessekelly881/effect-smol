@@ -29,14 +29,14 @@
  *
  * @since 2.0.0
  */
-import * as Cron from "./Cron.ts"
+import * as Cron from "./data/Cron.ts"
+import type * as DateTime from "./data/DateTime.ts"
+import * as Duration from "./data/Duration.ts"
+import type { LazyArg } from "./data/Function.ts"
+import { constant, constTrue, dual, identity } from "./data/Function.ts"
 import { hasProperty } from "./data/Predicate.ts"
 import * as Result from "./data/Result.ts"
-import type * as DateTime from "./DateTime.ts"
-import * as Duration from "./Duration.ts"
 import type { Effect } from "./Effect.ts"
-import type { LazyArg } from "./Function.ts"
-import { constant, constTrue, dual, identity } from "./Function.ts"
 import { type Pipeable, pipeArguments } from "./interfaces/Pipeable.ts"
 import { isEffect } from "./internal/core.ts"
 import * as effect from "./internal/effect.ts"

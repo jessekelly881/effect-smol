@@ -67,17 +67,17 @@
  *
  * @since 2.0.0
  */
-import type * as Cause from "./Cause.ts"
 import type { Clock } from "./Clock.ts"
 import type * as Arr from "./collections/Array.ts"
+import type * as Cause from "./data/Cause.ts"
+import * as Duration from "./data/Duration.ts"
+import * as Exit from "./data/Exit.ts"
 import type * as Filter from "./data/Filter.ts"
+import { constant, dual, type LazyArg } from "./data/Function.ts"
 import type { Option } from "./data/Option.ts"
 import type * as Predicate from "./data/Predicate.ts"
 import type * as Result from "./data/Result.ts"
-import * as Duration from "./Duration.ts"
-import * as Exit from "./Exit.ts"
 import type { Fiber } from "./Fiber.ts"
-import { constant, dual, type LazyArg } from "./Function.ts"
 import type { Pipeable } from "./interfaces/Pipeable.ts"
 import * as core from "./internal/core.ts"
 import * as internal from "./internal/effect.ts"

@@ -1,12 +1,12 @@
 /**
  * @since 4.0.0
  */
-import * as Cause from "../Cause.ts"
+import * as Cause from "../data/Cause.ts"
+import * as Exit from "../data/Exit.ts"
 import * as Filter from "../data/Filter.ts"
+import { dual } from "../data/Function.ts"
 import { hasProperty } from "../data/Predicate.ts"
 import type { Effect } from "../Effect.ts"
-import * as Exit from "../Exit.ts"
-import { dual } from "../Function.ts"
 import * as internalEffect from "../internal/effect.ts"
 
 /**

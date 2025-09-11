@@ -13,11 +13,11 @@
  *
  * @since 2.0.0
  */
-import type * as Cause from "./Cause.ts"
+import type * as Cause from "./data/Cause.ts"
+import type * as Exit from "./data/Exit.ts"
+import { dual } from "./data/Function.ts"
 import { hasProperty } from "./data/Predicate.ts"
 import type * as Effect from "./Effect.ts"
-import type * as Exit from "./Exit.ts"
-import { dual } from "./Function.ts"
 import * as core from "./internal/core.ts"
 import { StructuralPrototype } from "./internal/core.ts"
 import * as internalEffect from "./internal/effect.ts"

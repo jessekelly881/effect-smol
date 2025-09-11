@@ -1,9 +1,9 @@
 /**
  * @since 4.0.0
  */
-import type { LazyArg } from "../Function.ts"
-import { dual } from "../Function.ts"
 import * as Combiner from "./Combiner.ts"
+import type { LazyArg } from "./Function.ts"
+import { dual } from "./Function.ts"
 import * as Reducer from "./Reducer.ts"
 
 /**

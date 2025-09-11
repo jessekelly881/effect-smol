@@ -1,7 +1,7 @@
 /**
  * @since 3.5.0
  */
-import type * as Duration from "./Duration.ts"
+import type * as Duration from "./data/Duration.ts"
 import type * as Effect from "./Effect.ts"
 import * as internal from "./internal/rcRef.ts"
 import type { Scope } from "./Scope.ts"

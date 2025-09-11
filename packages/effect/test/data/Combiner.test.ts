@@ -1,5 +1,4 @@
-import { Number, String } from "effect"
-import { Combiner } from "effect/data"
+import { Combiner, Number, String } from "effect/data"
 import { describe, it } from "vitest"
 import { strictEqual } from "../utils/assert.ts"
 

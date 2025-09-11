@@ -3,7 +3,7 @@
  */
 import { Clock } from "../../Clock.ts"
 import * as Arr from "../../collections/Array.ts"
-import * as Duration from "../../Duration.ts"
+import * as Duration from "../../data/Duration.ts"
 import * as Effect from "../../Effect.ts"
 import * as Exporter from "../../internal/tracing/otlpExporter.ts"
 import * as Layer from "../../Layer.ts"

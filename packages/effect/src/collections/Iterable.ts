@@ -31,6 +31,7 @@
  */
 
 import type { NonEmptyArray } from "../collections/Array.ts"
+import { dual, identity } from "../data/Function.ts"
 import type { Option } from "../data/Option.ts"
 import * as O from "../data/Option.ts"
 import { isBoolean } from "../data/Predicate.ts"
@@ -38,7 +39,6 @@ import type * as Record from "../data/Record.ts"
 import type { Result } from "../data/Result.ts"
 import * as R from "../data/Result.ts"
 import * as Tuple from "../data/Tuple.ts"
-import { dual, identity } from "../Function.ts"
 import * as Equal from "../interfaces/Equal.ts"
 import type { NoInfer } from "../types/Types.ts"
 

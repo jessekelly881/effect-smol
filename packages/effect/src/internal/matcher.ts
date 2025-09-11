@@ -1,7 +1,7 @@
+import { dual, identity } from "../data/Function.ts"
 import * as Option from "../data/Option.ts"
 import type * as Predicate from "../data/Predicate.ts"
 import * as Result from "../data/Result.ts"
-import { dual, identity } from "../Function.ts"
 import { pipeArguments } from "../interfaces/Pipeable.ts"
 import type { Case, Matcher, Not, SafeRefinement, TypeMatcher, Types, ValueMatcher, When } from "../Match.ts"
 import type { Unify } from "../types/Unify.ts"

@@ -1,15 +1,15 @@
 /**
  * @since 4.0.0
  */
-import * as Boolean from "../Boolean.ts"
 import * as Array from "../collections/Array.ts"
+import * as Boolean from "../data/Boolean.ts"
 import * as Combiner from "../data/Combiner.ts"
+import * as Number from "../data/Number.ts"
 import * as Option from "../data/Option.ts"
 import * as Predicate from "../data/Predicate.ts"
 import * as Struct from "../data/Struct.ts"
 import * as UndefinedOr from "../data/UndefinedOr.ts"
 import { defaultParseOptions, memoizeThunk } from "../internal/schema/util.ts"
-import * as Number from "../Number.ts"
 import * as FastCheck from "../testing/FastCheck.ts"
 import type * as Annotations from "./Annotations.ts"
 import * as AST from "./AST.ts"

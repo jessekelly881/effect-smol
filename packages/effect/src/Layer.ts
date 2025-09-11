@@ -17,14 +17,14 @@
  *
  * @since 2.0.0
  */
-import type * as Cause from "./Cause.ts"
 import type { NonEmptyArray } from "./collections/Array.ts"
+import type * as Cause from "./data/Cause.ts"
+import type * as Exit from "./data/Exit.ts"
+import type { LazyArg } from "./data/Function.ts"
+import { constant, constTrue, dual, identity } from "./data/Function.ts"
 import { hasProperty } from "./data/Predicate.ts"
 import * as Deferred from "./Deferred.ts"
 import type { Effect } from "./Effect.ts"
-import type * as Exit from "./Exit.ts"
-import type { LazyArg } from "./Function.ts"
-import { constant, constTrue, dual, identity } from "./Function.ts"
 import { type Pipeable, pipeArguments } from "./interfaces/Pipeable.ts"
 import * as internalEffect from "./internal/effect.ts"
 import type { ErrorWithStackTraceLimit } from "./internal/tracer.ts"

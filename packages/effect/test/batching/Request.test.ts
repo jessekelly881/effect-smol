@@ -1,8 +1,9 @@
 import { assert, describe, expect, it } from "@effect/vitest"
-import { Cause, Effect, Exit, Fiber, Request, RequestResolver as Resolver, ServiceMap } from "effect"
+import { Effect, Fiber, Request, RequestResolver as Resolver, ServiceMap } from "effect"
 import { Array } from "effect/collections"
-import { Data } from "effect/data"
-import { flow, pipe } from "effect/Function"
+import { Cause, Data, Exit, Function } from "effect/data"
+
+const { flow, pipe } = Function
 
 class Counter extends ServiceMap.Key<Counter, { count: number }>()("Counter") {}
 class Requests extends ServiceMap.Key<Requests, { count: number }>()("Requests") {}

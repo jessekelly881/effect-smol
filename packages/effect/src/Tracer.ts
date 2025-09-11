@@ -1,9 +1,9 @@
 /**
  * @since 2.0.0
  */
-import type * as Exit from "./Exit.ts"
+import type * as Exit from "./data/Exit.ts"
+import { constFalse, type LazyArg } from "./data/Function.ts"
 import type { Fiber } from "./Fiber.ts"
-import { constFalse, type LazyArg } from "./Function.ts"
 import * as ServiceMap from "./ServiceMap.ts"
 
 /**

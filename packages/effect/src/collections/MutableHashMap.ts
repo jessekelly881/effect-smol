@@ -25,8 +25,8 @@
  * @category data-structures
  */
 import type { NonEmptyArray } from "../collections/Array.ts"
+import { dual } from "../data/Function.ts"
 import * as Option from "../data/Option.ts"
-import { dual } from "../Function.ts"
 import * as Equal from "../interfaces/Equal.ts"
 import * as Hash from "../interfaces/Hash.ts"
 import { format, type Inspectable, NodeInspectSymbol, toJson } from "../interfaces/Inspectable.ts"

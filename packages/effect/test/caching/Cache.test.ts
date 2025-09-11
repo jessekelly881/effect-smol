@@ -1,6 +1,6 @@
 import { assert, describe, it } from "@effect/vitest"
-import { Cache, Deferred, Duration, Effect, Exit, Fiber, ServiceMap } from "effect"
-import { Data, Option } from "effect/data"
+import { Cache, Deferred, Effect, Fiber, ServiceMap } from "effect"
+import { Data, Duration, Exit, Option } from "effect/data"
 import { TestClock } from "effect/testing"
 
 describe("Cache", () => {

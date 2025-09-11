@@ -8,11 +8,11 @@ import type { Equivalence } from "../data/Equivalence.ts"
 import * as Option from "../data/Option.ts"
 import type { Result } from "../data/Result.ts"
 import * as R from "../data/Result.ts"
-import { dual, identity } from "../Function.ts"
 import * as Equal from "../interfaces/Equal.ts"
 import type { TypeLambda } from "../types/HKT.ts"
 import type { NoInfer } from "../types/Types.ts"
 import type * as Combiner from "./Combiner.ts"
+import { dual, identity } from "./Function.ts"
 import * as Reducer from "./Reducer.ts"
 
 /**

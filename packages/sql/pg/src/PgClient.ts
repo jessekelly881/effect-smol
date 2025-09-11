@@ -3,8 +3,8 @@
  */
 import * as Arr from "effect/collections/Array"
 import * as Config from "effect/Config"
+import { Duration } from "effect/data"
 import * as Redacted from "effect/data/Redacted"
-import * as Duration from "effect/Duration"
 import * as Effect from "effect/Effect"
 import * as Fiber from "effect/Fiber"
 import * as Layer from "effect/Layer"

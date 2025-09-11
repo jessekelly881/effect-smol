@@ -3,9 +3,9 @@
  */
 import type { SqlStorage } from "@cloudflare/workers-types"
 import * as Config from "effect/Config"
+import { identity } from "effect/data/Function"
 import * as Effect from "effect/Effect"
 import * as Fiber from "effect/Fiber"
-import { identity } from "effect/Function"
 import * as Layer from "effect/Layer"
 import * as Scope from "effect/Scope"
 import * as ServiceMap from "effect/ServiceMap"

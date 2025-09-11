@@ -1,5 +1,6 @@
 import { afterAll, describe, expect, it, layer } from "@effect/vitest"
-import { Clock, Duration, Effect, Fiber, Layer, ServiceMap } from "effect"
+import { Clock, Effect, Fiber, Layer, ServiceMap } from "effect"
+import { Duration } from "effect/data"
 import { FastCheck, TestClock } from "effect/testing"
 
 it.effect(

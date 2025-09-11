@@ -1,15 +1,15 @@
 /**
  * @since 4.0.0
  */
-import type * as Cause from "../../Cause.ts"
 import * as Arr from "../../collections/Array.ts"
+import type * as Cause from "../../data/Cause.ts"
 import * as Data from "../../data/Data.ts"
+import type { DurationInput } from "../../data/Duration.ts"
+import * as Exit from "../../data/Exit.ts"
+import { identity } from "../../data/Function.ts"
 import * as Predicate from "../../data/Predicate.ts"
 import * as UndefinedOr from "../../data/UndefinedOr.ts"
-import type { DurationInput } from "../../Duration.ts"
 import * as Effect from "../../Effect.ts"
-import * as Exit from "../../Exit.ts"
-import { identity } from "../../Function.ts"
 import * as Equal from "../../interfaces/Equal.ts"
 import * as Hash from "../../interfaces/Hash.ts"
 import * as Layer from "../../Layer.ts"

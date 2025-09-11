@@ -2,9 +2,9 @@
  * @since 2.0.0
  */
 
+import { dual, pipe } from "../data/Function.ts"
 import * as Option from "../data/Option.ts"
 import { hasProperty } from "../data/Predicate.ts"
-import { dual, pipe } from "../Function.ts"
 import * as Equal_ from "../interfaces/Equal.ts"
 import * as Hash from "../interfaces/Hash.ts"
 import type { Inspectable } from "../interfaces/Inspectable.ts"

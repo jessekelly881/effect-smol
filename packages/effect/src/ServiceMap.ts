@@ -7,10 +7,10 @@
  *
  * @since 4.0.0
  */
+import { constant, dual, type LazyArg } from "./data/Function.ts"
 import * as Option from "./data/Option.ts"
 import { hasProperty } from "./data/Predicate.ts"
 import type { Effect, EffectIterator, Yieldable } from "./Effect.ts"
-import { constant, dual, type LazyArg } from "./Function.ts"
 import * as Equal from "./interfaces/Equal.ts"
 import * as Hash from "./interfaces/Hash.ts"
 import type { Inspectable } from "./interfaces/Inspectable.ts"

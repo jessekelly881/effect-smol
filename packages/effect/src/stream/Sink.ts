@@ -1,16 +1,16 @@
 /**
  * @since 2.0.0
  */
-import type * as Cause from "../Cause.ts"
 import type { NonEmptyReadonlyArray } from "../collections/Array.ts"
 import * as Arr from "../collections/Array.ts"
 import * as Chunk from "../collections/Chunk.ts"
+import type * as Cause from "../data/Cause.ts"
 import * as Filter from "../data/Filter.ts"
+import type { LazyArg } from "../data/Function.ts"
+import { constant, constTrue, constVoid, dual, identity } from "../data/Function.ts"
 import * as Option from "../data/Option.ts"
 import type { Predicate } from "../data/Predicate.ts"
 import * as Effect from "../Effect.ts"
-import type { LazyArg } from "../Function.ts"
-import { constant, constTrue, constVoid, dual, identity } from "../Function.ts"
 import { type Pipeable, pipeArguments } from "../interfaces/Pipeable.ts"
 import type * as Scope from "../Scope.ts"
 import * as Channel from "../stream/Channel.ts"

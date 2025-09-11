@@ -14,8 +14,8 @@
  * @since 2.0.0
  */
 
+import type { Exit } from "./data/Exit.ts"
 import type { Effect } from "./Effect.ts"
-import type { Exit } from "./Exit.ts"
 import * as effect from "./internal/effect.ts"
 import type * as ServiceMap from "./ServiceMap.ts"
 

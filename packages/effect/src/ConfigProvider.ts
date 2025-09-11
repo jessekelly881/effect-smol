@@ -3,9 +3,10 @@
  */
 
 import * as Data from "./data/Data.ts"
+import { dual, flow } from "./data/Function.ts"
 import * as Predicate from "./data/Predicate.ts"
+import * as Str from "./data/String.ts"
 import * as Effect from "./Effect.ts"
-import { dual, flow } from "./Function.ts"
 import type { Pipeable } from "./interfaces/Pipeable.ts"
 import { PipeInspectableProto } from "./internal/core.ts"
 import * as Layer from "./Layer.ts"
@@ -15,7 +16,6 @@ import type { PlatformError } from "./platform/PlatformError.ts"
 import type { StringLeafJson } from "./schema/Serializer.ts"
 import type { Scope } from "./Scope.ts"
 import * as ServiceMap from "./ServiceMap.ts"
-import * as Str from "./String.ts"
 
 /**
  * @category Models

@@ -1,15 +1,12 @@
 /**
  * @since 2.0.0
  */
-import type { NoSuchElementError } from "../Cause.ts"
 import * as Equivalence from "../data/Equivalence.ts"
 import type { Order } from "../data/Order.ts"
 import * as order from "../data/Order.ts"
 import type { Predicate, Refinement } from "../data/Predicate.ts"
 import type { Result } from "../data/Result.ts"
 import type { EffectIterator, Yieldable } from "../Effect.ts"
-import type { LazyArg } from "../Function.ts"
-import { constNull, constUndefined, dual, identity, isFunction } from "../Function.ts"
 import * as Equal from "../interfaces/Equal.ts"
 import type { Inspectable } from "../interfaces/Inspectable.ts"
 import type { Pipeable } from "../interfaces/Pipeable.ts"
@@ -20,7 +17,10 @@ import type { TypeLambda } from "../types/HKT.ts"
 import type { Covariant, NoInfer, NotFunction } from "../types/Types.ts"
 import type * as Unify from "../types/Unify.ts"
 import * as Gen from "../Utils.ts"
+import type { NoSuchElementError } from "./Cause.ts"
 import * as Combiner from "./Combiner.ts"
+import type { LazyArg } from "./Function.ts"
+import { constNull, constUndefined, dual, identity, isFunction } from "./Function.ts"
 import * as Reducer from "./Reducer.ts"
 
 const TypeId = "~effect/data/Option"

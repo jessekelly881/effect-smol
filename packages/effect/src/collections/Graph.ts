@@ -3,8 +3,8 @@
  */
 
 import * as Data from "../data/Data.ts"
+import { dual } from "../data/Function.ts"
 import * as Option from "../data/Option.ts"
-import { dual } from "../Function.ts"
 import * as Equal from "../interfaces/Equal.ts"
 import * as Hash from "../interfaces/Hash.ts"
 import type { Inspectable } from "../interfaces/Inspectable.ts"

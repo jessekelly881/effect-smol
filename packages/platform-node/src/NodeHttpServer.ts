@@ -1,12 +1,12 @@
 /**
  * @since 1.0.0
  */
-import type * as Cause from "effect/Cause"
 import * as Config from "effect/Config"
+import type { Cause } from "effect/data"
+import type { LazyArg } from "effect/data/Function"
 import type * as Record from "effect/data/Record"
 import * as Effect from "effect/Effect"
 import * as Fiber from "effect/Fiber"
-import type { LazyArg } from "effect/Function"
 import * as Layer from "effect/Layer"
 import type * as FileSystem from "effect/platform/FileSystem"
 import type * as Path from "effect/platform/Path"

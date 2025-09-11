@@ -28,10 +28,10 @@
  *
  * @since 4.0.0
  */
-import * as Cause from "effect/Cause"
+import * as Cause from "effect/data/Cause"
+import * as Exit from "effect/data/Exit"
+import { dual } from "effect/data/Function"
 import * as Effect from "effect/Effect"
-import * as Exit from "effect/Exit"
-import { dual } from "effect/Function"
 import type * as Fiber from "./Fiber.ts"
 
 /**

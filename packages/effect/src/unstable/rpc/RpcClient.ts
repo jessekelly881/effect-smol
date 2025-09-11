@@ -1,14 +1,14 @@
 /**
  * @since 4.0.0
  */
-import * as Cause from "../../Cause.ts"
 import type { NonEmptyReadonlyArray } from "../../collections/Array.ts"
+import * as Cause from "../../data/Cause.ts"
+import * as Exit from "../../data/Exit.ts"
 import * as Filter from "../../data/Filter.ts"
+import { constVoid, dual, identity } from "../../data/Function.ts"
 import type * as Struct from "../../data/Struct.ts"
 import * as Effect from "../../Effect.ts"
-import * as Exit from "../../Exit.ts"
 import * as Fiber from "../../Fiber.ts"
-import { constVoid, dual, identity } from "../../Function.ts"
 import * as Layer from "../../Layer.ts"
 import * as Queue from "../../Queue.ts"
 import * as Schedule from "../../Schedule.ts"

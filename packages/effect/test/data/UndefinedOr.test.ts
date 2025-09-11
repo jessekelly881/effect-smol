@@ -1,5 +1,4 @@
-import { Number } from "effect"
-import { UndefinedOr } from "effect/data"
+import { Number, UndefinedOr } from "effect/data"
 import { describe, it } from "vitest"
 import { strictEqual } from "../utils/assert.ts"
 

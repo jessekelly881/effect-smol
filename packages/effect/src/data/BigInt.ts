@@ -6,13 +6,13 @@
  * @since 2.0.0
  */
 
-import * as Combiner from "./data/Combiner.ts"
-import * as equivalence from "./data/Equivalence.ts"
-import * as order from "./data/Order.ts"
-import type { Ordering } from "./data/Ordering.ts"
-import * as predicate from "./data/Predicate.ts"
-import * as Reducer from "./data/Reducer.ts"
+import * as Combiner from "./Combiner.ts"
+import * as equivalence from "./Equivalence.ts"
 import { dual } from "./Function.ts"
+import * as order from "./Order.ts"
+import type { Ordering } from "./Ordering.ts"
+import * as predicate from "./Predicate.ts"
+import * as Reducer from "./Reducer.ts"
 
 /**
  * Reference to the global BigInt constructor.
@@ -713,21 +713,25 @@ export const remainder: {
  *
  * @since 4.0.0
  */
-export const ReducerSum: Reducer.Reducer<bigint> = Reducer.make((a, b) => a + b, 0n)
+export const ReducerSum: Reducer.Reducer<bigint> = Reducer.make((a: bigint, b: bigint) => a + b, 0n)
 
 /**
  * A `Reducer` for combining `bigint`s using multiplication.
  *
  * @since 4.0.0
  */
-export const ReducerMultiply: Reducer.Reducer<bigint> = Reducer.make((a, b) => a * b, 1n, (collection) => {
-  let acc = 1n
-  for (const n of collection) {
-    if (n === 0n) return 0n
-    acc *= n
+export const ReducerMultiply: Reducer.Reducer<bigint> = Reducer.make(
+  (a: bigint, b: bigint) => a * b,
+  1n,
+  (collection: Iterable<bigint>) => {
+    let acc = 1n
+    for (const n of collection) {
+      if (n === 0n) return 0n
+      acc *= n
+    }
+    return acc
   }
-  return acc
-})
+)
 
 /**
  * A `Combiner` that returns the maximum `bigint`.

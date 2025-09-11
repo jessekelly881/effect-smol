@@ -1,6 +1,7 @@
 import { describe, it } from "@effect/vitest"
 import { assertFalse, assertTrue, assertUndefined, deepStrictEqual, strictEqual, throws } from "@effect/vitest/utils"
-import { Duration, pipe } from "effect"
+import { pipe } from "effect"
+import { Duration } from "effect/data"
 import { Equal } from "effect/interfaces"
 
 describe("Duration", () => {

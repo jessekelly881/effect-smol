@@ -68,10 +68,10 @@
  *
  * @since 2.0.0
  */
-import type * as Cause from "./Cause.ts"
+import type * as Cause from "./data/Cause.ts"
+import type * as Exit from "./data/Exit.ts"
+import { dual, identity, type LazyArg } from "./data/Function.ts"
 import type { Effect } from "./Effect.ts"
-import type * as Exit from "./Exit.ts"
-import { dual, identity, type LazyArg } from "./Function.ts"
 import type { Pipeable } from "./interfaces/Pipeable.ts"
 import { pipeArguments } from "./interfaces/Pipeable.ts"
 import * as core from "./internal/core.ts"

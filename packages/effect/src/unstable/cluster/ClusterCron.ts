@@ -1,10 +1,10 @@
 /**
  * @since 4.0.0
  */
-import * as Cron from "../../Cron.ts"
+import * as Cron from "../../data/Cron.ts"
+import * as DateTime from "../../data/DateTime.ts"
+import * as Duration from "../../data/Duration.ts"
 import * as Option from "../../data/Option.ts"
-import * as DateTime from "../../DateTime.ts"
-import * as Duration from "../../Duration.ts"
 import * as Effect from "../../Effect.ts"
 import * as PrimaryKey from "../../interfaces/PrimaryKey.ts"
 import * as Layer from "../../Layer.ts"

@@ -1,15 +1,15 @@
 /**
  * @since 4.0.0
  */
-import * as Cause from "../../Cause.ts"
 import type { NonEmptyReadonlyArray } from "../../collections/Array.ts"
+import * as Cause from "../../data/Cause.ts"
+import * as Exit from "../../data/Exit.ts"
 import type * as Filter from "../../data/Filter.ts"
+import { constFalse, constTrue, dual } from "../../data/Function.ts"
 import * as Predicate from "../../data/Predicate.ts"
 import * as Result from "../../data/Result.ts"
 import * as Effect from "../../Effect.ts"
-import * as Exit from "../../Exit.ts"
 import type { Fiber } from "../../Fiber.ts"
-import { constFalse, constTrue, dual } from "../../Function.ts"
 import * as Inspectable from "../../interfaces/Inspectable.ts"
 import { type Pipeable, pipeArguments } from "../../interfaces/Pipeable.ts"
 import * as Layer from "../../Layer.ts"

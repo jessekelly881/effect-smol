@@ -1,15 +1,15 @@
 /**
  * @since 3.5.0
  */
-import * as Cause from "./Cause.ts"
 import { Clock } from "./Clock.ts"
 import * as MutableHashMap from "./collections/MutableHashMap.ts"
+import * as Cause from "./data/Cause.ts"
+import * as Duration from "./data/Duration.ts"
+import * as Exit from "./data/Exit.ts"
+import { dual } from "./data/Function.ts"
 import * as Deferred from "./Deferred.ts"
-import * as Duration from "./Duration.ts"
 import * as Effect from "./Effect.ts"
-import * as Exit from "./Exit.ts"
 import * as Fiber from "./Fiber.ts"
-import { dual } from "./Function.ts"
 import type { Pipeable } from "./interfaces/Pipeable.ts"
 import { pipeArguments } from "./interfaces/Pipeable.ts"
 import * as Scope from "./Scope.ts"

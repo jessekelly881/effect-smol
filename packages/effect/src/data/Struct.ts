@@ -6,8 +6,8 @@
 
 import * as Equivalence from "../data/Equivalence.ts"
 import * as order from "../data/Order.ts"
-import { dual } from "../Function.ts"
 import * as Combiner from "./Combiner.ts"
+import { dual } from "./Function.ts"
 import * as Reducer from "./Reducer.ts"
 
 /**

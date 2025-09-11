@@ -1,8 +1,8 @@
 /**
  * @since 2.0.0
  */
-import { pipeArguments } from "./interfaces/Pipeable.ts"
-import type { TypeLambda } from "./types/HKT.ts"
+import { pipeArguments } from "../interfaces/Pipeable.ts"
+import type { TypeLambda } from "../types/HKT.ts"
 
 /**
  * Type lambda for function types, used for higher-kinded type operations.

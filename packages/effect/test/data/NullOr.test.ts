@@ -1,5 +1,4 @@
-import { Number } from "effect"
-import { NullOr } from "effect/data"
+import { NullOr, Number } from "effect/data"
 import { describe, it } from "vitest"
 import { strictEqual } from "../utils/assert.ts"
 

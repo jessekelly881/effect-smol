@@ -1,10 +1,10 @@
 /**
  * @since 4.0.0
  */
-import * as Cause from "../../Cause.ts"
-import * as Duration from "../../Duration.ts"
+import * as Cause from "../../data/Cause.ts"
+import * as Duration from "../../data/Duration.ts"
+import type * as Exit from "../../data/Exit.ts"
 import * as Effect from "../../Effect.ts"
-import type * as Exit from "../../Exit.ts"
 import * as Exporter from "../../internal/tracing/otlpExporter.ts"
 import * as Layer from "../../Layer.ts"
 import type * as Scope from "../../Scope.ts"

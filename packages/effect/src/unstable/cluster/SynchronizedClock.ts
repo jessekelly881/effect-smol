@@ -2,7 +2,7 @@
  * @since 4.0.0
  */
 import * as Clock from "../../Clock.ts"
-import * as Duration from "../../Duration.ts"
+import * as Duration from "../../data/Duration.ts"
 import * as Effect from "../../Effect.ts"
 import * as Layer from "../../Layer.ts"
 import * as Schedule from "../../Schedule.ts"

@@ -1,7 +1,7 @@
 import { assert, describe, it } from "@effect/vitest"
-import { Cause, Effect, Fiber } from "effect"
+import { Effect, Fiber } from "effect"
 import { Chunk } from "effect/collections"
-import { Option } from "effect/data"
+import { Cause, Option } from "effect/data"
 import { TxQueue } from "effect/stm"
 
 describe("TxQueue", () => {

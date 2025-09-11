@@ -1,7 +1,7 @@
 import { describe, it } from "@effect/vitest"
 import { deepStrictEqual } from "@effect/vitest/utils"
-import { Config, ConfigProvider, Duration, Effect, pipe } from "effect"
-import { Option, Redacted } from "effect/data"
+import { Config, ConfigProvider, Effect, pipe } from "effect"
+import { Duration, Option, Redacted } from "effect/data"
 import { Issue, Schema } from "effect/schema"
 import { assertions } from "../utils/schema.ts"
 

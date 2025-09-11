@@ -1,11 +1,11 @@
 /**
  * @since 4.0.0
  */
+import * as DateTime from "../../data/DateTime.ts"
+import * as Duration from "../../data/Duration.ts"
+import * as Exit from "../../data/Exit.ts"
 import * as Record from "../../data/Record.ts"
-import * as DateTime from "../../DateTime.ts"
-import * as Duration from "../../Duration.ts"
 import * as Effect from "../../Effect.ts"
-import * as Exit from "../../Exit.ts"
 import * as PrimaryKey from "../../interfaces/PrimaryKey.ts"
 import * as Layer from "../../Layer.ts"
 import * as RcMap from "../../RcMap.ts"

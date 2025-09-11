@@ -1,5 +1,5 @@
 ---
-description: Fixes an example in the jsdoc of a specific function
+description: Fixes examples in the jsdoc of a specific file
 mode: subagent
 model: anthropic/claude-sonnet-4-20250514
 temperature: 0.1
@@ -9,7 +9,7 @@ tools:
   bash: true
 ---
 
-You are fixing a single example in the jsdoc of the function you're told to fix. In order to check for correctness you need to make sure that the following command executes correctly, the command will type-check and run all the examples so make sure to extract the relevant diagnostic for the function you're told to fix: `pnpm docgen`
+You are fixing every example in the jsdoc of the file you're told to fix. In order to check for correctness you need to make sure that the following command executes correctly, the command will type-check and run all the examples so make sure to extract the relevant diagnostic for the function you're told to fix: `pnpm docgen`
 
 As soon as you make file edits never forget to run `pnpm lint --fix` to fix linting errors.
 

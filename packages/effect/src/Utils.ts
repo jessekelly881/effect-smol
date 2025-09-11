@@ -1,8 +1,8 @@
 /**
  * @since 2.0.0
  */
+import { identity } from "./data/Function.ts"
 import { isNullish, isObject } from "./data/Predicate.ts"
-import { identity } from "./Function.ts"
 import type { Kind, TypeLambda } from "./types/HKT.ts"
 import type * as Types from "./types/Types.ts"
 

@@ -2,11 +2,11 @@
  * @since 4.0.0
  */
 import { Clock } from "../../Clock.ts"
+import { constFalse } from "../../data/Function.ts"
 import type { Predicate } from "../../data/Predicate.ts"
 import type { ReadonlyRecord } from "../../data/Record.ts"
 import * as UndefinedOr from "../../data/UndefinedOr.ts"
 import * as Effect from "../../Effect.ts"
-import { constFalse } from "../../Function.ts"
 import * as internalEffect from "../../internal/effect.ts"
 import * as Layer from "../../Layer.ts"
 import { TracerEnabled } from "../../References.ts"

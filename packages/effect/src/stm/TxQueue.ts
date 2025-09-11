@@ -9,12 +9,12 @@
  *
  * @since 4.0.0
  */
-import * as Cause from "../Cause.ts"
 import * as Chunk from "../collections/Chunk.ts"
+import * as Cause from "../data/Cause.ts"
+import { dual } from "../data/Function.ts"
 import * as Option from "../data/Option.ts"
 import { hasProperty } from "../data/Predicate.ts"
 import * as Effect from "../Effect.ts"
-import { dual } from "../Function.ts"
 import type { Inspectable } from "../interfaces/Inspectable.ts"
 import { NodeInspectSymbol, toJson } from "../interfaces/Inspectable.ts"
 import type * as Types from "../types/Types.ts"

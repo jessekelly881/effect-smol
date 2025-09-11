@@ -1,9 +1,9 @@
 /**
  * @since 4.0.0
  */
-import * as Cause from "../../Cause.ts"
 import * as Arr from "../../collections/Array.ts"
-import * as Duration from "../../Duration.ts"
+import * as Cause from "../../data/Cause.ts"
+import * as Duration from "../../data/Duration.ts"
 import * as Effect from "../../Effect.ts"
 import * as Exporter from "../../internal/tracing/otlpExporter.ts"
 import type * as Layer from "../../Layer.ts"
