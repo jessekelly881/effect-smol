@@ -42,7 +42,6 @@ export {
  * @example
  * ```ts
  * import { Effect, References } from "effect"
-
  *
  * const limitConcurrency = Effect.gen(function* () {
  *   // Get current setting
@@ -121,7 +120,6 @@ export {
  * @example
  * ```ts
  * import { Effect, References } from "effect"
-
  *
  * const tracingControl = Effect.gen(function* () {
  *   // Check if tracing is enabled (default is true)
@@ -170,7 +168,6 @@ export const TracerEnabled = ServiceMap.Reference<boolean>("effect/References/Tr
  * @example
  * ```ts
  * import { Effect, References } from "effect"
-
  *
  * const spanAnnotationExample = Effect.gen(function* () {
  *   // Get current annotations (empty by default)
@@ -226,7 +223,6 @@ export const TracerSpanAnnotations = ServiceMap.Reference<ReadonlyRecord<string,
  * @example
  * ```ts
  * import { Effect, References, Tracer } from "effect"
-
  *
  * const spanLinksExample = Effect.gen(function* () {
  *   // Get current links (empty by default)

@@ -26,7 +26,6 @@ const TypeId = "~effect/RcMap"
  * @example
  * ```ts
  * import { Effect, RcMap } from "effect"
-
  *
  * Effect.gen(function*() {
  *   // Create an RcMap that manages database connections
@@ -233,7 +232,6 @@ const makeUnsafe = <K, A, E>(options: {
  * @example
  * ```ts
  * import { Effect, RcMap } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const map = yield* RcMap.make({
@@ -309,7 +307,6 @@ export const make: {
  * @example
  * ```ts
  * import { Effect, RcMap } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const map = yield* RcMap.make({
@@ -426,7 +423,6 @@ const release = <K, A, E>(self: RcMap<K, A, E>, key: K, entry: State.Entry<A, E>
  * @example
  * ```ts
  * import { Effect, RcMap } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const map = yield* RcMap.make({
@@ -459,7 +455,6 @@ export const keys = <K, A, E>(self: RcMap<K, A, E>): Effect.Effect<Iterable<K>> 
  * @example
  * ```ts
  * import { Effect, RcMap } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const map = yield* RcMap.make({
@@ -525,7 +520,6 @@ export const has: {
  * @example
  * ```ts
  * import { Effect, RcMap } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const map = yield* RcMap.make({

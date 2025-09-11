@@ -148,7 +148,6 @@ export const make = <A = unknown, E = unknown>(): Effect.Effect<FiberSet<A, E>, 
  * @example
  * ```ts
  * import { Effect, Fiber, FiberSet } from "effect"
-
  *
  * const program = Effect.gen(function*() {
  *   const runFork = yield* FiberSet.makeRuntime()
@@ -186,7 +185,6 @@ export const makeRuntime = <R = never, A = unknown, E = unknown>(): Effect.Effec
  * @example
  * ```ts
  * import { Effect, FiberSet } from "effect"
-
  *
  * const program = Effect.gen(function*() {
  *   const runPromise = yield* FiberSet.makeRuntimePromise()
@@ -230,7 +228,6 @@ const isInternalInterruption = Filter.toPredicate(Filter.compose(
  * @example
  * ```ts
  * import { Effect, FiberSet } from "effect"
-
  *
  * const program = Effect.gen(function*() {
  *   const set = yield* FiberSet.make()
@@ -298,7 +295,6 @@ export const addUnsafe: {
  * @example
  * ```ts
  * import { Effect, FiberSet } from "effect"
-
  *
  * const program = Effect.gen(function*() {
  *   const set = yield* FiberSet.make()
@@ -345,7 +341,6 @@ export const add: {
  * @example
  * ```ts
  * import { Effect, FiberSet } from "effect"
-
  *
  * const program = Effect.gen(function*() {
  *   const set = yield* FiberSet.make()
@@ -390,7 +385,6 @@ const constInterruptedFiber = (function() {
  * @example
  * ```ts
  * import { Effect, Fiber, FiberSet } from "effect"
-
  *
  * const program = Effect.gen(function*() {
  *   const set = yield* FiberSet.make()
@@ -458,7 +452,6 @@ const runImpl = <A, E, R, XE extends E, XA extends A>(
  * @example
  * ```ts
  * import { Effect, FiberSet, ServiceMap } from "effect"
-
  *
  * interface Users {
  *   readonly _: unique symbol
@@ -523,7 +516,6 @@ export const runtime: <A, E>(
  * @example
  * ```ts
  * import { Effect, FiberSet } from "effect"
-
  *
  * const program = Effect.gen(function*() {
  *   const set = yield* FiberSet.make()
@@ -579,7 +571,6 @@ export const runtimePromise = <A, E>(self: FiberSet<A, E>): <R = never>() => Eff
  * @example
  * ```ts
  * import { Effect, FiberSet } from "effect"
-
  *
  * const program = Effect.gen(function*() {
  *   const set = yield* FiberSet.make()
@@ -605,16 +596,15 @@ export const size = <A, E>(self: FiberSet<A, E>): Effect.Effect<number> =>
  * @category combinators
  * @example
  * ```ts
-
- * import { FiberSet } from "effect";
+ * import { Effect, FiberSet } from "effect"
  *
- * Effect.gen(function* () {
+ * const program = Effect.gen(function* () {
  *   const set = yield* FiberSet.make()
  *   yield* FiberSet.add(set, Effect.runFork(Effect.fail("error")))
  *
  *   // parent fiber will fail with "error"
  *   yield* FiberSet.join(set)
- * });
+ * })
  * ```
  */
 export const join = <A, E>(self: FiberSet<A, E>): Effect.Effect<void, E> =>
@@ -628,7 +618,6 @@ export const join = <A, E>(self: FiberSet<A, E>): Effect.Effect<void, E> =>
  * @example
  * ```ts
  * import { Effect, FiberSet } from "effect"
-
  *
  * const program = Effect.gen(function*() {
  *   const set = yield* FiberSet.make()

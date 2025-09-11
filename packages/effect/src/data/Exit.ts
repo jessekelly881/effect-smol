@@ -144,7 +144,6 @@ export const succeed: <A>(a: A) => Exit<A> = core.exitSucceed
  * @example
  * ```ts
  * import { Cause, Exit } from "effect/data"
-
  *
  * const cause = Cause.fail("Something went wrong")
  * const exit = Exit.failCause(cause)

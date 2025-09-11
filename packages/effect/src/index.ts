@@ -56,7 +56,6 @@ export * as Cache from "./Cache.ts"
  * @example
  * ```ts
  * import { Clock, Effect } from "effect"
-
  *
  * // Get current time in milliseconds
  * const getCurrentTime = Clock.currentTimeMillis
@@ -76,7 +75,6 @@ export * as Cache from "./Cache.ts"
  * @example
  * ```ts
  * import { Clock, Effect } from "effect"
-
  *
  * // Using Clock service directly
  * const program = Effect.gen(function* () {
@@ -126,7 +124,6 @@ export * as ConfigProvider from "./ConfigProvider.ts"
  * @example
  * ```ts
  * import { Deferred, Effect, Fiber } from "effect"
-
  *
  * // Basic usage: coordinate between fibers
  * const program = Effect.gen(function* () {
@@ -270,7 +267,6 @@ export * as Effect from "./Effect.ts"
  * ```ts
  * import { Effect, Fiber } from "effect"
  * import { Console } from "effect/logging"
-
  *
  * // Basic fiber operations
  * const basicExample = Effect.gen(function* () {
@@ -711,7 +707,7 @@ export * as References from "./References.ts"
  *
  * @since 2.0.0
  */
-export * as RegExp from "./RegExp.ts"
+export * as RegExp from "./data/RegExp.ts"
 
 /**
  * The `Request` module provides a way to model requests to external data sources
@@ -745,7 +741,6 @@ export * as RequestResolver from "./RequestResolver.ts"
  * @example
  * ```ts
  * import { Effect, Fiber, Runtime } from "effect"
-
  *
  * // Create a main runner for Node.js
  * const runMain = Runtime.makeRunMain((options) => {

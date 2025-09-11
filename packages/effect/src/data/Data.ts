@@ -950,7 +950,6 @@ function taggedMatch<
  * ```ts
  * import { Effect } from "effect"
  * import { Data, Exit } from "effect/data"
-
  *
  * class NetworkError extends Data.Error<{ code: number; message: string }> {}
  *

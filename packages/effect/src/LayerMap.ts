@@ -18,7 +18,6 @@ const TypeId = "~effect/LayerMap"
  * @example
  * ```ts
  * import { Effect, Layer, LayerMap, ServiceMap } from "effect"
-
  *
  * // Define a service key
  * const DatabaseService = ServiceMap.Key<{
@@ -81,7 +80,6 @@ export interface LayerMap<in out K, in out I, in out E = never> {
  * @example
  * ```ts
  * import { Effect, Layer, LayerMap, Scope, ServiceMap } from "effect"
-
  *
  * // Define a service key
  * const DatabaseService = ServiceMap.Key<{
@@ -159,7 +157,6 @@ export const make: <
  * @example
  * ```ts
  * import { Effect, Layer, LayerMap, ServiceMap } from "effect"
-
  *
  * // Define service keys
  * const DevDatabase = ServiceMap.Key<{
@@ -274,7 +271,6 @@ export interface TagClass<
  * import { Effect, Layer, LayerMap, ServiceMap } from "effect"
 
  * import { Console } from "effect/logging"
-
  *
  * // Define a service key
  * const Greeter = ServiceMap.Key<{

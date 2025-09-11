@@ -18,7 +18,6 @@
  * @example
  * ```ts
  * import { Deferred, Effect, Fiber } from "effect"
-
  *
  * // Basic usage: coordinate between fibers
  * const program = Effect.gen(function* () {
@@ -90,7 +89,6 @@ const TypeId = "~effect/Deferred"
  * @example
  * ```ts
  * import { Deferred, Effect, Fiber } from "effect"
-
  *
  * // Create and use a Deferred for inter-fiber communication
  * const program = Effect.gen(function* () {
@@ -303,7 +301,6 @@ export const completeWith: {
  * ```ts
  * import { Deferred, Effect } from "effect"
  * import { Exit } from "effect/data"
-
  *
  * const program = Effect.gen(function*() {
  *   const deferred = yield* Deferred.make<number>()
@@ -380,7 +377,6 @@ export const failSync: {
  * ```ts
  * import { Deferred, Effect } from "effect"
  * import { Cause } from "effect/data"
-
  *
  * const program = Effect.gen(function*() {
  *   const deferred = yield* Deferred.make<number, string>()
@@ -408,7 +404,6 @@ export const failCause: {
  * ```ts
  * import { Deferred, Effect } from "effect"
  * import { Cause } from "effect/data"
-
  *
  * const program = Effect.gen(function*() {
  *   const deferred = yield* Deferred.make<number, string>()

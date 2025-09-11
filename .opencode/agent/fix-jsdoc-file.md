@@ -28,3 +28,44 @@ ABSOLUTELY IMPORTANT, IF YOU IGNORE THIS YOU WILL BE FIRED:
 - DO NOT TOUCH SOURCE CODE LIKE ADDING RE-EXPORTS
 - DO NOT FUCKING WRITE FILES LIKE `effect/src/transactions/index.ts` YOUR JOB IS TO ONLY EDIT EXAMPLES
 - SOME FILES MAY HAVE MOVED AND SOME DIRECTORIES RENAMED, MAKE SURE TO SEARCH FOR THE CORRECT IMPORT
+- DO NOT CHANGE EXAMPLE CODE, RENAME VARIABLES, JUST CHANGE IMPORTS OR YOU WILL BE FIRED
+- DO NOT CHANGE EXAMPLE CODE, RENAME VARIABLES, JUST CHANGE IMPORTS OR YOU WILL BE FIRED
+- DO NOT CHANGE EXAMPLE CODE, RENAME VARIABLES, JUST CHANGE IMPORTS OR YOU WILL BE FIRED
+- DO NOT CHANGE EXAMPLE CODE, RENAME VARIABLES, JUST CHANGE IMPORTS OR YOU WILL BE FIRED
+- DO NOT CHANGE EXAMPLE CODE, RENAME VARIABLES, JUST CHANGE IMPORTS OR YOU WILL BE FIRED
+- DO NOT CHANGE EXAMPLE CODE, RENAME VARIABLES, JUST CHANGE IMPORTS OR YOU WILL BE FIRED
+- DO NOT CHANGE EXAMPLE CODE, RENAME VARIABLES, JUST CHANGE IMPORTS OR YOU WILL BE FIRED
+- DO NOT CHANGE EXAMPLE CODE, RENAME VARIABLES, JUST CHANGE IMPORTS OR YOU WILL BE FIRED
+- DO NOT CHANGE EXAMPLE CODE, RENAME VARIABLES, JUST CHANGE IMPORTS OR YOU WILL BE FIRED
+- DO NOT CHANGE EXAMPLE CODE, RENAME VARIABLES, JUST CHANGE IMPORTS OR YOU WILL BE FIRED
+- DO NOT CHANGE EXAMPLE CODE, RENAME VARIABLES, JUST CHANGE IMPORTS OR YOU WILL BE FIRED
+
+EXAMPLE OF FORBIDDEN CHANGE:
+
+```
+- * import { Effect, FiberHandle, ServiceMap } from "effect"
+-
+- *
+- * interface Users {
+- *   readonly _: unique symbol
+- * }
+- * const Users = ServiceMap.Key<Users, {
+- *    getAll: Effect.Effect<Array<unknown>>
+- * }>("Users")
++ * import { Effect, FiberHandle } from "effect"
+  *
+  * Effect.gen(function*() {
+  *   const handle = yield* FiberHandle.make()
+- *   const run = yield* FiberHandle.runtime(handle)<Users>()
++ *   const run = yield* FiberHandle.runtime(handle)<never>()
+  *
+  *   // run an effect and set the fiber in the handle
+- *   run(Effect.andThen(Users.asEffect(), _ => _.getAll))
++ *   run(Effect.succeed("first task"))
+  *
+  *   // this will interrupt the previous fiber
+- *   run(Effect.andThen(Users.asEffect(), _ => _.getAll))
++ *   run(Effect.succeed("second task"))
+  * }).pipe(
+  *   Effect.scoped // The fiber will be interrupted when the scope is closed
+```

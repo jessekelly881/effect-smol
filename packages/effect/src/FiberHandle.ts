@@ -23,7 +23,6 @@ const TypeId = "~effect/FiberHandle"
  * @example
  * ```ts
  * import { Effect, Fiber, FiberHandle } from "effect"
-
  *
  * Effect.gen(function*() {
  *   // Create a FiberHandle that can hold fibers producing strings
@@ -53,7 +52,6 @@ export interface FiberHandle<out A = unknown, out E = unknown> extends Pipeable,
  * @example
  * ```ts
  * import { Effect, FiberHandle } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -93,7 +91,6 @@ const makeUnsafe = <A = unknown, E = unknown>(): FiberHandle<A, E> => {
  * @example
  * ```ts
  * import { Effect, FiberHandle } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -136,7 +133,6 @@ export const make = <A = unknown, E = unknown>(): Effect.Effect<FiberHandle<A, E
  * @example
  * ```ts
  * import { Effect, Fiber, FiberHandle } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const run = yield* FiberHandle.makeRuntime<never>()
@@ -179,7 +175,6 @@ export const makeRuntime = <R, E = unknown, A = unknown>(): Effect.Effect<
  * @example
  * ```ts
  * import { Effect, FiberHandle } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const run = yield* FiberHandle.makeRuntimePromise()
@@ -224,7 +219,6 @@ const isInternalInterruption = Filter.toPredicate(Filter.compose(
  * @example
  * ```ts
  * import { Effect, Fiber, FiberHandle } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -304,7 +298,6 @@ export const setUnsafe: {
  * @example
  * ```ts
  * import { Effect, Fiber, FiberHandle } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -358,7 +351,6 @@ export const set: {
  * @example
  * ```ts
  * import { Effect, FiberHandle } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -386,7 +378,6 @@ export function getUnsafe<A, E>(self: FiberHandle<A, E>): Fiber.Fiber<A, E> | un
  * @example
  * ```ts
  * import { Effect, Fiber, FiberHandle } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -413,7 +404,6 @@ export function get<A, E>(self: FiberHandle<A, E>): Effect.Effect<Fiber.Fiber<A,
  * @example
  * ```ts
  * import { Effect, FiberHandle } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -464,7 +454,6 @@ const constInterruptedFiber = (function() {
  * @example
  * ```ts
  * import { Effect, Fiber, FiberHandle } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -536,7 +525,6 @@ const runImpl = <A, E, R, XE extends E, XA extends A>(
  * @example
  * ```ts
  * import { Effect, FiberHandle, ServiceMap } from "effect"
-
  *
  * interface Users {
  *   readonly _: unique symbol
@@ -617,7 +605,6 @@ export const runtime: <A, E>(
  * @example
  * ```ts
  * import { Effect, FiberHandle } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -680,7 +667,7 @@ export const runtimePromise = <A, E>(self: FiberHandle<A, E>): <R = never>() => 
  * @example
  * ```ts
 
- * import { FiberHandle } from "effect";
+ * import { Effect, FiberHandle } from "effect";
  *
  * Effect.gen(function* () {
  *   const handle = yield* FiberHandle.make()
@@ -702,7 +689,6 @@ export const join = <A, E>(self: FiberHandle<A, E>): Effect.Effect<void, E> =>
  * @example
  * ```ts
  * import { Effect, FiberHandle } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()

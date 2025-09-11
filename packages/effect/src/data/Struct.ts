@@ -347,7 +347,6 @@ export const renameKeys: {
  * @example
  * ```ts
  * import { Number as N, String as S, Struct } from "effect/data"
-
  *
  * const PersonEquivalence = Struct.getEquivalence({
  *   name: S.Equivalence,
@@ -374,7 +373,6 @@ export const getEquivalence = Equivalence.struct
  * @example
  * ```ts
  * import { Number as N, String as S, Struct } from "effect/data"
-
  *
  * const PersonOrder = Struct.getOrder({
  *   name: S.Order,

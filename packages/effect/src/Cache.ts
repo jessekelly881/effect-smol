@@ -29,7 +29,7 @@ const TypeId = "~effect/caching/Cache"
  * import { Duration } from "effect/data"
  *
  * // Basic cache with string keys and number values
- * const program = Effect.gen(function*() {
+ * const basicCacheProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make<string, number>({
  *     capacity: 100,
  *     lookup: (key: string) => Effect.succeed(key.length)
@@ -47,10 +47,10 @@ const TypeId = "~effect/caching/Cache"
  * @example
  * ```ts
  * import { Effect, Cache } from "effect"
- * import { Duration } from "effect/data"
+ * import { Exit } from "effect/data"
  *
  * // Cache with error handling
- * const program = Effect.gen(function*() {
+ * const errorHandlingProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make<string, number, string>({
  *     capacity: 10,
  *     lookup: (key: string) =>
@@ -70,12 +70,12 @@ const TypeId = "~effect/caching/Cache"
  * @example
  * ```ts
  * import { Effect, Cache } from "effect"
-
+ * import { Duration, Data } from "effect/data"
  *
  * // Cache with complex key types and TTL
- * class UserId extends Data.Class<{ id: number }> {}
+ * class UserId extends Data.Class<{ readonly id: number }> {}
  *
- * const program = Effect.gen(function*() {
+ * const complexCacheProgram = Effect.gen(function*() {
  *   const userCache = yield* Cache.make<UserId, string>({
  *     capacity: 1000,
  *     lookup: (userId: UserId) =>
@@ -121,10 +121,11 @@ export interface Entry<A, E> {
  *
  * @example
  * ```ts
-
+ * import { Effect, Cache } from "effect"
+ * import { Exit } from "effect/data"
  *
  * // Cache with different TTL for success vs failure
- * const program = Effect.gen(function*() {
+ * const dynamicTtlProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.makeWith<string, number, string>({
  *     capacity: 100,
  *     lookup: (key) => key === "fail"
@@ -145,12 +146,11 @@ export interface Entry<A, E> {
  *
  * @example
  * ```ts
-
+ * import { Effect, Cache } from "effect"
  * import { Exit } from "effect/data"
-
  *
  * // Cache with TTL based on computed value
- * const userCache = Effect.gen(function*() {
+ * const userCacheProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.makeWith<number, { id: number; active: boolean }, never>({
  *     capacity: 1000,
  *     lookup: (id) => Effect.succeed({ id, active: id % 2 === 0 }),
@@ -212,7 +212,7 @@ export const makeWith = <
  * import { Effect, Cache } from "effect"
  *
  * // Basic cache with string keys
- * const program = Effect.gen(function*() {
+ * const basicMakeProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make<string, number>({
  *     capacity: 100,
  *     lookup: (key) => Effect.succeed(key.length)
@@ -229,7 +229,7 @@ export const makeWith = <
  * import { Effect, Cache } from "effect"
  *
  * // Cache with TTL and async lookup
- * const fetchUserCache = Effect.gen(function*() {
+ * const fetchUserCacheProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make<number, { name: string; email: string }, string>({
  *     capacity: 500,
  *     lookup: (userId) => Effect.tryPromise({
@@ -294,9 +294,9 @@ const defaultTimeToLive = <A, E>(_: Exit.Exit<A, E>, _key: unknown): Duration.Du
  *
  * @example
  * ```ts
-
+ * import { Effect, Cache } from "effect"
  *
- * const program = Effect.gen(function*() {
+ * const getBasicProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 10,
  *     lookup: (key: string) => Effect.succeed(key.length)
@@ -316,10 +316,11 @@ const defaultTimeToLive = <A, E>(_: Exit.Exit<A, E>, _key: unknown): Duration.Du
  *
  * @example
  * ```ts
-
+ * import { Effect, Cache } from "effect"
+ * import { Exit } from "effect/data"
  *
  * // Error handling when lookup fails
- * const program = Effect.gen(function*() {
+ * const getErrorProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make<string, number, string>({
  *     capacity: 10,
  *     lookup: (key: string) =>
@@ -340,10 +341,10 @@ const defaultTimeToLive = <A, E>(_: Exit.Exit<A, E>, _key: unknown): Duration.Du
  *
  * @example
  * ```ts
-
+ * import { Effect, Cache } from "effect"
  *
  * // Concurrent access - multiple gets of same key only invoke lookup once
- * const program = Effect.gen(function*() {
+ * const getConcurrentProgram = Effect.gen(function*() {
  *   let lookupCount = 0
  *   const cache = yield* Cache.make({
  *     capacity: 10,
@@ -430,11 +431,10 @@ const checkCapacity = <K, A, E, R>(self: Cache<K, A, E, R>) => {
  *
  * @example
  * ```ts
-
+ * import { Effect, Cache } from "effect"
  * import { Option } from "effect/data"
-
  *
- * const program = Effect.gen(function*() {
+ * const getOptionBasicProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 10,
  *     lookup: (key: string) => Effect.succeed(key.length)
@@ -457,13 +457,12 @@ const checkCapacity = <K, A, E, R>(self: Cache<K, A, E, R>) => {
  *
  * @example
  * ```ts
-
+ * import { Effect, Cache } from "effect"
  * import { Option } from "effect/data"
  * import { TestClock } from "effect/testing"
-
  *
  * // Expired entries return None
- * const program = Effect.gen(function*() {
+ * const getOptionExpiryProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 10,
  *     lookup: (key: string) => Effect.succeed(key.length),
@@ -488,12 +487,11 @@ const checkCapacity = <K, A, E, R>(self: Cache<K, A, E, R>) => {
  *
  * @example
  * ```ts
-
+ * import { Effect, Cache, Deferred, Fiber } from "effect"
  * import { Option } from "effect/data"
-
  *
  * // Waits for ongoing computation to complete
- * const program = Effect.gen(function*() {
+ * const getOptionConcurrentProgram = Effect.gen(function*() {
  *   const deferred = yield* Deferred.make<void>()
  *   const cache = yield* Cache.make({
  *     capacity: 10,
@@ -579,7 +577,7 @@ export const getSuccess: {
  * ```ts
  * import { Effect, Cache } from "effect"
  *
- * const program = Effect.gen(function*() {
+ * const setBasicProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 100,
  *     lookup: (key: string) => Effect.succeed(key.length)
@@ -597,7 +595,7 @@ export const getSuccess: {
  * import { Effect, Cache } from "effect"
  *
  * // Overwriting existing cached values
- * const program = Effect.gen(function*() {
+ * const setOverwriteProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 100,
  *     lookup: (key: string) => Effect.succeed(key.length)
@@ -620,7 +618,7 @@ export const getSuccess: {
  * import { TestClock } from "effect/testing"
  *
  * // TTL behavior with set operations
- * const program = Effect.gen(function*() {
+ * const setTtlProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 100,
  *     lookup: (key: string) => Effect.succeed(key.length),
@@ -642,7 +640,7 @@ export const getSuccess: {
  * import { Effect, Cache } from "effect"
  *
  * // Capacity enforcement with set operations
- * const program = Effect.gen(function*() {
+ * const setCapacityProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 2,
  *     lookup: (key: string) => Effect.succeed(key.length)
@@ -697,7 +695,7 @@ export const set: {
  * ```ts
  * import { Effect, Cache } from "effect"
  *
- * const program = Effect.gen(function*() {
+ * const hasBasicProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 100,
  *     lookup: (key: string) => Effect.succeed(key.length)
@@ -718,7 +716,7 @@ export const set: {
  * import { TestClock } from "effect/testing"
  *
  * // TTL expiration behavior
- * const program = Effect.gen(function*() {
+ * const hasTtlProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 100,
  *     lookup: (key: string) => Effect.succeed(key.length),
@@ -744,7 +742,7 @@ export const set: {
  * import { Effect, Cache } from "effect"
  *
  * // Checking multiple keys efficiently
- * const program = Effect.gen(function*() {
+ * const hasMultipleProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 100,
  *     lookup: (key: string) => Effect.succeed(key.length)
@@ -790,7 +788,7 @@ export const has: {
  * ```ts
  * import { Effect, Cache } from "effect"
  *
- * const program = Effect.gen(function*() {
+ * const invalidateProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 10,
  *     lookup: (key: string) => Effect.succeed(key.length)
@@ -839,7 +837,7 @@ export const invalidate: {
  * ```ts
  * import { Effect, Cache } from "effect"
  *
- * const program = Effect.gen(function*() {
+ * const invalidateWhenProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 10,
  *     lookup: (key: string) => Effect.succeed(key.length)
@@ -913,7 +911,7 @@ export const invalidateWhen: {
  * import { Effect, Cache } from "effect"
  *
  * // Force refresh of existing cached values
- * const program = Effect.gen(function*() {
+ * const refreshBasicProgram = Effect.gen(function*() {
  *   let counter = 0
  *   const cache = yield* Cache.make({
  *     capacity: 10,
@@ -942,10 +940,9 @@ export const invalidateWhen: {
  * ```ts
  * import { Effect, Cache } from "effect"
  * import { TestClock } from "effect/testing"
- * import { Duration } from "effect/data"
  *
  * // Refresh resets TTL (Time To Live)
- * const program = Effect.gen(function*() {
+ * const refreshTtlProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 10,
  *     lookup: (key: string) => Effect.succeed(key.length),
@@ -972,7 +969,7 @@ export const invalidateWhen: {
  * import { Effect, Cache } from "effect"
  *
  * // Refresh non-existent keys
- * const program = Effect.gen(function*() {
+ * const refreshNewKeyProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 10,
  *     lookup: (key: string) => Effect.succeed(`value-for-${key}`)
@@ -1033,7 +1030,7 @@ export const refresh: {
  * import { Effect, Cache } from "effect"
  *
  * // Clear all cached entries at once
- * const program = Effect.gen(function*() {
+ * const invalidateAllProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 10,
  *     lookup: (key: string) => Effect.succeed(key.length)
@@ -1077,7 +1074,7 @@ export const invalidateAll = <Key, A, E, R>(self: Cache<Key, A, E, R>): Effect.E
  * ```ts
  * import { Effect, Cache } from "effect"
  *
- * const program = Effect.gen(function*() {
+ * const sizeProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 10,
  *     lookup: (key: string) => Effect.succeed(key.length)
@@ -1114,7 +1111,7 @@ export const size = <Key, A, E, R>(self: Cache<Key, A, E, R>): Effect.Effect<num
  * import { Effect, Cache } from "effect"
  *
  * // Basic key enumeration
- * const program = Effect.gen(function*() {
+ * const keysProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 10,
  *     lookup: (key: string) => Effect.succeed(key.length)
@@ -1155,7 +1152,7 @@ export const keys = <Key, A, E, R>(self: Cache<Key, A, E, R>): Effect.Effect<Ite
  * ```ts
  * import { Effect, Cache } from "effect"
  *
- * const program = Effect.gen(function*() {
+ * const valuesProgram = Effect.gen(function*() {
  *   const cache = yield* Cache.make({
  *     capacity: 10,
  *     lookup: (key: string) => Effect.succeed(key.length)

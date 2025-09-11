@@ -2423,7 +2423,6 @@ export const histogram = (name: string, options: {
  * ```ts
  * import { Effect, Metric } from "effect"
  * import { Data, Duration } from "effect/data"
-
  *
  * class SummaryError extends Data.TaggedError("SummaryError")<{
  *   readonly operation: string
@@ -2546,7 +2545,6 @@ export const summaryWithTimestamp = (name: string, options: {
  * ```ts
  * import { Effect, Metric } from "effect"
  * import { Data, Duration } from "effect/data"
-
  *
  * class TimerError extends Data.TaggedError("TimerError")<{
  *   readonly operation: string
@@ -3440,9 +3438,7 @@ export const FiberRuntimeMetricsKey: typeof InternalMetric.FiberRuntimeMetricsKe
  * @example
  * ```ts
  * import { Effect, Layer, Metric, ServiceMap } from "effect"
- * import { Data } from "effect/data"
-
- * import type { Exit } from "effect/data"
+ * import { Data, Exit } from "effect/data"
  *
  * class MetricsError extends Data.TaggedError("MetricsError")<{
  *   readonly operation: string
@@ -3454,7 +3450,7 @@ export const FiberRuntimeMetricsKey: typeof InternalMetric.FiberRuntimeMetricsKe
  *     console.log("Fiber started")
  *     // Custom logic for tracking fiber starts
  *   },
- *   recordFiberEnd: (context: ServiceMap.ServiceMap<never>, exit: Exit<unknown, unknown>) => {
+ *   recordFiberEnd: (context: ServiceMap.ServiceMap<never>, exit: Exit.Exit<unknown, unknown>) => {
  *     console.log("Fiber completed with exit:", exit)
  *     // Custom logic for tracking fiber completion based on exit status
  *   }

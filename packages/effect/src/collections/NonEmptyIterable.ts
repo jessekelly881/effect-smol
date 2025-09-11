@@ -162,7 +162,6 @@ export declare const nonEmpty: unique symbol
  * @example
  * ```ts
  * import { Array, Chunk, NonEmptyIterable } from "effect/collections"
-
  *
  * // Function that requires non-empty data
  * function getFirst<A>(data: NonEmptyIterable.NonEmptyIterable<A>): A {
@@ -210,7 +209,6 @@ export interface NonEmptyIterable<out A> extends Iterable<A> {
  * @example
  * ```ts
  * import { Array, Chunk, NonEmptyIterable } from "effect/collections"
-
  *
  * // Helper to make iterator iterable for Array.from
  * const iteratorToIterable = <T>(iterator: Iterator<T>): Iterable<T> => ({

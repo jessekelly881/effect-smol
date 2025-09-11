@@ -256,7 +256,6 @@ const StreamProto = {
  * @example
  * ```ts
  * import { Channel, Stream } from "effect/stream"
-
  *
  * const myChannel = Channel.succeed([1, 2, 3] as const)
  * const stream = Stream.fromChannel(myChannel)

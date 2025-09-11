@@ -671,7 +671,6 @@ export const whenAnd: <
  * @example
  * ```ts
  * import { Match, pipe } from "effect"
-
  *
  * const match = pipe(
  *   Match.type<{ type: "A"; a: string } | { type: "B"; b: number } | { type: "C"; c: boolean }>(),
@@ -717,7 +716,6 @@ export const discriminator: <D extends string>(
  * @example
  * ```ts
  * import { Match, pipe } from "effect"
-
  *
  * const match = pipe(
  *   Match.type<{ type: "A" } | { type: "B" } | { type: "A.A" } | {}>(),
@@ -766,7 +764,6 @@ export const discriminatorStartsWith: <D extends string>(
  * @example
  * ```ts
  * import { Match, pipe } from "effect"
-
  *
  * const match = pipe(
  *   Match.type<{ type: "A"; a: string } | { type: "B"; b: number } | { type: "C"; c: boolean }>(),
@@ -821,7 +818,6 @@ export const discriminators: <D extends string>(
  * @example
  * ```ts
  * import { Match, pipe } from "effect"
-
  *
  * const match = pipe(
  *   Match.type<{ type: "A"; a: string } | { type: "B"; b: number } | { type: "C"; c: boolean }>(),
@@ -924,7 +920,6 @@ export const tag: <
  * @example
   ```ts
  * import { Match, pipe } from "effect"
-
  *
  * const match = pipe(
  *   Match.type<{ _tag: "A" } | { _tag: "B" } | { _tag: "A.A" } | {}>(),
@@ -974,7 +969,6 @@ export const tagStartsWith: <
  * @example
  * ```ts
  * import { Match, pipe } from "effect"
-
  *
  * const match = pipe(
  *   Match.type<{ _tag: "A"; a: string } | { _tag: "B"; b: number } | { _tag: "C"; c: boolean }>(),
@@ -1024,7 +1018,6 @@ export const tags: <
  * @example
  * ```ts
  * import { Match, pipe } from "effect"
-
  *
  * const match = pipe(
  *   Match.type<{ _tag: "A"; a: string } | { _tag: "B"; b: number } | { _tag: "C"; c: boolean }>(),

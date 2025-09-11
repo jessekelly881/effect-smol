@@ -337,6 +337,13 @@ export * as Predicate from "./Predicate.ts"
 export * as Record from "./Record.ts"
 
 /**
+ * This module provides utility functions for working with RegExp in TypeScript.
+ *
+ * @since 2.0.0
+ */
+export * as RegExp from "./RegExp.ts"
+
+/**
  * The Redacted module provides functionality for handling sensitive information
  * securely within your application. By using the `Redacted` data type, you can
  * ensure that sensitive values are not accidentally exposed in logs or error

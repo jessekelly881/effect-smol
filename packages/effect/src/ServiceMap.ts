@@ -473,7 +473,6 @@ export const make = <I, S>(
  * ```ts
  * import * as assert from "node:assert"
  * import { ServiceMap, pipe } from "effect"
-
  *
  * const Port = ServiceMap.Key<{ PORT: number }>("Port")
  * const Timeout = ServiceMap.Key<{ TIMEOUT: number }>("Timeout")
@@ -633,7 +632,6 @@ export const getUnsafe: {
  * ```ts
  * import * as assert from "node:assert"
  * import { ServiceMap, pipe } from "effect"
-
  *
  * const Port = ServiceMap.Key<{ PORT: number }>("Port")
  * const Timeout = ServiceMap.Key<{ TIMEOUT: number }>("Timeout")

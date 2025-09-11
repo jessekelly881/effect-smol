@@ -32,7 +32,6 @@ const CloseableTypeId = effect.ScopeCloseableTypeId
  * import { Effect, Scope } from "effect"
  * import { Exit } from "effect/data"
  * import { Console } from "effect/logging"
-
  *
  * const program = Effect.gen(function* () {
  *   const scope = yield* Scope.make("sequential")
@@ -64,7 +63,6 @@ export interface Scope {
  * import { Effect, Scope } from "effect"
  * import { Exit } from "effect/data"
  * import { Console } from "effect/logging"
-
  *
  * const program = Effect.gen(function* () {
  *   const scope = yield* Scope.make()
@@ -92,7 +90,6 @@ export interface Closeable extends Scope {
  * ```ts
  * import { Effect, Scope } from "effect"
  * import { Exit } from "effect/data"
-
  *
  * // Example of checking scope states
  * const program = Effect.gen(function* () {
@@ -232,7 +229,6 @@ export const Scope: ServiceMap.Key<Scope, Scope> = effect.scopeTag
  * import { Effect, Scope } from "effect"
  * import { Exit } from "effect/data"
  * import { Console } from "effect/logging"
-
  *
  * const program = Effect.gen(function* () {
  *   // Create a scope with sequential cleanup
@@ -263,7 +259,6 @@ export const make: (finalizerStrategy?: "sequential" | "parallel") => Effect<Clo
  * import { Effect, Scope } from "effect"
  * import { Exit } from "effect/data"
  * import { Console } from "effect/logging"
-
  *
  * // Create a scope immediately
  * const scope = Scope.makeUnsafe("sequential")
@@ -288,7 +283,6 @@ export const makeUnsafe: (finalizerStrategy?: "sequential" | "parallel") => Clos
  * ```ts
  * import { Effect, Scope } from "effect"
  * import { Console } from "effect/logging"
-
  *
  * // An effect that requires a Scope
  * const program = Effect.gen(function* () {
@@ -321,7 +315,6 @@ export const provide: {
  * import { Effect, Scope } from "effect"
  * import { Exit } from "effect/data"
  * import { Console } from "effect/logging"
-
  *
  * const withResource = Effect.gen(function* () {
  *   const scope = yield* Scope.make()
@@ -355,7 +348,6 @@ export const addFinalizerExit: (scope: Scope, finalizer: (exit: Exit<any, any>) 
  * import { Effect, Scope } from "effect"
  * import { Exit } from "effect/data"
  * import { Console } from "effect/logging"
-
  *
  * const program = Effect.gen(function* () {
  *   const scope = yield* Scope.make()
@@ -387,7 +379,6 @@ export const addFinalizer: (scope: Scope, finalizer: Effect<unknown>) => Effect<
  * import { Effect, Scope } from "effect"
  * import { Exit } from "effect/data"
  * import { Console } from "effect/logging"
-
  *
  * const nestedScopes = Effect.gen(function* () {
  *   const parentScope = yield* Scope.make("sequential")
@@ -424,7 +415,6 @@ export const fork: (
  * import { Effect, Scope } from "effect"
  * import { Exit } from "effect/data"
  * import { Console } from "effect/logging"
-
  *
  * const program = Effect.gen(function* () {
  *   const parentScope = Scope.makeUnsafe("sequential")
@@ -455,7 +445,6 @@ export const forkUnsafe: (scope: Scope, finalizerStrategy?: "sequential" | "para
  * import { Effect, Scope } from "effect"
  * import { Exit } from "effect/data"
  * import { Console } from "effect/logging"
-
  *
  * const resourceManagement = Effect.gen(function* () {
  *   const scope = yield* Scope.make("sequential")

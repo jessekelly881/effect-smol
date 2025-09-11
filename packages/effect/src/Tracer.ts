@@ -12,7 +12,6 @@ import * as ServiceMap from "./ServiceMap.ts"
  * @example
  * ```ts
  * import { ServiceMap, Tracer } from "effect"
-
  *
  * // Create a custom tracer implementation
  * const customTracer: Tracer.Tracer = {
@@ -83,7 +82,6 @@ export type SpanStatus = {
  * @example
  * ```ts
  * import { Effect, Tracer } from "effect"
-
  *
  * // Function that accepts any span type
  * const logSpan = (span: Tracer.AnySpan) => {
@@ -119,7 +117,6 @@ export const ParentSpanKey = "effect/Tracer/ParentSpan"
  * @example
  * ```ts
  * import { Effect, Tracer } from "effect"
-
  *
  * // Access the parent span from the context
  * const program = Effect.gen(function* () {
@@ -136,7 +133,6 @@ export class ParentSpan extends ServiceMap.Key<ParentSpan, AnySpan>()(ParentSpan
  * @example
  * ```ts
  * import { ServiceMap, Tracer } from "effect"
-
  *
  * // Create an external span from another tracing system
  * const externalSpan: Tracer.ExternalSpan = {
@@ -164,7 +160,6 @@ export interface ExternalSpan {
  * @example
  * ```ts
  * import { Effect, Tracer } from "effect"
-
  *
  * // Create an effect with span options
  * const options: Tracer.SpanOptions = {
@@ -208,7 +203,6 @@ export interface TraceOptions {
  * @example
  * ```ts
  * import { Effect, Tracer } from "effect"
-
  *
  * // Different span kinds for different operations
  * const serverSpan = Effect.withSpan("handle-request", {
@@ -265,7 +259,6 @@ export interface Span {
  * @example
  * ```ts
  * import { Effect, Tracer } from "effect"
-
  *
  * // Create a span link to connect spans
  * const externalSpan = Tracer.externalSpan({
@@ -318,7 +311,6 @@ export const make = (options: Tracer): Tracer => options
  * @example
  * ```ts
  * import { Effect, Tracer } from "effect"
-
  *
  * // Create an external span from another tracing system
  * const span = Tracer.externalSpan({
@@ -354,7 +346,6 @@ export const externalSpan = (
  * @example
  * ```ts
  * import { Effect, Tracer } from "effect"
-
  *
  * // Disable span propagation for a specific effect
  * const program = Effect.gen(function* () {
@@ -381,7 +372,6 @@ export const TracerKey = "effect/Tracer"
  * @example
  * ```ts
  * import { Effect, Tracer } from "effect"
-
  *
  * // Access the current tracer from the context
  * const program = Effect.gen(function* () {

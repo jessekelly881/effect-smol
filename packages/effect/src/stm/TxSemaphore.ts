@@ -525,7 +525,6 @@ export const withPermits = <A, E, R>(
  * import { Effect, Scope } from "effect"
  * import { Console } from "effect/logging"
  * import { TxSemaphore } from "effect/stm"
-
  *
  * const program = Effect.gen(function* () {
  *   const semaphore = yield* TxSemaphore.make(3)

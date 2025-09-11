@@ -104,7 +104,6 @@ export const reverse = (o: Ordering): Ordering => (o === -1 ? 1 : o === 1 ? -1 :
  * ```ts
  * import * as assert from "node:assert"
  * import { Function, Ordering } from "effect/data"
-
  *
  * const toMessage = Ordering.match({
  *   onLessThan: Function.constant('less than'),

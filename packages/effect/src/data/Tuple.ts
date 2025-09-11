@@ -366,7 +366,6 @@ export const mapOmit: {
  * @example
  * ```ts
  * import { Number, String, Tuple } from "effect/data"
-
  *
  * // Creates an equivalence for tuples with string and number elements
  * const equivalence = Tuple.getEquivalence([String.Equivalence, Number.Equivalence])
@@ -383,7 +382,6 @@ export const getEquivalence = Equivalence.tuple
  * @example
  * ```ts
  * import { Number, String, Tuple } from "effect/data"
-
  *
  * // Creates an order for tuples with string and number elements
  * const tupleOrder = Tuple.getOrder([String.Order, Number.Order])

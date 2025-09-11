@@ -21,7 +21,6 @@ const TypeId = "~effect/RcRef"
  * @example
  * ```ts
  * import { Effect, RcRef } from "effect"
-
  *
  * // Create an RcRef for a database connection
  * const createConnectionRef = (connectionString: string) =>
@@ -95,7 +94,6 @@ export declare namespace RcRef {
  * @example
  * ```ts
  * import { Effect, RcRef } from "effect"
-
  *
  * Effect.gen(function*() {
  *   const ref = yield* RcRef.make({
@@ -137,7 +135,6 @@ export const make: <A, E, R>(
  * @example
  * ```ts
  * import { Effect, RcRef } from "effect"
-
  *
  * const program = Effect.gen(function* () {
  *   // Create an RcRef with a resource

@@ -236,7 +236,6 @@ export const fromTransform = <L, In, E, A, R, EX, RX>(
  * @example
  * ```ts
  * import { Channel, Sink } from "effect/stream"
-
  *
  * // Create a sink and extract its channel
  * const sink = Sink.succeed(42)

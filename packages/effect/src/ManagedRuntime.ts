@@ -133,7 +133,6 @@ export interface ManagedRuntime<in R, out ER> {
  * ```ts
  * import { Effect, Layer, ManagedRuntime, ServiceMap } from "effect"
  * import { Console } from "effect/logging"
-
  *
  * class Notifications extends ServiceMap.Key<
  *   Notifications,

@@ -1043,7 +1043,6 @@ export const fromEffect = <A, E, R>(
  * import { Effect, Queue } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class QueueError extends Data.TaggedError("QueueError")<{
  *   readonly reason: string
@@ -1088,7 +1087,6 @@ export const fromQueue = <A, E>(
  * import { Effect, Queue } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class ProcessingError extends Data.TaggedError("ProcessingError")<{
  *   readonly stage: string
@@ -1136,7 +1134,6 @@ export const fromQueueArray = <A, E>(
  * import { Effect, PubSub } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class SubscriptionError extends Data.TaggedError("SubscriptionError")<{
  *   readonly reason: string
@@ -1193,7 +1190,6 @@ export const fromSubscription = <A>(
  * import { Effect, PubSub } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class StreamError extends Data.TaggedError("StreamError")<{
  *   readonly message: string
@@ -1222,7 +1218,6 @@ export const fromSubscription = <A>(
  * import { Effect, PubSub } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class BatchProcessingError extends Data.TaggedError("BatchProcessingError")<{
  *   readonly reason: string
@@ -1250,7 +1245,6 @@ export const fromSubscription = <A>(
  * import { Effect, PubSub } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class MetricsError extends Data.TaggedError("MetricsError")<{
  *   readonly cause: string
@@ -1307,7 +1301,6 @@ export const fromSubscriptionArray = <A>(
  * import { Effect, PubSub } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class StreamError extends Data.TaggedError("StreamError")<{
  *   readonly message: string
@@ -1334,7 +1327,6 @@ export const fromSubscriptionArray = <A>(
  * import { Effect, PubSub } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class NotificationError extends Data.TaggedError("NotificationError")<{
  *   readonly reason: string
@@ -1362,7 +1354,6 @@ export const fromSubscriptionArray = <A>(
  * import { Effect, PubSub } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class EventProcessingError extends Data.TaggedError("EventProcessingError")<{
  *   readonly eventType: string
@@ -1419,7 +1410,6 @@ export const fromPubSub = <A>(
  * import { Effect, PubSub } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class BatchError extends Data.TaggedError("BatchError")<{
  *   readonly message: string
@@ -1447,7 +1437,6 @@ export const fromPubSub = <A>(
  * import { Effect, PubSub } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class OrderProcessingError extends Data.TaggedError("OrderProcessingError")<{
  *   readonly orderId: string
@@ -1490,7 +1479,6 @@ export const fromPubSub = <A>(
  * import { Effect, PubSub } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class LogProcessingError extends Data.TaggedError("LogProcessingError")<{
  *   readonly batchId: string
@@ -2736,7 +2724,6 @@ export const scanEffect: {
  * import { Effect } from "effect"
  * import { Cause, Data } from "effect/data"
  * import { Channel } from "effect/stream"
-
  *
  * class ProcessError extends Data.TaggedError("ProcessError")<{
  *   readonly reason: string
@@ -3854,7 +3841,6 @@ export const pipeToOrFail: {
  * import { Effect, Scope } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class UnwrapError extends Data.TaggedError("UnwrapError")<{
  *   readonly reason: string
@@ -3955,7 +3941,6 @@ export const embedInput: {
  * import { Data, Exit } from "effect/data"
  * import { Channel } from "effect/stream"
  * import { Console } from "effect/logging"
-
  *
  * class ExitError extends Data.TaggedError("ExitError")<{
  *   readonly stage: string
@@ -4549,7 +4534,6 @@ export const runFold: {
  * import { Effect, Scope } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class PullError extends Data.TaggedError("PullError")<{
  *   readonly step: string
@@ -4600,7 +4584,6 @@ export const toPull: <OutElem, OutErr, OutDone, Env>(
  * import { Effect, Scope } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class ScopedPullError extends Data.TaggedError("ScopedPullError")<{
  *   readonly reason: string
@@ -4633,7 +4616,6 @@ export const toPullScoped = <OutElem, OutErr, OutDone, Env>(
  * import { Effect, Queue } from "effect"
  * import { Channel } from "effect/stream"
  * import { Data } from "effect/data"
-
  *
  * class QueueError extends Data.TaggedError("QueueError")<{
  *   readonly operation: string

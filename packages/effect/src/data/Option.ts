@@ -1930,7 +1930,6 @@ export const filter: {
  * @example
  * ```ts
  * import { Number, Option } from "effect/data"
-
  *
  * const isEquivalent = Option.getEquivalence(Number.Equivalence)
  *
@@ -1972,7 +1971,6 @@ export const getEquivalence = <A>(isEquivalent: Equivalence.Equivalence<A>): Equ
  * @example
  * ```ts
  * import { Number, Option } from "effect/data"
-
  *
  * const order = Option.getOrder(Number.Order)
  *
@@ -2100,7 +2098,6 @@ export const liftPredicate: { // Note: I intentionally avoid using the NoInfer p
  * @example
  * ```ts
  * import { Number, Option } from "effect/data"
-
  *
  * const contains = Option.containsWith(Number.Equivalence)
  *
