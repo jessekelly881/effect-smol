@@ -8,7 +8,8 @@
  *
  * @example
  * ```ts
- * import { Effect, Schedule, Duration } from "effect"
+ * import { Effect, Schedule } from "effect"
+ * import { Duration } from "effect/data"
  *
  * // Retry with exponential backoff
  * const retryPolicy = Schedule.exponential("100 millis", 2.0)
@@ -32,8 +33,7 @@
 import * as Cron from "./data/Cron.ts"
 import type * as DateTime from "./data/DateTime.ts"
 import * as Duration from "./data/Duration.ts"
-import type { LazyArg } from "./data/Function.ts"
-import { constant, constTrue, dual, identity } from "./data/Function.ts"
+import { constant, constTrue, dual, identity, type LazyArg } from "./data/Function.ts"
 import { hasProperty } from "./data/Predicate.ts"
 import * as Result from "./data/Result.ts"
 import type { Effect } from "./Effect.ts"
@@ -51,8 +51,7 @@ export const TypeId = "~effect/Schedule"
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Schedule } from "effect"
+ * import { Effect, Schedule } from "effect"
  * import { Console } from "effect/logging"
  *
  * // Basic retry schedule - retry up to 3 times with exponential backoff
@@ -93,7 +92,8 @@ export interface Schedule<out Output, in Input = unknown, out Error = never, out
  *
  * @example
  * ```ts
- * import { Effect, Schedule, Duration } from "effect"
+ * import { Effect, Schedule } from "effect"
+ * import { Duration } from "effect/data"
  *
  * // Usage of the Schedule namespace for creating schedules
  *
@@ -127,7 +127,8 @@ export declare namespace Schedule {
    *
    * @example
    * ```ts
-   * import { Effect, Schedule, Duration } from "effect"
+   * import { Effect, Schedule } from "effect"
+   * import { Duration } from "effect/data"
    *
    * // Understanding Schedule variance:
    * // - Output: covariant (can be a subtype)
@@ -195,7 +196,8 @@ export declare namespace Schedule {
    *
    * @example
    * ```ts
-   * import { Effect, Schedule, Duration } from "effect"
+   * import { Effect, Schedule } from "effect"
+   * import { Duration } from "effect/data"
    * import { Console } from "effect/logging"
    *
    * // Custom schedule that uses input metadata
@@ -237,7 +239,8 @@ export declare namespace Schedule {
    *
    * @example
    * ```ts
-   * import { Effect, Schedule, Duration } from "effect"
+   * import { Effect, Schedule } from "effect"
+   * import { Duration } from "effect/data"
    * import { Console } from "effect/logging"
    *
    * // Custom schedule that logs metadata including output
@@ -357,8 +360,7 @@ const metadataFn = () => {
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Schedule } from "effect"
+ * import { Effect, Schedule } from "effect"
  *
  * // fromStepWithMetadata is an advanced function for creating schedules
  * // that need access to execution metadata like timing and recurrence count
@@ -394,8 +396,7 @@ export const fromStepWithMetadata = <Input, Output, EnvX, ErrorX, Error, Env>(
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Schedule } from "effect"
+ * import { Effect, Schedule } from "effect"
  *
  * // Extract step function from an existing schedule
  * const schedule = Schedule.exponential("100 millis").pipe(Schedule.take(3))
@@ -1905,7 +1906,8 @@ export const eitherWith: {
  *
  * @example
  * ```ts
- * import { Effect, Schedule, Duration } from "effect"
+ * import { Effect, Schedule } from "effect"
+ * import { Duration } from "effect/data"
  * import { Console } from "effect/logging"
  *
  * const program = Effect.gen(function*() {
@@ -2241,7 +2243,8 @@ export const map: {
  *
  * @example
  * ```ts
- * import { Effect, Schedule, Duration } from "effect"
+ * import { Effect, Schedule } from "effect"
+ * import { Duration } from "effect/data"
  * import { Console } from "effect/logging"
  *
  * // Modify delays based on output - increase delay on high iteration counts
@@ -3195,7 +3198,8 @@ export const ensureInput = <T>() =>
  *
  * @example
  * ```ts
- * import { Schedule, Duration } from "effect"
+ * import { Schedule } from "effect"
+ * import { Duration } from "effect/data"
  *
  * // ensureOutput is a type-level function for compile-time constraints
  * // It ensures that a schedule's output type matches the specified type

@@ -17,12 +17,12 @@ import * as Reducer from "./Reducer.ts"
  *
  * @example
  * ```ts
- * import * as N from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * const num = N.Number("42")
+ * const num = Number.Number("42")
  * console.log(num) // 42
  *
- * const float = N.Number("3.14")
+ * const float = Number.Number("3.14")
  * console.log(float) // 3.14
  * ```
  *
@@ -37,10 +37,10 @@ export const Number = globalThis.Number
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { isNumber } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(isNumber(2), true)
- * assert.deepStrictEqual(isNumber("2"), false)
+ * assert.deepStrictEqual(Number.isNumber(2), true)
+ * assert.deepStrictEqual(Number.isNumber("2"), false)
  * ```
  *
  * @category guards
@@ -54,9 +54,9 @@ export const isNumber: (input: unknown) => input is number = predicate.isNumber
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { sum } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(sum(2, 3), 5)
+ * assert.deepStrictEqual(Number.sum(2, 3), 5)
  * ```
  *
  * @category math
@@ -73,9 +73,9 @@ export const sum: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { multiply } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(multiply(2, 3), 6)
+ * assert.deepStrictEqual(Number.multiply(2, 3), 6)
  * ```
  *
  * @category math
@@ -92,9 +92,9 @@ export const multiply: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { subtract } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(subtract(2, 3), -1)
+ * assert.deepStrictEqual(Number.subtract(2, 3), -1)
  * ```
  *
  * @category math
@@ -113,7 +113,7 @@ export const subtract: {
  * **Example**
  *
  * ```ts
- * import { Number } from "effect"
+ * import { Number } from "effect/data"
  *
  * Number.divide(6, 3) // 2
  * Number.divide(6, 0) // undefined
@@ -136,9 +136,9 @@ export const divide: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { increment } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(increment(2), 3)
+ * assert.deepStrictEqual(Number.increment(2), 3)
  * ```
  *
  * @category math
@@ -152,9 +152,9 @@ export const increment = (n: number): number => n + 1
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { decrement } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(decrement(3), 2)
+ * assert.deepStrictEqual(Number.decrement(3), 2)
  * ```
  *
  * @category math
@@ -167,7 +167,7 @@ export const decrement = (n: number): number => n - 1
  *
  * @example
  * ```ts
- * import * as Number from "effect/Number"
+ * import { Number } from "effect/data"
  *
  * console.log(Number.Equivalence(1, 1)) // true
  * console.log(Number.Equivalence(1, 2)) // false
@@ -183,7 +183,7 @@ export const Equivalence: equivalence.Equivalence<number> = equivalence.number
  *
  * @example
  * ```ts
- * import * as Number from "effect/Number"
+ * import { Number } from "effect/data"
  *
  * console.log(Number.Order(1, 2)) // -1
  * console.log(Number.Order(2, 1)) // 1
@@ -201,11 +201,11 @@ export const Order: order.Order<number> = order.number
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { lessThan } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(lessThan(2, 3), true)
- * assert.deepStrictEqual(lessThan(3, 3), false)
- * assert.deepStrictEqual(lessThan(4, 3), false)
+ * assert.deepStrictEqual(Number.lessThan(2, 3), true)
+ * assert.deepStrictEqual(Number.lessThan(3, 3), false)
+ * assert.deepStrictEqual(Number.lessThan(4, 3), false)
  * ```
  *
  * @category predicates
@@ -222,11 +222,11 @@ export const lessThan: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { lessThanOrEqualTo } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(lessThanOrEqualTo(2, 3), true)
- * assert.deepStrictEqual(lessThanOrEqualTo(3, 3), true)
- * assert.deepStrictEqual(lessThanOrEqualTo(4, 3), false)
+ * assert.deepStrictEqual(Number.lessThanOrEqualTo(2, 3), true)
+ * assert.deepStrictEqual(Number.lessThanOrEqualTo(3, 3), true)
+ * assert.deepStrictEqual(Number.lessThanOrEqualTo(4, 3), false)
  * ```
  *
  * @category predicates
@@ -243,11 +243,11 @@ export const lessThanOrEqualTo: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { greaterThan } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(greaterThan(2, 3), false)
- * assert.deepStrictEqual(greaterThan(3, 3), false)
- * assert.deepStrictEqual(greaterThan(4, 3), true)
+ * assert.deepStrictEqual(Number.greaterThan(2, 3), false)
+ * assert.deepStrictEqual(Number.greaterThan(3, 3), false)
+ * assert.deepStrictEqual(Number.greaterThan(4, 3), true)
  * ```
  *
  * @category predicates
@@ -264,11 +264,11 @@ export const greaterThan: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { greaterThanOrEqualTo } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(greaterThanOrEqualTo(2, 3), false)
- * assert.deepStrictEqual(greaterThanOrEqualTo(3, 3), true)
- * assert.deepStrictEqual(greaterThanOrEqualTo(4, 3), true)
+ * assert.deepStrictEqual(Number.greaterThanOrEqualTo(2, 3), false)
+ * assert.deepStrictEqual(Number.greaterThanOrEqualTo(3, 3), true)
+ * assert.deepStrictEqual(Number.greaterThanOrEqualTo(4, 3), true)
  * ```
  *
  * @category predicates
@@ -285,7 +285,7 @@ export const greaterThanOrEqualTo: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import * as Number from "effect/Number"
+ * import { Number } from "effect/data"
  *
  * const between = Number.between({ minimum: 0, maximum: 5 })
  *
@@ -318,7 +318,7 @@ export const between: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import * as Number from "effect/Number"
+ * import { Number } from "effect/data"
  *
  * const clamp = Number.clamp({ minimum: 1, maximum: 5 })
  *
@@ -347,9 +347,9 @@ export const clamp: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { min } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(min(2, 3), 2)
+ * assert.deepStrictEqual(Number.min(2, 3), 2)
  * ```
  *
  * @category math
@@ -366,9 +366,9 @@ export const min: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { max } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(max(2, 3), 3)
+ * assert.deepStrictEqual(Number.max(2, 3), 3)
  * ```
  *
  * @category math
@@ -385,11 +385,11 @@ export const max: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { sign } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(sign(-5), -1)
- * assert.deepStrictEqual(sign(0), 0)
- * assert.deepStrictEqual(sign(5), 1)
+ * assert.deepStrictEqual(Number.sign(-5), -1)
+ * assert.deepStrictEqual(Number.sign(0), 0)
+ * assert.deepStrictEqual(Number.sign(5), 1)
  * ```
  *
  * @category math
@@ -403,9 +403,9 @@ export const sign = (n: number): Ordering => Order(n, 0)
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { sumAll } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(sumAll([2, 3, 4]), 9)
+ * assert.deepStrictEqual(Number.sumAll([2, 3, 4]), 9)
  * ```
  *
  * @category math
@@ -425,9 +425,9 @@ export const sumAll = (collection: Iterable<number>): number => {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { multiplyAll } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(multiplyAll([2, 3, 4]), 24)
+ * assert.deepStrictEqual(Number.multiplyAll([2, 3, 4]), 24)
  * ```
  *
  * @category math
@@ -452,11 +452,11 @@ export const multiplyAll = (collection: Iterable<number>): number => {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { remainder } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(remainder(2, 2), 0)
- * assert.deepStrictEqual(remainder(3, 2), 1)
- * assert.deepStrictEqual(remainder(-4, 2), -0)
+ * assert.deepStrictEqual(Number.remainder(2, 2), 0)
+ * assert.deepStrictEqual(Number.remainder(3, 2), 1)
+ * assert.deepStrictEqual(Number.remainder(-4, 2), -0)
  * ```
  *
  * @category math
@@ -481,10 +481,10 @@ export const remainder: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { nextPow2 } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(nextPow2(5), 8)
- * assert.deepStrictEqual(nextPow2(17), 32)
+ * assert.deepStrictEqual(Number.nextPow2(5), 8)
+ * assert.deepStrictEqual(Number.nextPow2(17), 32)
  * ```
  *
  * @category math
@@ -502,7 +502,7 @@ export const nextPow2 = (n: number): number => {
  * **Example**
  *
  * ```ts
- * import { Number } from "effect"
+ * import { Number } from "effect/data"
  *
  * Number.parse("42") // 42
  * Number.parse("3.14") // 3.14
@@ -540,10 +540,10 @@ export const parse = (s: string): number | undefined => {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { round } from "effect/Number"
+ * import { Number } from "effect/data"
  *
- * assert.deepStrictEqual(round(1.1234, 2), 1.12)
- * assert.deepStrictEqual(round(1.567, 2), 1.57)
+ * assert.deepStrictEqual(Number.round(1.1234, 2), 1.12)
+ * assert.deepStrictEqual(Number.round(1.567, 2), 1.57)
  * ```
  *
  * @category math

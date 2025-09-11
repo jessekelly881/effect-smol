@@ -24,7 +24,7 @@ import * as Layer from "../Layer.ts"
  *
  * ```ts
  * import * as assert from "node:assert"
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  * import { Effect, pipe } from "effect"
  * import { Option } from "effect/data"
  * import { Fiber } from "effect"
@@ -347,8 +347,7 @@ export const make = Effect.fnUntraced(function*(
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Layer } from "effect"
+ * import { Effect, Layer } from "effect"
  * import { TestClock } from "effect/testing"
  *
  * // Create a TestClock layer
@@ -440,7 +439,7 @@ export const adjust = (duration: Duration.DurationInput): Effect.Effect<void> =>
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  * import { Effect } from "effect"
  * import { TestClock } from "effect/testing"
  *
@@ -474,8 +473,8 @@ export const setTime = (timestamp: number): Effect.Effect<void> =>
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Clock } from "effect"
+ * import { Clock, Effect } from "effect"
+
  * import { TestClock } from "effect/testing"
  *
  * const program = Effect.gen(function*() {

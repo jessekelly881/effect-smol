@@ -131,11 +131,9 @@ export interface ManagedRuntime<in R, out ER> {
  * @category runtime class
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Layer } from "effect"
+ * import { Effect, Layer, ManagedRuntime, ServiceMap } from "effect"
  * import { Console } from "effect/logging"
- * import { ServiceMap } from "effect"
- * import { ManagedRuntime } from "effect"
+
  *
  * class Notifications extends ServiceMap.Key<
  *   Notifications,

@@ -4376,10 +4376,10 @@ export const isSuccess: <A, E, R>(self: Effect<A, E, R>) => Effect<boolean, neve
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
+ * import { Effect, ServiceMap } from "effect"
  * import * as Option from "effect/data/Option"
  * import { Console } from "effect/logging"
- * import { ServiceMap } from "effect"
+
  *
  * const Logger = ServiceMap.Key<{ log: (msg: string) => void }>("Logger")
  * const Database = ServiceMap.Key<{ query: (sql: string) => string }>("Database")
@@ -4457,9 +4457,8 @@ export const servicesWith: <R, A, E, R2>(
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { ServiceMap } from "effect"
- * import { Layer } from "effect"
+ * import { Effect, Layer, ServiceMap } from "effect"
+
  *
  * interface Database {
  *   readonly query: (sql: string) => Effect.Effect<string>
@@ -4635,8 +4634,8 @@ export const serviceOption: <I, S>(key: ServiceMap.Key<I, S>) => Effect<Option<S
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { ServiceMap } from "effect"
+ * import { Effect, ServiceMap } from "effect"
+
  *
  * // Define services
  * const Logger = ServiceMap.Key<{ log: (msg: string) => void }>("Logger")
@@ -4677,9 +4676,9 @@ export const updateServices: {
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
+ * import { Effect, ServiceMap } from "effect"
  * import { Console } from "effect/logging"
- * import { ServiceMap } from "effect"
+
  *
  * // Define a counter service
  * const Counter = ServiceMap.Key<{ count: number }>("Counter")
@@ -4721,9 +4720,9 @@ export const updateService: {
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
+ * import { Effect, ServiceMap } from "effect"
  * import { Console } from "effect/logging"
- * import { ServiceMap } from "effect"
+
  *
  * // Define a service for configuration
  * const Config = ServiceMap.Key<{ apiUrl: string; timeout: number }>("Config")
@@ -4774,9 +4773,9 @@ export const provideService: {
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
+ * import { Effect, ServiceMap } from "effect"
  * import { Console } from "effect/logging"
- * import { ServiceMap } from "effect"
+
  *
  * // Define a database connection service
  * interface DatabaseConnection {
@@ -5637,8 +5636,8 @@ export const onInterrupt: {
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Fiber } from "effect"
+ * import { Effect, Fiber } from "effect"
+
  * import { Console } from "effect/logging"
  *
  * const criticalTask = Effect.gen(function* () {
@@ -6019,8 +6018,8 @@ export declare namespace Repeat {
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Fiber } from "effect"
+ * import { Effect, Fiber } from "effect"
+
  * import { Console } from "effect/logging"
  *
  * const task = Effect.gen(function* () {
@@ -6073,8 +6072,8 @@ export const forever: <Arg extends Effect<any, any, any> | { readonly autoYield?
  * @example
  * ```ts
  * // Success Example
- * import { Effect } from "effect"
- * import { Schedule } from "effect"
+ * import { Effect, Schedule } from "effect"
+
  * import { Console } from "effect/logging"
  *
  * const action = Console.log("success")
@@ -6148,8 +6147,8 @@ export const repeat: {
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Schedule } from "effect"
+ * import { Effect, Schedule } from "effect"
+
  * import * as Option from "effect/data/Option"
  * import { Console } from "effect/logging"
  *
@@ -6322,8 +6321,8 @@ export const schedule = dual<
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Schedule } from "effect"
+ * import { Effect, Schedule } from "effect"
+
  * import { Console } from "effect/logging"
  *
  * const task = (input: number) =>
@@ -7221,8 +7220,8 @@ export const runPromise: <A, E>(
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { ServiceMap } from "effect"
+ * import { Effect, ServiceMap } from "effect"
+
  *
  * interface Config {
  *   apiUrl: string
@@ -7306,8 +7305,8 @@ export const runPromiseExit: <A, E>(
  *
  * @example
  * ```ts
- * import { Effect, Exit } from "effect"
- * import { ServiceMap } from "effect"
+ * import { Effect, Exit, ServiceMap } from "effect"
+
  *
  * interface Database {
  *   query: (sql: string) => string
@@ -7507,8 +7506,8 @@ export const runSyncExit: <A, E>(effect: Effect<A, E>) => Exit.Exit<A, E> = inte
  *
  * @example
  * ```ts
- * import { Effect, Exit } from "effect"
- * import { ServiceMap } from "effect"
+ * import { Effect, Exit, ServiceMap } from "effect"
+
  *
  * // Define a logger service
  * const Logger = ServiceMap.Key<{ log: (msg: string) => void }>("Logger")

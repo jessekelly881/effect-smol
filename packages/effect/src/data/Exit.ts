@@ -25,7 +25,7 @@ const TypeId = core.ExitTypeId
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * // A successful exit
  * const success: Exit.Exit<number> = Exit.succeed(42)
@@ -62,7 +62,7 @@ export declare namespace Exit {
 /**
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const success = Exit.succeed(42)
  *
@@ -83,7 +83,7 @@ export interface Success<out A, out E = never> extends Exit.Proto<A, E> {
 /**
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const failure = Exit.fail("something went wrong")
  *
@@ -106,7 +106,7 @@ export interface Failure<out A, out E> extends Exit.Proto<A, E> {
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const success = Exit.succeed(42)
  * const failure = Exit.fail("error")
@@ -126,7 +126,7 @@ export const isExit: (u: unknown) => u is Exit<unknown, unknown> = core.isExit
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const exit = Exit.succeed(42)
  * console.log(exit._tag) // "Success"
@@ -143,7 +143,8 @@ export const succeed: <A>(a: A) => Exit<A> = core.exitSucceed
  *
  * @example
  * ```ts
- * import { Exit, Cause } from "effect"
+ * import { Cause, Exit } from "effect/data"
+
  *
  * const cause = Cause.fail("Something went wrong")
  * const exit = Exit.failCause(cause)
@@ -160,7 +161,7 @@ export const failCause: <E>(cause: Cause.Cause<E>) => Exit<never, E> = core.exit
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const exit = Exit.fail("Something went wrong")
  * console.log(exit._tag) // "Failure"
@@ -176,7 +177,7 @@ export const fail: <E>(e: E) => Exit<never, E> = core.exitFail
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const exit = Exit.die(new Error("Unexpected error"))
  * console.log(exit._tag) // "Failure"
@@ -192,7 +193,7 @@ export const die: (defect: unknown) => Exit<never> = core.exitDie
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const exit = Exit.interrupt(123)
  * console.log(exit._tag) // "Failure"
@@ -210,7 +211,7 @@ export {
    *
    * @example
    * ```ts
-   * import { Exit } from "effect"
+   * import { Exit } from "effect/data"
    *
    * const exit = Exit.void
    * console.log(exit._tag) // "Success"
@@ -228,7 +229,7 @@ export {
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const success = Exit.succeed(42)
  * const failure = Exit.fail("error")
@@ -247,7 +248,7 @@ export const isSuccess: <A, E>(self: Exit<A, E>) => self is Success<A, E> = effe
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const success = Exit.succeed(42)
  * const failure = Exit.fail("error")
@@ -266,7 +267,7 @@ export const isFailure: <A, E>(self: Exit<A, E>) => self is Failure<A, E> = effe
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const failure = Exit.fail("error")
  * const defect = Exit.die(new Error("defect"))
@@ -285,7 +286,7 @@ export const hasFail: <A, E>(self: Exit<A, E>) => self is Failure<A, E> = effect
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const failure = Exit.fail("error")
  * const defect = Exit.die(new Error("defect"))
@@ -304,7 +305,7 @@ export const hasDie: <A, E>(self: Exit<A, E>) => self is Failure<A, E> = effect.
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const failure = Exit.fail("error")
  * const interruption = Exit.interrupt(123)
@@ -362,7 +363,7 @@ export const filterDefect: <A, E>(input: Exit<A, E>) => {} | Filter.fail<Exit<A,
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const success = Exit.succeed(42)
  * const failure = Exit.fail("error")
@@ -402,7 +403,7 @@ export const match: {
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const success = Exit.succeed(42)
  * const failure = Exit.fail("error")
@@ -427,7 +428,7 @@ export const map: {
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const success = Exit.succeed(42)
  * const failure = Exit.fail("error")
@@ -452,7 +453,7 @@ export const mapError: {
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const success = Exit.succeed(42)
  * const failure = Exit.fail("error")
@@ -488,7 +489,7 @@ export const mapBoth: {
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const success = Exit.succeed(42)
  * const failure = Exit.fail("error")
@@ -511,7 +512,7 @@ export const asVoid: <A, E>(self: Exit<A, E>) => Exit<void, E> = effect.exitAsVo
  *
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  *
  * const exits1 = [Exit.succeed(1), Exit.succeed(2), Exit.succeed(3)]
  * const result1 = Exit.asVoidAll(exits1)

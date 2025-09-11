@@ -49,8 +49,7 @@ import * as ServiceMap from "../ServiceMap.ts"
 import * as Pull from "../stream/Pull.ts"
 import * as Sink from "../stream/Sink.ts"
 import * as Stream from "../stream/Stream.ts"
-import type { PlatformError } from "./PlatformError.ts"
-import { BadArgument, SystemError } from "./PlatformError.ts"
+import { BadArgument, type PlatformError, SystemError } from "./PlatformError.ts"
 
 const TypeId = "~effect/platform/FileSystem"
 
@@ -963,8 +962,7 @@ export const makeNoop = (fileSystem: Partial<FileSystem>): FileSystem =>
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Layer } from "effect"
+ * import { Effect, Layer } from "effect"
  * import { FileSystem } from "effect/platform"
  *
  * // Create a test layer with specific behaviors

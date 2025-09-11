@@ -1,8 +1,7 @@
 /**
  * @since 1.0.0
  */
-import type { RedisOptions as BunRedisOptions } from "bun"
-import { RedisClient } from "bun"
+import { RedisClient, type RedisOptions as BunRedisOptions } from "bun"
 import type { NonEmptyArray } from "effect/collections/Array"
 import * as Config from "effect/Config"
 import { Duration } from "effect/data"

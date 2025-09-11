@@ -1,8 +1,7 @@
 /**
  * @since 1.0.0
  */
-import type { Cause } from "effect/data"
-import { Exit } from "effect/data"
+import { type Cause, Exit } from "effect/data"
 import { pipe } from "effect/data/Function"
 import * as Effect from "effect/Effect"
 import * as FiberSet from "effect/FiberSet"

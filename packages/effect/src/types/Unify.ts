@@ -171,7 +171,7 @@ type FilterOut<A> = A extends any ? typeSymbol extends keyof A ? never : A : nev
  *
  * @example
  * ```ts
- * import * as Unify from "effect/types/Unify"
+ * import { Unify } from "effect/types"
  *
  * // Example of types that can be unified
  * type UnifiableA = {

@@ -22,9 +22,8 @@ const TypeId = "~effect/FiberHandle"
  * @category models
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { FiberHandle } from "effect"
- * import { Fiber } from "effect"
+ * import { Effect, Fiber, FiberHandle } from "effect"
+
  *
  * Effect.gen(function*() {
  *   // Create a FiberHandle that can hold fibers producing strings
@@ -53,8 +52,8 @@ export interface FiberHandle<out A = unknown, out E = unknown> extends Pipeable,
  * @category refinements
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { FiberHandle } from "effect"
+ * import { Effect, FiberHandle } from "effect"
+
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -93,8 +92,8 @@ const makeUnsafe = <A = unknown, E = unknown>(): FiberHandle<A, E> => {
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { FiberHandle } from "effect"
+ * import { Effect, FiberHandle } from "effect"
+
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -136,9 +135,8 @@ export const make = <A = unknown, E = unknown>(): Effect.Effect<FiberHandle<A, E
  * @category constructors
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { FiberHandle } from "effect"
- * import { Fiber } from "effect"
+ * import { Effect, Fiber, FiberHandle } from "effect"
+
  *
  * Effect.gen(function*() {
  *   const run = yield* FiberHandle.makeRuntime<never>()
@@ -180,8 +178,8 @@ export const makeRuntime = <R, E = unknown, A = unknown>(): Effect.Effect<
  * @category constructors
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { FiberHandle } from "effect"
+ * import { Effect, FiberHandle } from "effect"
+
  *
  * Effect.gen(function*() {
  *   const run = yield* FiberHandle.makeRuntimePromise()
@@ -225,9 +223,8 @@ const isInternalInterruption = Filter.toPredicate(Filter.compose(
  * @category combinators
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { FiberHandle } from "effect"
- * import { Fiber } from "effect"
+ * import { Effect, Fiber, FiberHandle } from "effect"
+
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -306,9 +303,8 @@ export const setUnsafe: {
  * @category combinators
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { FiberHandle } from "effect"
- * import { Fiber } from "effect"
+ * import { Effect, Fiber, FiberHandle } from "effect"
+
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -361,8 +357,8 @@ export const set: {
  * @category combinators
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { FiberHandle } from "effect"
+ * import { Effect, FiberHandle } from "effect"
+
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -389,9 +385,8 @@ export function getUnsafe<A, E>(self: FiberHandle<A, E>): Fiber.Fiber<A, E> | un
  * @category combinators
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { FiberHandle } from "effect"
- * import { Fiber } from "effect"
+ * import { Effect, Fiber, FiberHandle } from "effect"
+
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -417,8 +412,8 @@ export function get<A, E>(self: FiberHandle<A, E>): Effect.Effect<Fiber.Fiber<A,
  * @category combinators
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { FiberHandle } from "effect"
+ * import { Effect, FiberHandle } from "effect"
+
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -468,9 +463,8 @@ const constInterruptedFiber = (function() {
  * @category combinators
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { FiberHandle } from "effect"
- * import { Fiber } from "effect"
+ * import { Effect, Fiber, FiberHandle } from "effect"
+
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -541,9 +535,8 @@ const runImpl = <A, E, R, XE extends E, XA extends A>(
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { ServiceMap } from "effect"
- * import { FiberHandle } from "effect"
+ * import { Effect, FiberHandle, ServiceMap } from "effect"
+
  *
  * interface Users {
  *   readonly _: unique symbol
@@ -623,8 +616,8 @@ export const runtime: <A, E>(
  * @category combinators
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { FiberHandle } from "effect"
+ * import { Effect, FiberHandle } from "effect"
+
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()
@@ -686,7 +679,7 @@ export const runtimePromise = <A, E>(self: FiberHandle<A, E>): <R = never>() => 
  * @category combinators
  * @example
  * ```ts
- * import { Effect } from "effect"
+
  * import { FiberHandle } from "effect";
  *
  * Effect.gen(function* () {
@@ -708,8 +701,8 @@ export const join = <A, E>(self: FiberHandle<A, E>): Effect.Effect<void, E> =>
  * @category combinators
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { FiberHandle } from "effect"
+ * import { Effect, FiberHandle } from "effect"
+
  *
  * Effect.gen(function*() {
  *   const handle = yield* FiberHandle.make()

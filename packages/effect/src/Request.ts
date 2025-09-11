@@ -147,7 +147,8 @@ export type Services<T extends Request<any, any, any>> = [T] extends [Request<in
  *
  * @example
  * ```ts
- * import { Exit, Request } from "effect"
+ * import { Request } from "effect"
+ * import { Exit } from "effect/data"
  *
  * interface GetUser extends Request.Request<string, Error> {
  *   readonly _tag: "GetUser"

@@ -7,10 +7,8 @@ import * as Option from "../data/Option.ts"
 import { hasProperty } from "../data/Predicate.ts"
 import * as Equal_ from "../interfaces/Equal.ts"
 import * as Hash from "../interfaces/Hash.ts"
-import type { Inspectable } from "../interfaces/Inspectable.ts"
-import { format, NodeInspectSymbol, toJson } from "../interfaces/Inspectable.ts"
-import type { Pipeable } from "../interfaces/Pipeable.ts"
-import { pipeArguments } from "../interfaces/Pipeable.ts"
+import { format, type Inspectable, NodeInspectSymbol, toJson } from "../interfaces/Inspectable.ts"
+import { type Pipeable, pipeArguments } from "../interfaces/Pipeable.ts"
 import type { NoInfer } from "../types/Types.ts"
 
 /** @internal */

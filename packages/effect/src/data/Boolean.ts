@@ -6,8 +6,7 @@
  * @since 2.0.0
  */
 import * as equivalence from "./Equivalence.ts"
-import type { LazyArg } from "./Function.ts"
-import { dual } from "./Function.ts"
+import { dual, type LazyArg } from "./Function.ts"
 import * as order from "./Order.ts"
 import * as predicate from "./Predicate.ts"
 import * as Reducer from "./Reducer.ts"
@@ -17,7 +16,7 @@ import * as Reducer from "./Reducer.ts"
  *
  * @example
  * ```ts
- * import * as Boolean from "effect/Boolean"
+ * import { Boolean } from "effect/data"
  *
  * const bool = Boolean.Boolean(1)
  * console.log(bool) // true
@@ -40,10 +39,10 @@ export const Boolean = globalThis.Boolean
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { isBoolean } from "effect/Boolean"
+ * import { Boolean } from "effect/data"
  *
- * assert.deepStrictEqual(isBoolean(true), true)
- * assert.deepStrictEqual(isBoolean("true"), false)
+ * assert.deepStrictEqual(Boolean.isBoolean(true), true)
+ * assert.deepStrictEqual(Boolean.isBoolean("true"), false)
  * ```
  *
  * @category guards
@@ -58,7 +57,7 @@ export const isBoolean: (input: unknown) => input is boolean = predicate.isBoole
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import * as Boolean from "effect/Boolean"
+ * import { Boolean } from "effect/data"
  *
  * assert.deepStrictEqual(Boolean.match(true, { onFalse: () => "It's false!", onTrue: () => "It's true!" }), "It's true!")
  * ```
@@ -85,7 +84,7 @@ export const match: {
  *
  * @example
  * ```ts
- * import * as Boolean from "effect/Boolean"
+ * import { Boolean } from "effect/data"
  *
  * console.log(Boolean.Equivalence(true, true)) // true
  * console.log(Boolean.Equivalence(false, false)) // true
@@ -103,7 +102,7 @@ export const Equivalence: equivalence.Equivalence<boolean> = equivalence.boolean
  *
  * @example
  * ```ts
- * import * as Boolean from "effect/Boolean"
+ * import { Boolean } from "effect/data"
  *
  * console.log(Boolean.Order(false, true)) // -1 (false < true)
  * console.log(Boolean.Order(true, false)) // 1 (true > false)
@@ -121,10 +120,10 @@ export const Order: order.Order<boolean> = order.boolean
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { not } from "effect/Boolean"
+ * import { Boolean } from "effect/data"
  *
- * assert.deepStrictEqual(not(true), false)
- * assert.deepStrictEqual(not(false), true)
+ * assert.deepStrictEqual(Boolean.not(true), false)
+ * assert.deepStrictEqual(Boolean.not(false), true)
  * ```
  *
  * @category combinators
@@ -138,12 +137,12 @@ export const not = (self: boolean): boolean => !self
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { and } from "effect/Boolean"
+ * import { Boolean } from "effect/data"
  *
- * assert.deepStrictEqual(and(true, true), true)
- * assert.deepStrictEqual(and(true, false), false)
- * assert.deepStrictEqual(and(false, true), false)
- * assert.deepStrictEqual(and(false, false), false)
+ * assert.deepStrictEqual(Boolean.and(true, true), true)
+ * assert.deepStrictEqual(Boolean.and(true, false), false)
+ * assert.deepStrictEqual(Boolean.and(false, true), false)
+ * assert.deepStrictEqual(Boolean.and(false, false), false)
  * ```
  *
  * @category combinators
@@ -160,12 +159,12 @@ export const and: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { nand } from "effect/Boolean"
+ * import { Boolean } from "effect/data"
  *
- * assert.deepStrictEqual(nand(true, true), false)
- * assert.deepStrictEqual(nand(true, false), true)
- * assert.deepStrictEqual(nand(false, true), true)
- * assert.deepStrictEqual(nand(false, false), true)
+ * assert.deepStrictEqual(Boolean.nand(true, true), false)
+ * assert.deepStrictEqual(Boolean.nand(true, false), true)
+ * assert.deepStrictEqual(Boolean.nand(false, true), true)
+ * assert.deepStrictEqual(Boolean.nand(false, false), true)
  * ```
  *
  * @category combinators
@@ -182,12 +181,12 @@ export const nand: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { or } from "effect/Boolean"
+ * import { Boolean } from "effect/data"
  *
- * assert.deepStrictEqual(or(true, true), true)
- * assert.deepStrictEqual(or(true, false), true)
- * assert.deepStrictEqual(or(false, true), true)
- * assert.deepStrictEqual(or(false, false), false)
+ * assert.deepStrictEqual(Boolean.or(true, true), true)
+ * assert.deepStrictEqual(Boolean.or(true, false), true)
+ * assert.deepStrictEqual(Boolean.or(false, true), true)
+ * assert.deepStrictEqual(Boolean.or(false, false), false)
  * ```
  *
  * @category combinators
@@ -204,12 +203,12 @@ export const or: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { nor } from "effect/Boolean"
+ * import { Boolean } from "effect/data"
  *
- * assert.deepStrictEqual(nor(true, true), false)
- * assert.deepStrictEqual(nor(true, false), false)
- * assert.deepStrictEqual(nor(false, true), false)
- * assert.deepStrictEqual(nor(false, false), true)
+ * assert.deepStrictEqual(Boolean.nor(true, true), false)
+ * assert.deepStrictEqual(Boolean.nor(true, false), false)
+ * assert.deepStrictEqual(Boolean.nor(false, true), false)
+ * assert.deepStrictEqual(Boolean.nor(false, false), true)
  * ```
  *
  * @category combinators
@@ -226,12 +225,12 @@ export const nor: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { xor } from "effect/Boolean"
+ * import { Boolean } from "effect/data"
  *
- * assert.deepStrictEqual(xor(true, true), false)
- * assert.deepStrictEqual(xor(true, false), true)
- * assert.deepStrictEqual(xor(false, true), true)
- * assert.deepStrictEqual(xor(false, false), false)
+ * assert.deepStrictEqual(Boolean.xor(true, true), false)
+ * assert.deepStrictEqual(Boolean.xor(true, false), true)
+ * assert.deepStrictEqual(Boolean.xor(false, true), true)
+ * assert.deepStrictEqual(Boolean.xor(false, false), false)
  * ```
  *
  * @category combinators
@@ -248,12 +247,12 @@ export const xor: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { eqv } from "effect/Boolean"
+ * import { Boolean } from "effect/data"
  *
- * assert.deepStrictEqual(eqv(true, true), true)
- * assert.deepStrictEqual(eqv(true, false), false)
- * assert.deepStrictEqual(eqv(false, true), false)
- * assert.deepStrictEqual(eqv(false, false), true)
+ * assert.deepStrictEqual(Boolean.eqv(true, true), true)
+ * assert.deepStrictEqual(Boolean.eqv(true, false), false)
+ * assert.deepStrictEqual(Boolean.eqv(false, true), false)
+ * assert.deepStrictEqual(Boolean.eqv(false, false), true)
  * ```
  *
  * @category combinators
@@ -270,12 +269,12 @@ export const eqv: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { implies } from "effect/Boolean"
+ * import { Boolean } from "effect/data"
  *
- * assert.deepStrictEqual(implies(true, true), true)
- * assert.deepStrictEqual(implies(true, false), false)
- * assert.deepStrictEqual(implies(false, true), true)
- * assert.deepStrictEqual(implies(false, false), true)
+ * assert.deepStrictEqual(Boolean.implies(true, true), true)
+ * assert.deepStrictEqual(Boolean.implies(true, false), false)
+ * assert.deepStrictEqual(Boolean.implies(false, true), true)
+ * assert.deepStrictEqual(Boolean.implies(false, false), true)
  * ```
  *
  * @category combinators
@@ -292,10 +291,10 @@ export const implies: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { every } from "effect/Boolean"
+ * import { Boolean } from "effect/data"
  *
- * assert.deepStrictEqual(every([true, true, true]), true)
- * assert.deepStrictEqual(every([true, false, true]), false)
+ * assert.deepStrictEqual(Boolean.every([true, true, true]), true)
+ * assert.deepStrictEqual(Boolean.every([true, false, true]), false)
  * ```
  *
  * @category utilities
@@ -316,10 +315,10 @@ export const every = (collection: Iterable<boolean>): boolean => {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { some } from "effect/Boolean"
+ * import { Boolean } from "effect/data"
  *
- * assert.deepStrictEqual(some([true, false, true]), true)
- * assert.deepStrictEqual(some([false, false, false]), false)
+ * assert.deepStrictEqual(Boolean.some([true, false, true]), true)
+ * assert.deepStrictEqual(Boolean.some([false, false, false]), false)
  * ```
  *
  * @category utilities

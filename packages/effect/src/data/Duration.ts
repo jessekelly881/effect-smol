@@ -17,8 +17,7 @@ import * as Equal from "../interfaces/Equal.ts"
 import * as Hash from "../interfaces/Hash.ts"
 import type * as Inspectable from "../interfaces/Inspectable.ts"
 import { NodeInspectSymbol } from "../interfaces/Inspectable.ts"
-import type { Pipeable } from "../interfaces/Pipeable.ts"
-import { pipeArguments } from "../interfaces/Pipeable.ts"
+import { type Pipeable, pipeArguments } from "../interfaces/Pipeable.ts"
 import * as Combiner from "./Combiner.ts"
 import type * as equivalence from "./Equivalence.ts"
 import { dual, identity } from "./Function.ts"
@@ -105,7 +104,7 @@ const DURATION_REGEX = /^(-?\d+(?:\.\d+)?)\s+(nanos?|micros?|millis?|seconds?|mi
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const duration1 = Duration.fromDurationInputUnsafe(1000) // 1000 milliseconds
  * const duration2 = Duration.fromDurationInputUnsafe("5 seconds")
@@ -173,7 +172,7 @@ export const fromDurationInputUnsafe = (input: DurationInput): Duration => {
  * **Example**
  *
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * Duration.fromDurationInput(1000)?.pipe(Duration.toSeconds) // 1
  *
@@ -251,7 +250,7 @@ const make = (input: number | bigint): Duration => {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * console.log(Duration.isDuration(Duration.seconds(1))) // true
  * console.log(Duration.isDuration(1000)) // false
@@ -267,7 +266,7 @@ export const isDuration = (u: unknown): u is Duration => hasProperty(u, TypeId)
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * console.log(Duration.isFinite(Duration.seconds(5))) // true
  * console.log(Duration.isFinite(Duration.infinity)) // false
@@ -283,7 +282,7 @@ export const isFinite = (self: Duration): boolean => self.value._tag !== "Infini
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * console.log(Duration.isZero(Duration.zero)) // true
  * console.log(Duration.isZero(Duration.seconds(1))) // false
@@ -308,7 +307,7 @@ export const isZero = (self: Duration): boolean => {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * console.log(Duration.toMillis(Duration.zero)) // 0
  * ```
@@ -323,7 +322,7 @@ export const zero: Duration = make(0)
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * console.log(Duration.toMillis(Duration.infinity)) // Infinity
  * ```
@@ -338,7 +337,7 @@ export const infinity: Duration = make(Infinity)
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const duration = Duration.nanos(BigInt(500_000_000))
  * console.log(Duration.toMillis(duration)) // 500
@@ -354,7 +353,7 @@ export const nanos = (nanos: bigint): Duration => make(nanos)
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const duration = Duration.micros(BigInt(500_000))
  * console.log(Duration.toMillis(duration)) // 500
@@ -370,7 +369,7 @@ export const micros = (micros: bigint): Duration => make(micros * bigint1e3)
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const duration = Duration.millis(1000)
  * console.log(Duration.toMillis(duration)) // 1000
@@ -386,7 +385,7 @@ export const millis = (millis: number): Duration => make(millis)
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const duration = Duration.seconds(30)
  * console.log(Duration.toMillis(duration)) // 30000
@@ -402,7 +401,7 @@ export const seconds = (seconds: number): Duration => make(seconds * 1000)
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const duration = Duration.minutes(5)
  * console.log(Duration.toMillis(duration)) // 300000
@@ -418,7 +417,7 @@ export const minutes = (minutes: number): Duration => make(minutes * 60_000)
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const duration = Duration.hours(2)
  * console.log(Duration.toMillis(duration)) // 7200000
@@ -434,7 +433,7 @@ export const hours = (hours: number): Duration => make(hours * 3_600_000)
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const duration = Duration.days(1)
  * console.log(Duration.toMillis(duration)) // 86400000
@@ -450,7 +449,7 @@ export const days = (days: number): Duration => make(days * 86_400_000)
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const duration = Duration.weeks(1)
  * console.log(Duration.toMillis(duration)) // 604800000
@@ -466,7 +465,7 @@ export const weeks = (weeks: number): Duration => make(weeks * 604_800_000)
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * console.log(Duration.toMillis(Duration.seconds(5))) // 5000
  * console.log(Duration.toMillis(Duration.minutes(2))) // 120000
@@ -487,7 +486,7 @@ export const toMillis = (self: Duration): number =>
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * console.log(Duration.toSeconds(Duration.millis(5000))) // 5
  * console.log(Duration.toSeconds(Duration.minutes(2))) // 120
@@ -508,7 +507,7 @@ export const toSeconds = (self: Duration): number =>
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * console.log(Duration.toMinutes(Duration.seconds(120))) // 2
  * console.log(Duration.toMinutes(Duration.hours(1))) // 60
@@ -529,7 +528,7 @@ export const toMinutes = (self: Duration): number =>
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * console.log(Duration.toHours(Duration.minutes(120))) // 2
  * console.log(Duration.toHours(Duration.days(1))) // 24
@@ -550,7 +549,7 @@ export const toHours = (self: Duration): number =>
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * console.log(Duration.toDays(Duration.hours(48))) // 2
  * console.log(Duration.toDays(Duration.weeks(1))) // 7
@@ -571,7 +570,7 @@ export const toDays = (self: Duration): number =>
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * console.log(Duration.toWeeks(Duration.days(14))) // 2
  * console.log(Duration.toWeeks(Duration.days(7))) // 1
@@ -594,7 +593,7 @@ export const toWeeks = (self: Duration): number =>
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const duration = Duration.seconds(2)
  * const nanos = Duration.toNanosUnsafe(duration)
@@ -630,7 +629,7 @@ export const toNanosUnsafe = (self: Duration): bigint => {
  * **Example**
  *
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * Duration.toNanos(Duration.seconds(1)) // 1000000000n
  *
@@ -647,7 +646,7 @@ export const toNanos: (self: Duration) => bigint | undefined = UndefinedOr.liftT
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const duration = Duration.millis(1500)
  * const hrtime = Duration.toHrTime(duration)
@@ -679,7 +678,7 @@ export const toHrTime = (self: Duration): [seconds: number, nanos: number] => {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const result = Duration.match(Duration.seconds(5), {
  *   onMillis: (millis) => `${millis} milliseconds`,
@@ -731,7 +730,7 @@ export const match: {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const sum = Duration.matchPair(Duration.seconds(3), Duration.seconds(2), {
  *   onMillis: (a, b) => a + b,
@@ -788,7 +787,7 @@ export const matchPair: {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const durations = [Duration.seconds(3), Duration.seconds(1), Duration.seconds(2)]
  * const sorted = durations.sort((a, b) => Duration.Order(a, b))
@@ -819,7 +818,7 @@ export const Order: order.Order<Duration> = order.make((self, that) =>
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const isInRange = Duration.between(Duration.seconds(3), {
  *   minimum: Duration.seconds(2),
@@ -843,7 +842,7 @@ export const between: {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const isEqual = Duration.Equivalence(Duration.seconds(5), Duration.millis(5000))
  * console.log(isEqual) // true
@@ -864,7 +863,7 @@ export const Equivalence: equivalence.Equivalence<Duration> = (self, that) =>
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const shorter = Duration.min(Duration.seconds(5), Duration.seconds(3))
  * console.log(Duration.toSeconds(shorter)) // 3
@@ -883,7 +882,7 @@ export const min: {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const longer = Duration.max(Duration.seconds(5), Duration.seconds(3))
  * console.log(Duration.toSeconds(longer)) // 5
@@ -902,7 +901,7 @@ export const max: {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const clamped = Duration.clamp(Duration.seconds(10), {
  *   minimum: Duration.seconds(2),
@@ -925,7 +924,7 @@ export const clamp: {
  * **Example**
  *
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const d = Duration.divide(Duration.seconds(10), 2)
  * console.log(d?.pipe(Duration.toSeconds)) // 5
@@ -966,7 +965,7 @@ export const divide: {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const half = Duration.divideUnsafe(Duration.seconds(10), 2)
  * console.log(Duration.toSeconds(half)) // 5
@@ -1002,7 +1001,7 @@ export const divideUnsafe: {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const doubled = Duration.times(Duration.seconds(5), 2)
  * console.log(Duration.toSeconds(doubled)) // 10
@@ -1036,7 +1035,7 @@ export const times: {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const result = Duration.subtract(Duration.seconds(10), Duration.seconds(3))
  * console.log(Duration.toSeconds(result)) // 7
@@ -1075,7 +1074,7 @@ export const subtract: {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const total = Duration.sum(Duration.seconds(5), Duration.seconds(3))
  * console.log(Duration.toSeconds(total)) // 8
@@ -1102,7 +1101,7 @@ export const sum: {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const isLess = Duration.lessThan(Duration.seconds(3), Duration.seconds(5))
  * console.log(isLess) // true
@@ -1121,7 +1120,7 @@ export const lessThan: {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const isLessOrEqual = Duration.lessThanOrEqualTo(Duration.seconds(5), Duration.seconds(5))
  * console.log(isLessOrEqual) // true
@@ -1140,7 +1139,7 @@ export const lessThanOrEqualTo: {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const isGreater = Duration.greaterThan(Duration.seconds(5), Duration.seconds(3))
  * console.log(isGreater) // true
@@ -1159,7 +1158,7 @@ export const greaterThan: {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const isGreaterOrEqual = Duration.greaterThanOrEqualTo(Duration.seconds(5), Duration.seconds(5))
  * console.log(isGreaterOrEqual) // true
@@ -1178,7 +1177,7 @@ export const greaterThanOrEqualTo: {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const isEqual = Duration.equals(Duration.seconds(5), Duration.millis(5000))
  * console.log(isEqual) // true
@@ -1197,7 +1196,7 @@ export const equals: {
  *
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * // Create a complex duration by adding multiple parts
  * const duration = Duration.sum(
@@ -1277,7 +1276,7 @@ export const parts = (self: Duration): {
  * @category conversions
  * @example
  * ```ts
- * import { Duration } from "effect"
+ * import { Duration } from "effect/data"
  *
  * Duration.format(Duration.millis(1000)) // "1s"
  * Duration.format(Duration.millis(1001)) // "1s 1ms"

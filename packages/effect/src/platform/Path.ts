@@ -139,8 +139,7 @@ export declare namespace Path {
  * @category tag
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Layer } from "effect"
+ * import { Effect, Layer } from "effect"
  * import { Path } from "effect/platform"
  *
  * // Create a custom path implementation

@@ -75,7 +75,8 @@ export * as Brand from "./Brand.ts"
  *
  * @example
  * ```ts
- * import { Cause, Effect } from "effect"
+ * import { Cause } from "effect/data"
+ * import { Effect } from "effect"
  *
  * // Creating different types of causes
  * const failCause = Cause.fail("Something went wrong")

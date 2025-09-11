@@ -143,7 +143,8 @@ export const make = <A, E, R>(options: {
  *
  * ```ts skip-type-checking
  * import { createConnection } from "mysql2";
- * import { Duration, Effect, Pool } from "effect"
+ * import { Effect, Pool } from "effect"
+ * import { Duration } from "effect/data"
  *
  * const acquireDBConnection = Effect.acquireRelease(
  *   Effect.sync(() => createConnection('mysql://...')),

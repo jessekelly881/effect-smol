@@ -27,8 +27,15 @@ import * as Socket from "../socket/Socket.ts"
 import * as Rpc from "./Rpc.ts"
 import { RpcClientError } from "./RpcClientError.ts"
 import type * as RpcGroup from "./RpcGroup.ts"
-import type { FromClient, FromClientEncoded, FromServer, FromServerEncoded, Request } from "./RpcMessage.ts"
-import { constPing, RequestId } from "./RpcMessage.ts"
+import {
+  constPing,
+  type FromClient,
+  type FromClientEncoded,
+  type FromServer,
+  type FromServerEncoded,
+  type Request,
+  RequestId
+} from "./RpcMessage.ts"
 import type * as RpcMiddleware from "./RpcMiddleware.ts"
 import * as RpcSchema from "./RpcSchema.ts"
 import * as RpcSerialization from "./RpcSerialization.ts"

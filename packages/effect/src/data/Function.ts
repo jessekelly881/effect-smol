@@ -10,10 +10,10 @@ import type { TypeLambda } from "../types/HKT.ts"
  * @example
  * ```ts
  * import type { Kind } from "effect/types/HKT"
- * import type { FunctionTypeLambda } from "effect/Function"
+ * import type { Function } from "effect/data"
  *
  * // Create a function type using the type lambda
- * type StringToNumber = Kind<FunctionTypeLambda, string, never, never, number>
+ * type StringToNumber = Kind<Function.FunctionTypeLambda, string, never, never, number>
  * // Equivalent to: (a: string) => number
  * ```
  *
@@ -30,7 +30,7 @@ export interface FunctionTypeLambda extends TypeLambda {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import * as Predicate from "effect/data/Predicate"
+ * import { Predicate } from "effect/data"
  *
  * assert.deepStrictEqual(Predicate.isFunction(Predicate.isFunction), true)
  * assert.deepStrictEqual(Predicate.isFunction("function"), false)
@@ -60,7 +60,9 @@ export const isFunction = (input: unknown): input is Function => typeof input ==
  *
  * @example
  * ```ts
- * import { dual, pipe } from "effect/Function"
+ * import { Function } from "effect/data"
+ *
+ * const { dual, pipe } = Function
  *
  * // Using arity to determine data-first or data-last style
  * const sum = dual<
@@ -75,7 +77,9 @@ export const isFunction = (input: unknown): input is Function => typeof input ==
  * **Example** (Using arity to determine data-first or data-last style)
  *
  * ```ts
- * import { dual, pipe } from "effect/Function"
+ * import { Function } from "effect/data"
+ *
+ * const { dual, pipe } = Function
  *
  * const sum = dual<
  *   (that: number) => (self: number) => number,
@@ -89,7 +93,9 @@ export const isFunction = (input: unknown): input is Function => typeof input ==
  * **Example** (Using call signatures to define the overloads)
  *
  * ```ts
- * import { dual, pipe } from "effect/Function"
+ * import { Function } from "effect/data"
+ *
+ * const { dual, pipe } = Function
  *
  * const sum: {
  *   (that: number): (self: number) => number
@@ -103,7 +109,9 @@ export const isFunction = (input: unknown): input is Function => typeof input ==
  * **Example** (Using a predicate to determine data-first or data-last style)
  *
  * ```ts
- * import { dual, pipe } from "effect/Function"
+ * import { Function } from "effect/data"
+ *
+ * const { dual, pipe } = Function
  *
  * const sum = dual<
  *   (that: number) => (self: number) => number,
@@ -182,10 +190,9 @@ export const dual: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { pipe, apply } from "effect/Function"
- * import { length } from "effect/String"
+ * import { Function, String } from "effect/data"
  *
- * assert.deepStrictEqual(pipe(length, apply("hello")), 5)
+ * assert.deepStrictEqual(Function.pipe(String.length, Function.apply("hello")), 5)
  * ```
  *
  * @category combinators
@@ -199,9 +206,9 @@ export const apply = <A>(a: A) => <B>(self: (a: A) => B): B => self(a)
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { LazyArg, constant } from "effect/Function"
+ * import { Function } from "effect/data"
  *
- * const constNull: LazyArg<null> = constant(null)
+ * const constNull: Function.LazyArg<null> = Function.constant(null)
  * ```
  *
  * @category models
@@ -215,9 +222,9 @@ export type LazyArg<A> = () => A
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { FunctionN } from "effect/Function"
+ * import { Function } from "effect/data"
  *
- * const sum: FunctionN<[number, number], number> = (a, b) => a + b
+ * const sum: Function.FunctionN<[number, number], number> = (a, b) => a + b
  * assert.deepStrictEqual(sum(2, 3), 5)
  * ```
  *
@@ -232,9 +239,9 @@ export type FunctionN<A extends ReadonlyArray<unknown>, B> = (...args: A) => B
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { identity } from "effect/Function"
+ * import { Function } from "effect/data"
  *
- * assert.deepStrictEqual(identity(5), 5)
+ * assert.deepStrictEqual(Function.identity(5), 5)
  * ```
  *
  * @category combinators
@@ -249,15 +256,15 @@ export const identity = <A>(a: A): A => a
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { satisfies } from "effect/Function"
+ * import { Function } from "effect/data"
  *
- * const test1 = satisfies<number>()(5 as const)
+ * const test1 = Function.satisfies<number>()(5 as const)
  *     //^? const test: 5
  *     // @ts-expect-error
- * const test2 = satisfies<string>()(5)
+ * const test2 = Function.satisfies<string>()(5)
  *     //^? Argument of type 'number' is not assignable to parameter of type 'string'
  *
- * assert.deepStrictEqual(satisfies<number>()(5), 5)
+ * assert.deepStrictEqual(Function.satisfies<number>()(5), 5)
  * ```
  *
  * @category type utils
@@ -271,9 +278,9 @@ export const satisfies = <A>() => <B extends A>(b: B) => b
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { coerceUnsafe, identity } from "effect/Function"
+ * import { Function } from "effect/data"
  *
- * assert.deepStrictEqual(coerceUnsafe, identity)
+ * assert.deepStrictEqual(Function.coerceUnsafe, Function.identity)
  * ```
  *
  * @category type utils
@@ -290,9 +297,9 @@ export const coerceUnsafe: <A, B>(a: A) => B = identity as any
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { constant } from "effect/Function"
+ * import { Function } from "effect/data"
  *
- * const constNull = constant(null)
+ * const constNull = Function.constant(null)
  *
  * assert.deepStrictEqual(constNull(), null)
  * assert.deepStrictEqual(constNull(), null)
@@ -309,9 +316,9 @@ export const constant = <A>(value: A): LazyArg<A> => () => value
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { constTrue } from "effect/Function"
+ * import { Function } from "effect/data"
  *
- * assert.deepStrictEqual(constTrue(), true)
+ * assert.deepStrictEqual(Function.constTrue(), true)
  * ```
  *
  * @category constants
@@ -325,9 +332,9 @@ export const constTrue: LazyArg<boolean> = constant(true)
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { constFalse } from "effect/Function"
+ * import { Function } from "effect/data"
  *
- * assert.deepStrictEqual(constFalse(), false)
+ * assert.deepStrictEqual(Function.constFalse(), false)
  * ```
  *
  * @category constants
@@ -341,9 +348,9 @@ export const constFalse: LazyArg<boolean> = constant(false)
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { constNull } from "effect/Function"
+ * import { Function } from "effect/data"
  *
- * assert.deepStrictEqual(constNull(), null)
+ * assert.deepStrictEqual(Function.constNull(), null)
  * ```
  *
  * @category constants
@@ -357,9 +364,9 @@ export const constNull: LazyArg<null> = constant(null)
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { constUndefined } from "effect/Function"
+ * import { Function } from "effect/data"
  *
- * assert.deepStrictEqual(constUndefined(), undefined)
+ * assert.deepStrictEqual(Function.constUndefined(), undefined)
  * ```
  *
  * @category constants
@@ -373,9 +380,9 @@ export const constUndefined: LazyArg<undefined> = constant(undefined)
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { constVoid } from "effect/Function"
+ * import { Function } from "effect/data"
  *
- * assert.deepStrictEqual(constVoid(), undefined)
+ * assert.deepStrictEqual(Function.constVoid(), undefined)
  * ```
  *
  * @category constants
@@ -389,11 +396,11 @@ export const constVoid: LazyArg<void> = constUndefined
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { flip } from "effect/Function"
+ * import { Function } from "effect/data"
  *
  * const f = (a: number) => (b: string) => a - b.length
  *
- * assert.deepStrictEqual(flip(f)('aaa')(2), -1)
+ * assert.deepStrictEqual(Function.flip(f)('aaa')(2), -1)
  * ```
  *
  * @category combinators
@@ -412,12 +419,12 @@ export const flip = <A extends Array<unknown>, B extends Array<unknown>, C>(
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { compose } from "effect/Function"
+ * import { Function } from "effect/data"
  *
  * const increment = (n: number) => n + 1;
  * const square = (n: number) => n * n;
  *
- * assert.strictEqual(compose(increment, square)(2), 9);
+ * assert.strictEqual(Function.compose(increment, square)(2), 9);
  * ```
  *
  * @category combinators
@@ -436,10 +443,10 @@ export const compose: {
  *
  * @example
  * ```ts
- * import { absurd } from "effect/Function"
+ * import { Function } from "effect/data"
  *
  * const handleNever = (value: never) => {
- *   return absurd(value) // This will throw an error if called
+ *   return Function.absurd(value) // This will throw an error if called
  * }
  * ```
  *
@@ -456,9 +463,9 @@ export const absurd = <A>(_: never): A => {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { tupled } from "effect/Function"
+ * import { Function } from "effect/data"
  *
- * const sumTupled = tupled((x: number, y: number): number => x + y)
+ * const sumTupled = Function.tupled((x: number, y: number): number => x + y)
  *
  * assert.deepStrictEqual(sumTupled([1, 2]), 3)
  * ```
@@ -474,9 +481,9 @@ export const tupled = <A extends ReadonlyArray<unknown>, B>(f: (...a: A) => B): 
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { untupled } from "effect/Function"
+ * import { Function } from "effect/data"
  *
- * const getFirst = untupled(<A, B>(tuple: [A, B]): A => tuple[0])
+ * const getFirst = Function.untupled(<A, B>(tuple: [A, B]): A => tuple[0])
  *
  * assert.deepStrictEqual(getFirst(1, 2), 1)
  * ```
@@ -1031,12 +1038,12 @@ export function pipe(a: unknown, ...args: Array<any>): unknown {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { flow } from "effect/Function"
+ * import { Function } from "effect/data"
  *
  * const len = (s: string): number => s.length
  * const double = (n: number): number => n * 2
  *
- * const f = flow(len, double)
+ * const f = Function.flow(len, double)
  *
  * assert.strictEqual(f('aaa'), 6)
  * ```
@@ -1214,10 +1221,10 @@ export function flow(
  *
  * @example
  * ```ts
- * import { hole } from "effect/Function"
+ * import { Function } from "effect/data"
  *
  * // Use during development as a placeholder
- * const placeholder: string = hole<string>()
+ * const placeholder: string = Function.hole<string>()
  * ```
  *
  * @category utilities
@@ -1234,9 +1241,9 @@ export const hole: <T>() => T = coerceUnsafe(absurd)
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { SK } from "effect/Function";
+ * import { Function } from "effect/data"
  *
- * assert.deepStrictEqual(SK(0, "hello"), "hello")
+ * assert.deepStrictEqual(Function.SK(0, "hello"), "hello")
  * ```
  *
  * @category combinators

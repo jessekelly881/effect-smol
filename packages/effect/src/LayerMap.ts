@@ -17,10 +17,8 @@ const TypeId = "~effect/LayerMap"
  * @category Models
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Layer } from "effect"
- * import { ServiceMap } from "effect"
- * import { LayerMap } from "effect"
+ * import { Effect, Layer, LayerMap, ServiceMap } from "effect"
+
  *
  * // Define a service key
  * const DatabaseService = ServiceMap.Key<{
@@ -82,9 +80,8 @@ export interface LayerMap<in out K, in out I, in out E = never> {
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Layer, ServiceMap } from "effect"
- * import { LayerMap, Scope } from "effect"
+ * import { Effect, Layer, LayerMap, Scope, ServiceMap } from "effect"
+
  *
  * // Define a service key
  * const DatabaseService = ServiceMap.Key<{
@@ -161,9 +158,8 @@ export const make: <
  * @category Constructors
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { LayerMap } from "effect"
- * import { Layer, ServiceMap } from "effect"
+ * import { Effect, Layer, LayerMap, ServiceMap } from "effect"
+
  *
  * // Define service keys
  * const DevDatabase = ServiceMap.Key<{
@@ -275,11 +271,10 @@ export interface TagClass<
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Layer } from "effect"
- * import { ServiceMap } from "effect"
+ * import { Effect, Layer, LayerMap, ServiceMap } from "effect"
+
  * import { Console } from "effect/logging"
- * import { LayerMap } from "effect"
+
  *
  * // Define a service key
  * const Greeter = ServiceMap.Key<{

@@ -10,7 +10,8 @@
  *
  * @example
  * ```ts
- * import { Cause, Effect } from "effect"
+ * import { Cause } from "effect/data"
+ * import { Effect } from "effect"
  *
  * // Creating different types of causes
  * const failCause = Cause.fail("Something went wrong")
@@ -58,7 +59,7 @@ const FailureTypeId = core.CauseFailureTypeId
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const failCause: Cause.Cause<string> = Cause.fail("Something went wrong")
  * const dieCause: Cause.Cause<never> = Cause.die(new Error("Unexpected error"))
@@ -82,7 +83,7 @@ export interface Cause<out E> extends Pipeable, Inspectable, Equal {
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * console.log(Cause.isCause(Cause.fail("error"))) // true
  * console.log(Cause.isCause("not a cause")) // false
@@ -102,7 +103,7 @@ export const isFailure: (self: unknown) => self is Failure<unknown> = core.isCau
 /**
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const failCause = Cause.fail("error")
  * const failure: Cause.Failure<string> = failCause.failures[0]
@@ -122,7 +123,7 @@ export type Failure<E> = Fail<E> | Die | Interrupt
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const cause = Cause.fail("error")
  * const failure = cause.failures[0]
@@ -139,7 +140,7 @@ export const failureIsFail: <E>(self: Failure<E>) => self is Fail<E> = core.fail
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const cause = Cause.die("defect")
  * const failure = cause.failures[0]
@@ -156,7 +157,7 @@ export const failureIsDie: <E>(self: Failure<E>) => self is Die = core.failureIs
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const cause = Cause.interrupt(123)
  * const failure = cause.failures[0]
@@ -171,7 +172,7 @@ export const failureIsInterrupt: <E>(self: Failure<E>) => self is Interrupt = co
 /**
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * type StringCauseError = Cause.Cause.Error<Cause.Cause<string>>
  * // type StringCauseError = string
@@ -191,7 +192,7 @@ export declare namespace Cause {
   /**
    * @example
    * ```ts
-   * import { Cause } from "effect"
+   * import { Cause } from "effect/data"
    *
    * type ErrorType = Cause.Cause.Error<Cause.Cause<string>>
    * // type ErrorType = string
@@ -205,7 +206,7 @@ export declare namespace Cause {
   /**
    * @example
    * ```ts
-   * import { Cause } from "effect"
+   * import { Cause } from "effect/data"
    *
    * const cause = Cause.fail("error")
    * const failure = cause.failures[0]
@@ -231,7 +232,7 @@ export declare namespace Cause {
 /**
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * type StringFailureError = Cause.Failure.Error<Cause.Failure<string>>
  * // type StringFailureError = string
@@ -244,7 +245,7 @@ export declare namespace Failure {
   /**
    * @example
    * ```ts
-   * import { Cause } from "effect"
+   * import { Cause } from "effect/data"
    *
    * type ErrorType = Cause.Failure.Error<Cause.Failure<string>>
    * // type ErrorType = string
@@ -259,7 +260,7 @@ export declare namespace Failure {
 /**
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const cause = Cause.die(new Error("Unexpected error"))
  * const failure = cause.failures[0]
@@ -279,7 +280,7 @@ export interface Die extends Cause.FailureProto<"Die"> {
 /**
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const cause = Cause.fail("Something went wrong")
  * const failure = cause.failures[0]
@@ -299,7 +300,7 @@ export interface Fail<out E> extends Cause.FailureProto<"Fail"> {
 /**
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const cause = Cause.interrupt(123)
  * const failure = cause.failures[0]
@@ -321,7 +322,7 @@ export interface Interrupt extends Cause.FailureProto<"Interrupt"> {
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const fail1 = Cause.fail("error1").failures[0]
  * const fail2 = Cause.fail("error2").failures[0]
@@ -350,7 +351,7 @@ export const empty: Cause<never> = core.causeEmpty
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const cause = Cause.fail("Something went wrong")
  * console.log(cause.failures.length) // 1
@@ -366,7 +367,7 @@ export const fail: <E>(error: E) => Cause<E> = core.causeFail
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const cause = Cause.die(new Error("Unexpected error"))
  * console.log(cause.failures.length) // 1
@@ -382,7 +383,7 @@ export const die: (defect: unknown) => Cause<never> = core.causeDie
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const cause = Cause.interrupt(123)
  * console.log(cause.failures.length) // 1
@@ -416,7 +417,7 @@ export const failureInterrupt: (fiberId?: number | undefined) => Interrupt = eff
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const interruptCause = Cause.interrupt(123)
  * const failCause = Cause.fail("error")
@@ -444,7 +445,7 @@ export const map: {
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const cause1 = Cause.fail("error1")
  * const cause2 = Cause.fail("error2")
@@ -466,7 +467,7 @@ export const merge: {
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const cause = Cause.fail("error")
  * const squashed = Cause.squash(cause)
@@ -483,7 +484,7 @@ export const squash: <E>(self: Cause<E>) => unknown = effect.causeSquash
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const failCause = Cause.fail("error")
  * const dieCause = Cause.die("defect")
@@ -518,7 +519,7 @@ export const filterError: <E>(self: Cause<E>) => E | Filter.fail<Cause<never>> =
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const dieCause = Cause.die("defect")
  * const failCause = Cause.fail("error")
@@ -553,7 +554,7 @@ export const filterDefect: <E>(self: Cause<E>) => {} | Filter.fail<Cause<E>> = e
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const interruptCause = Cause.interrupt(123)
  * const failCause = Cause.fail("error")
@@ -606,7 +607,8 @@ export const pretty: <E>(cause: Cause<E>) => string = effect.causePretty
 /**
  * @example
  * ```ts
- * import { Cause, Effect } from "effect"
+ * import { Cause } from "effect/data"
+ * import { Effect } from "effect"
  *
  * const error = new Cause.NoSuchElementError("Item not found")
  *
@@ -632,7 +634,7 @@ export interface YieldableError extends Error {
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const error = new Cause.NoSuchElementError()
  * console.log(Cause.isNoSuchElementError(error)) // true
@@ -647,7 +649,7 @@ export const isNoSuchElementError: (u: unknown) => u is NoSuchElementError = cor
 /**
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const error: Cause.NoSuchElementError = new Cause.NoSuchElementError("Element not found")
  * console.log(error._tag) // "NoSuchElementError"
@@ -668,7 +670,7 @@ export interface NoSuchElementError extends YieldableError {
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const error = new Cause.NoSuchElementError("Element not found")
  * console.log(error.message) // "Element not found"
@@ -684,7 +686,7 @@ export const NoSuchElementError: new(message?: string) => NoSuchElementError = c
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const error = new Cause.TimeoutError()
  * console.log(Cause.isTimeoutError(error)) // true
@@ -699,7 +701,7 @@ export const isTimeoutError: (u: unknown) => u is TimeoutError = effect.isTimeou
 /**
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const error: Cause.TimeoutError = new Cause.TimeoutError("Operation timed out")
  * console.log(error._tag) // "TimeoutError"
@@ -720,7 +722,7 @@ export interface TimeoutError extends YieldableError {
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const error = new Cause.TimeoutError("Operation timed out")
  * console.log(error.message) // "Operation timed out"
@@ -736,7 +738,7 @@ export const TimeoutError: new(message?: string) => TimeoutError = effect.Timeou
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const error = new Cause.IllegalArgumentError()
  * console.log(Cause.isIllegalArgumentError(error)) // true
@@ -751,7 +753,7 @@ export const isIllegalArgumentError: (u: unknown) => u is IllegalArgumentError =
 /**
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const error: Cause.IllegalArgumentError = new Cause.IllegalArgumentError("Invalid argument")
  * console.log(error._tag) // "IllegalArgumentError"
@@ -772,7 +774,7 @@ export interface IllegalArgumentError extends YieldableError {
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const error = new Cause.IllegalArgumentError("Invalid argument")
  * console.log(error.message) // "Invalid argument"
@@ -788,7 +790,7 @@ export const IllegalArgumentError: new(message?: string) => IllegalArgumentError
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const error = new Cause.ExceededCapacityError()
  * console.log(Cause.isExceededCapacityError(error)) // true
@@ -803,7 +805,7 @@ export const isExceededCapacityError: (u: unknown) => u is ExceededCapacityError
 /**
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const error: Cause.ExceededCapacityError = new Cause.ExceededCapacityError("Capacity exceeded")
  * console.log(error._tag) // "ExceededCapacityError"
@@ -824,7 +826,7 @@ export interface ExceededCapacityError extends YieldableError {
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const error = new Cause.ExceededCapacityError("Capacity exceeded")
  * console.log(error.message) // "Capacity exceeded"
@@ -840,7 +842,7 @@ export const ExceededCapacityError: new(message?: string) => ExceededCapacityErr
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const error = new Cause.UnknownError("some cause")
  * console.log(Cause.isUnknownError(error)) // true
@@ -855,7 +857,7 @@ export const isUnknownError: (u: unknown) => u is UnknownError = effect.isUnknow
 /**
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const error: Cause.UnknownError = new Cause.UnknownError("original cause", "Unknown error occurred")
  * console.log(error._tag) // "UnknownError"
@@ -876,7 +878,7 @@ export interface UnknownError extends YieldableError {
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  *
  * const error = new Cause.UnknownError("original cause", "Unknown error occurred")
  * console.log(error.message) // "Unknown error occurred"
@@ -893,7 +895,7 @@ export const UnknownError: new(cause: unknown, message?: string) => UnknownError
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  * import { ServiceMap } from "effect"
  *
  * // Define a custom annotation key

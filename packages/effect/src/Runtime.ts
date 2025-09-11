@@ -7,9 +7,8 @@
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Runtime } from "effect"
- * import { Fiber } from "effect"
+ * import { Effect, Fiber, Runtime } from "effect"
+
  *
  * // Create a main runner for Node.js
  * const runMain = Runtime.makeRunMain((options) => {
@@ -45,8 +44,9 @@ import type * as Fiber from "./Fiber.ts"
  *
  * @example
  * ```ts
- * import { Effect, Exit } from "effect"
- * import { Runtime } from "effect"
+ * import { Effect, Runtime } from "effect"
+ * import { Exit } from "effect/data"
+
  *
  * // Custom teardown that logs completion status
  * const customTeardown: Runtime.Teardown = (exit, onExit) => {
@@ -89,8 +89,9 @@ export interface Teardown {
  *
  * @example
  * ```ts
- * import { Effect, Exit, Cause } from "effect"
- * import { Runtime } from "effect"
+ * import { Effect, Runtime } from "effect"
+ * import { Exit, Cause } from "effect/data"
+
  *
  * // The default teardown behavior
  * const program1 = Effect.succeed(42)
@@ -135,9 +136,8 @@ export const defaultTeardown: Teardown = <E, A>(
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Runtime } from "effect"
- * import { Fiber } from "effect"
+ * import { Effect, Fiber, Runtime } from "effect"
+
  *
  * // Create a simple runner for a hypothetical platform
  * const runMain = Runtime.makeRunMain(({ fiber, teardown }) => {

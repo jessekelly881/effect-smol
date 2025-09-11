@@ -11,8 +11,8 @@ import * as ServiceMap from "./ServiceMap.ts"
  * @category models
  * @example
  * ```ts
- * import { Tracer } from "effect"
- * import { ServiceMap } from "effect"
+ * import { ServiceMap, Tracer } from "effect"
+
  *
  * // Create a custom tracer implementation
  * const customTracer: Tracer.Tracer = {
@@ -49,7 +49,7 @@ export interface Tracer {
  * @category models
  * @example
  * ```ts
- * import { Exit } from "effect"
+ * import { Exit } from "effect/data"
  * import { Tracer } from "effect"
  *
  * // Started span status
@@ -82,8 +82,8 @@ export type SpanStatus = {
  * @category models
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Tracer } from "effect"
+ * import { Effect, Tracer } from "effect"
+
  *
  * // Function that accepts any span type
  * const logSpan = (span: Tracer.AnySpan) => {
@@ -118,8 +118,8 @@ export const ParentSpanKey = "effect/Tracer/ParentSpan"
  * @category tags
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Tracer } from "effect"
+ * import { Effect, Tracer } from "effect"
+
  *
  * // Access the parent span from the context
  * const program = Effect.gen(function* () {
@@ -135,8 +135,8 @@ export class ParentSpan extends ServiceMap.Key<ParentSpan, AnySpan>()(ParentSpan
  * @category models
  * @example
  * ```ts
- * import { Tracer } from "effect"
- * import { ServiceMap } from "effect"
+ * import { ServiceMap, Tracer } from "effect"
+
  *
  * // Create an external span from another tracing system
  * const externalSpan: Tracer.ExternalSpan = {
@@ -163,8 +163,8 @@ export interface ExternalSpan {
  * @category models
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Tracer } from "effect"
+ * import { Effect, Tracer } from "effect"
+
  *
  * // Create an effect with span options
  * const options: Tracer.SpanOptions = {
@@ -207,8 +207,8 @@ export interface TraceOptions {
  * @category models
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Tracer } from "effect"
+ * import { Effect, Tracer } from "effect"
+
  *
  * // Different span kinds for different operations
  * const serverSpan = Effect.withSpan("handle-request", {
@@ -264,8 +264,8 @@ export interface Span {
  * @category models
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Tracer } from "effect"
+ * import { Effect, Tracer } from "effect"
+
  *
  * // Create a span link to connect spans
  * const externalSpan = Tracer.externalSpan({
@@ -293,8 +293,8 @@ export interface SpanLink {
  * @category constructors
  * @example
  * ```ts
- * import { Tracer } from "effect"
- * import { ServiceMap } from "effect"
+ * import { ServiceMap, Tracer } from "effect"
+
  * import { Option } from "effect/data"
  *
  * // Create a custom tracer with logging
@@ -317,8 +317,8 @@ export const make = (options: Tracer): Tracer => options
  * @category constructors
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Tracer } from "effect"
+ * import { Effect, Tracer } from "effect"
+
  *
  * // Create an external span from another tracing system
  * const span = Tracer.externalSpan({
@@ -353,8 +353,8 @@ export const externalSpan = (
  * @category references
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Tracer } from "effect"
+ * import { Effect, Tracer } from "effect"
+
  *
  * // Disable span propagation for a specific effect
  * const program = Effect.gen(function* () {
@@ -380,8 +380,8 @@ export const TracerKey = "effect/Tracer"
  * @category references
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Tracer } from "effect"
+ * import { Effect, Tracer } from "effect"
+
  *
  * // Access the current tracer from the context
  * const program = Effect.gen(function* () {
@@ -416,8 +416,8 @@ export const Tracer: ServiceMap.Reference<Tracer> = ServiceMap.Reference<Tracer>
  * @category native tracer
  * @example
  * ```ts
- * import { Tracer } from "effect"
- * import { ServiceMap } from "effect"
+ * import { ServiceMap, Tracer } from "effect"
+
  * import { Option } from "effect/data"
  *
  * // Create a native span directly

@@ -27,8 +27,7 @@
 import * as MutableHashMap from "../collections/MutableHashMap.ts"
 import * as Dual from "../data/Function.ts"
 import { format, type Inspectable, NodeInspectSymbol, toJson } from "../interfaces/Inspectable.ts"
-import type { Pipeable } from "../interfaces/Pipeable.ts"
-import { pipeArguments } from "../interfaces/Pipeable.ts"
+import { type Pipeable, pipeArguments } from "../interfaces/Pipeable.ts"
 
 const TypeId = "~effect/collections/MutableHashSet"
 

@@ -55,8 +55,8 @@ export * as Cache from "./Cache.ts"
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Clock } from "effect"
+ * import { Clock, Effect } from "effect"
+
  *
  * // Get current time in milliseconds
  * const getCurrentTime = Clock.currentTimeMillis
@@ -75,8 +75,8 @@ export * as Cache from "./Cache.ts"
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Clock } from "effect"
+ * import { Clock, Effect } from "effect"
+
  *
  * // Using Clock service directly
  * const program = Effect.gen(function* () {
@@ -125,9 +125,8 @@ export * as ConfigProvider from "./ConfigProvider.ts"
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Deferred } from "effect"
- * import { Fiber } from "effect"
+ * import { Deferred, Effect, Fiber } from "effect"
+
  *
  * // Basic usage: coordinate between fibers
  * const program = Effect.gen(function* () {
@@ -269,9 +268,9 @@ export * as Effect from "./Effect.ts"
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
+ * import { Effect, Fiber } from "effect"
  * import { Console } from "effect/logging"
- * import { Fiber } from "effect"
+
  *
  * // Basic fiber operations
  * const basicExample = Effect.gen(function* () {
@@ -444,8 +443,7 @@ export * as Match from "./Match.ts"
  * ## Basic Usage
  *
  * ```ts
- * import { Effect } from "effect"
- * import { Metric } from "effect"
+ * import { Effect, Metric } from "effect"
  *
  * // Create metrics
  * const requestCount = Metric.counter("http_requests_total", {
@@ -474,8 +472,7 @@ export * as Match from "./Match.ts"
  * ## Attributes and Tagging
  *
  * ```ts
- * import { Effect } from "effect"
- * import { Metric } from "effect"
+ * import { Effect, Metric } from "effect"
  *
  * const requestCount = Metric.counter("requests", {
  *   description: "Number of requests by endpoint and method"
@@ -503,8 +500,7 @@ export * as Match from "./Match.ts"
  * ## Advanced Examples
  *
  * ```ts
- * import { Effect } from "effect"
- * import { Metric } from "effect"
+ * import { Effect, Metric } from "effect"
  * import { Schedule } from "effect"
  *
  * // Business metrics
@@ -595,9 +591,7 @@ export * as Pool from "./Pool.ts"
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Scope } from "effect"
- * import { PubSub } from "effect"
+ * import { Effect, PubSub, Scope } from "effect"
  *
  * const program = Effect.gen(function*() {
  *   const pubsub = yield* PubSub.bounded<string>(10)
@@ -629,8 +623,7 @@ export * as PubSub from "./PubSub.ts"
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Queue } from "effect"
+ * import { Effect, Queue } from "effect"
  *
  * // Creating a bounded queue with capacity 10
  * const program = Effect.gen(function*() {
@@ -676,8 +669,7 @@ export * as RcRef from "./RcRef.ts"
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Ref } from "effect"
+ * import { Effect, Ref } from "effect"
  *
  * const program = Effect.gen(function*() {
  *   // Create a ref with initial value
@@ -752,9 +744,8 @@ export * as RequestResolver from "./RequestResolver.ts"
  *
  * @example
  * ```ts
- * import { Effect } from "effect"
- * import { Runtime } from "effect"
- * import { Fiber } from "effect"
+ * import { Effect, Fiber, Runtime } from "effect"
+
  *
  * // Create a main runner for Node.js
  * const runMain = Runtime.makeRunMain((options) => {
@@ -785,7 +776,8 @@ export * as Runtime from "./Runtime.ts"
  *
  * @example
  * ```ts
- * import { Effect, Schedule, Duration } from "effect"
+ * import { Effect, Schedule } from "effect"
+ * import { Duration } from "effect/data"
  *
  * // Retry with exponential backoff
  * const retryPolicy = Schedule.exponential("100 millis", 2.0)

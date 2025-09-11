@@ -1,8 +1,7 @@
 /**
  * @since 4.0.0
  */
-import type { Cause } from "effect/data"
-import { Exit } from "effect/data"
+import { type Cause, Exit } from "effect/data"
 import * as Option from "effect/data/Option"
 import * as Predicate from "effect/data/Predicate"
 import * as Result from "effect/data/Result"

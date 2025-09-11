@@ -11,7 +11,7 @@ import * as predicate from "./Predicate.ts"
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import * as Predicate from "effect/data/Predicate"
+ * import { Predicate } from "effect/data"
  *
  * assert.deepStrictEqual(Predicate.isSymbol(Symbol.for("a")), true)
  * assert.deepStrictEqual(Predicate.isSymbol("a"), false)
@@ -30,7 +30,7 @@ export const isSymbol: (u: unknown) => u is symbol = predicate.isSymbol
  *
  * @example
  * ```ts
- * import * as S from "effect/Symbol"
+ * import { Symbol as S } from "effect/data"
  *
  * const sym1 = Symbol("test")
  * const sym2 = Symbol("test")

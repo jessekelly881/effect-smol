@@ -83,8 +83,7 @@ import * as UndefinedOr from "../data/UndefinedOr.ts"
 import * as Equal from "../interfaces/Equal.ts"
 import * as Hash from "../interfaces/Hash.ts"
 import { format, type Inspectable, NodeInspectSymbol, toJson } from "../interfaces/Inspectable.ts"
-import type { Pipeable } from "../interfaces/Pipeable.ts"
-import { pipeArguments } from "../interfaces/Pipeable.ts"
+import { type Pipeable, pipeArguments } from "../interfaces/Pipeable.ts"
 import type { TypeLambda } from "../types/HKT.ts"
 import type { Covariant, NoInfer } from "../types/Types.ts"
 
@@ -212,7 +211,7 @@ const emptyArray: ReadonlyArray<never> = []
  * @example
  * ```ts
  * import { Chunk } from "effect/collections"
- * import * as Equivalence from "effect/data/Equivalence"
+ * import { Equivalence } from "effect/data"
  *
  * const chunk1 = Chunk.make(1, 2, 3)
  * const chunk2 = Chunk.make(1, 2, 3)
@@ -561,7 +560,7 @@ export const reverse: <S extends Chunk<any>>(self: S) => Chunk.With<S, Chunk.Inf
  * @example
  * ```ts
  * import { Chunk } from "effect/collections"
- * import * as Option from "effect/data/Option"
+ * import { Option } from "effect/data"
  *
  * const chunk = Chunk.make("a", "b", "c", "d")
  *

@@ -365,12 +365,11 @@ export const mapOmit: {
  *
  * @example
  * ```ts
- * import { Tuple } from "effect/data"
- * import * as S from "effect/String"
- * import * as N from "effect/Number"
+ * import { Number, String, Tuple } from "effect/data"
+
  *
  * // Creates an equivalence for tuples with string and number elements
- * const equivalence = Tuple.getEquivalence([S.Equivalence, N.Equivalence])
+ * const equivalence = Tuple.getEquivalence([String.Equivalence, Number.Equivalence])
  * ```
  *
  * @category Equivalence
@@ -383,12 +382,11 @@ export const getEquivalence = Equivalence.tuple
  *
  * @example
  * ```ts
- * import { Tuple } from "effect/data"
- * import * as S from "effect/String"
- * import * as N from "effect/Number"
+ * import { Number, String, Tuple } from "effect/data"
+
  *
  * // Creates an order for tuples with string and number elements
- * const tupleOrder = Tuple.getOrder([S.Order, N.Order])
+ * const tupleOrder = Tuple.getOrder([String.Order, Number.Order])
  * ```
  *
  * @category Ordering
@@ -463,7 +461,7 @@ export {
  *
  * ```ts
  * import { Tuple } from "effect/data"
- * import { Number, String } from "effect"
+ * import { Number, String } from "effect/data"
  *
  * const C = Tuple.getCombiner<readonly [number, string]>([Number.ReducerSum, String.ReducerConcat])
  * ```
@@ -499,7 +497,7 @@ export function getCombiner<A extends ReadonlyArray<unknown>>(
  *
  * ```ts
  * import { Tuple } from "effect/data"
- * import { Number, String } from "effect"
+ * import { Number, String } from "effect/data"
  *
  * const R = Tuple.getReducer<readonly [number, string]>([Number.ReducerSum, String.ReducerConcat])
  * ```

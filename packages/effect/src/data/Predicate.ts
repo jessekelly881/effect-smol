@@ -236,8 +236,8 @@ export declare namespace Refinement {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { Predicate } from "effect/data"
- * import * as N from "effect/Number"
+ * import { Number as N, Predicate } from "effect/data"
+
  *
  * const minLength3 = Predicate.mapInput(N.greaterThan(2), (s: string) => s.length)
  *
@@ -1126,8 +1126,8 @@ export const struct: {
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { Predicate } from "effect/data"
- * import * as N from "effect/Number"
+ * import { Number as N, Predicate } from "effect/data"
+
  *
  * const isPositive = Predicate.not(N.lessThan(0))
  *
@@ -1147,8 +1147,8 @@ export const not = <A>(self: Predicate<A>): Predicate<A> => (a) => !self(a)
  * @example
  * ```ts
  * import * as assert from "node:assert"
- * import { Predicate } from "effect/data"
- * import * as N from "effect/Number"
+ * import { Number as N, Predicate } from "effect/data"
+
  *
  * const nonZero = Predicate.or(N.lessThan(0), N.greaterThan(0))
  *

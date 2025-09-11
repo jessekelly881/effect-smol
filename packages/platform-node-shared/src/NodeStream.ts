@@ -13,8 +13,7 @@ import * as ServiceMap from "effect/ServiceMap"
 import * as Channel from "effect/stream/Channel"
 import * as Pull from "effect/stream/Pull"
 import * as Stream from "effect/stream/Stream"
-import type { Duplex } from "node:stream"
-import { Readable } from "node:stream"
+import { type Duplex, Readable } from "node:stream"
 import { pullIntoWritable } from "./NodeSink.ts"
 
 /**

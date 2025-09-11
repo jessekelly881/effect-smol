@@ -8,8 +8,7 @@ import * as Cause from "../data/Cause.ts"
 import * as Duration from "../data/Duration.ts"
 import * as Exit from "../data/Exit.ts"
 import type * as Filter from "../data/Filter.ts"
-import type { LazyArg } from "../data/Function.ts"
-import { constant, constTrue, constVoid, dual, identity } from "../data/Function.ts"
+import { constant, constTrue, constVoid, dual, identity, type LazyArg } from "../data/Function.ts"
 import * as Option from "../data/Option.ts"
 import { hasProperty } from "../data/Predicate.ts"
 import * as Effect from "../Effect.ts"
@@ -256,8 +255,8 @@ const StreamProto = {
  *
  * @example
  * ```ts
- * import { Stream } from "effect/stream"
- * import { Channel } from "effect/stream"
+ * import { Channel, Stream } from "effect/stream"
+
  *
  * const myChannel = Channel.succeed([1, 2, 3] as const)
  * const stream = Stream.fromChannel(myChannel)
@@ -586,7 +585,8 @@ export const failSync = <E>(evaluate: LazyArg<E>): Stream<never, E> => fromChann
  *
  * @example
  * ```ts
- * import { Effect, Cause } from "effect"
+ * import { Effect } from "effect"
+ * import { Cause } from "effect/data"
  * import { Stream } from "effect/stream"
  *
  * const cause = Cause.fail("Database connection failed")
@@ -612,7 +612,8 @@ export const die = (defect: unknown): Stream<never> => fromChannel(Channel.die(d
  *
  * @example
  * ```ts
- * import { Effect, Cause } from "effect"
+ * import { Effect } from "effect"
+ * import { Cause } from "effect/data"
  * import { Stream } from "effect/stream"
  *
  * const stream = Stream.failCauseSync(() =>
@@ -966,9 +967,9 @@ export const fromEventListener = <A = unknown>(
  * ```ts
  * import { Stream } from "effect/stream"
  * import { Effect } from "effect"
- * import * as Option from "effect/data/Option"
+ * import { Option } from "effect/data"
  *
- * const stream = Stream.paginate(0, (n) => [
+ * const stream = Stream.paginate(0, (n: number) => [
  *   n,
  *   n < 3 ? Option.some(n + 1) : Option.none()
  * ])
@@ -1506,7 +1507,8 @@ export const filter: {
  *
  * @example
  * ```ts
- * import { Effect, Cause } from "effect"
+ * import { Effect } from "effect"
+ * import { Cause } from "effect/data"
  * import { Stream } from "effect/stream"
  *
  * const failingStream = Stream.make(1, 2).pipe(
@@ -1582,7 +1584,8 @@ export const mapError: {
  *
  * @example
  * ```ts
- * import { Effect, Cause } from "effect"
+ * import { Effect } from "effect"
+ * import { Cause } from "effect/data"
  * import { Stream } from "effect/stream"
  *
  * const failingStream = Stream.fail("NetworkError")
@@ -2547,7 +2550,8 @@ export const splitLines = <E, R>(self: Stream<string, E, R>): Stream<string, E, 
  *
  * @example
  * ```ts
- * import { Effect, Exit } from "effect"
+ * import { Effect } from "effect"
+ * import { Exit } from "effect/data"
  * import { Console } from "effect/logging"
  * import { Stream } from "effect/stream"
  *

@@ -1,5 +1,4 @@
-import { Effect, pipe, Ref } from "effect"
-import type { Scope } from "effect"
+import { Effect, pipe, Ref, type Scope } from "effect"
 
 interface Counter {
   acquire(): Effect.Effect<number, never, Scope.Scope>

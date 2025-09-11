@@ -15,8 +15,7 @@ import { dual } from "../data/Function.ts"
 import * as Option from "../data/Option.ts"
 import { hasProperty } from "../data/Predicate.ts"
 import * as Effect from "../Effect.ts"
-import type { Inspectable } from "../interfaces/Inspectable.ts"
-import { NodeInspectSymbol, toJson } from "../interfaces/Inspectable.ts"
+import { type Inspectable, NodeInspectSymbol, toJson } from "../interfaces/Inspectable.ts"
 import type * as Types from "../types/Types.ts"
 import * as TxChunk from "./TxChunk.ts"
 import * as TxRef from "./TxRef.ts"
@@ -31,7 +30,7 @@ import * as TxRef from "./TxRef.ts"
  *
  * @example
  * ```ts
- * import { Cause } from "effect"
+ * import { Cause } from "effect/data"
  * import { TxQueue } from "effect/stm"
  *
  * // State progression example
@@ -192,7 +191,8 @@ export interface TxQueueState extends Inspectable {
  *
  * @example
  * ```ts
- * import { Effect, Cause } from "effect"
+ * import { Effect } from "effect"
+ * import { Cause } from "effect/data"
  * import { TxQueue } from "effect/stm"
  *
  * const program = Effect.gen(function* () {
@@ -1226,7 +1226,8 @@ export const fail: {
  *
  * @example
  * ```ts
- * import { Effect, Cause } from "effect"
+ * import { Effect } from "effect"
+ * import { Cause } from "effect/data"
  * import { TxQueue } from "effect/stm"
  *
  * const program = Effect.gen(function* () {
@@ -1277,7 +1278,8 @@ export const failCause: {
  *
  * @example
  * ```ts
- * import { Effect, Cause } from "effect"
+ * import { Effect } from "effect"
+ * import { Cause } from "effect/data"
  * import { TxQueue } from "effect/stm"
  *
  * const program = Effect.gen(function* () {

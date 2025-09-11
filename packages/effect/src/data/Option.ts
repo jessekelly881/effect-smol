@@ -19,8 +19,7 @@ import type * as Unify from "../types/Unify.ts"
 import * as Gen from "../Utils.ts"
 import type { NoSuchElementError } from "./Cause.ts"
 import * as Combiner from "./Combiner.ts"
-import type { LazyArg } from "./Function.ts"
-import { constNull, constUndefined, dual, identity, isFunction } from "./Function.ts"
+import { constNull, constUndefined, dual, identity, isFunction, type LazyArg } from "./Function.ts"
 import * as Reducer from "./Reducer.ts"
 
 const TypeId = "~effect/data/Option"
@@ -101,7 +100,7 @@ export interface Some<out A> extends Pipeable, Inspectable, Yieldable<Option<A>,
  * @example
  * ```ts
  * import { Option } from "effect/data"
- * import * as Unify from "effect/types/Unify"
+ * import { Unify } from "effect/types"
  *
  * // Internal unification interface used by the Effect library
  * // for type-level operations with Option types
@@ -1930,10 +1929,10 @@ export const filter: {
  *
  * @example
  * ```ts
- * import { Option } from "effect/data"
- * import * as N from "effect/Number"
+ * import { Number, Option } from "effect/data"
+
  *
- * const isEquivalent = Option.getEquivalence(N.Equivalence)
+ * const isEquivalent = Option.getEquivalence(Number.Equivalence)
  *
  * console.log(isEquivalent(Option.none(), Option.none()))
  * // Output: true
@@ -1972,10 +1971,10 @@ export const getEquivalence = <A>(isEquivalent: Equivalence.Equivalence<A>): Equ
  *
  * @example
  * ```ts
- * import { Option } from "effect/data"
- * import * as N from "effect/Number"
+ * import { Number, Option } from "effect/data"
+
  *
- * const order = Option.getOrder(N.Order)
+ * const order = Option.getOrder(Number.Order)
  *
  * console.log(order(Option.none(), Option.none()))
  * // Output: 0
@@ -2100,10 +2099,10 @@ export const liftPredicate: { // Note: I intentionally avoid using the NoInfer p
  *
  * @example
  * ```ts
- * import { Option } from "effect/data"
- * import * as N from "effect/Number"
+ * import { Number, Option } from "effect/data"
+
  *
- * const contains = Option.containsWith(N.Equivalence)
+ * const contains = Option.containsWith(Number.Equivalence)
  *
  * console.log(Option.some(2).pipe(contains(2)))
  * // Output: true

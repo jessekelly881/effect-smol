@@ -1,6 +1,5 @@
 import { assert, describe, it } from "@effect/vitest"
-import type { Layer } from "effect"
-import { Effect, Fiber } from "effect"
+import { Effect, Fiber, type Layer } from "effect"
 import { Cause, Option } from "effect/data"
 import { Stream } from "effect/stream"
 import { RpcClient, RpcServer } from "effect/unstable/rpc"

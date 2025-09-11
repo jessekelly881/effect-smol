@@ -12,10 +12,8 @@
 import * as Chunk from "../collections/Chunk.ts"
 import { dual } from "../data/Function.ts"
 import * as Effect from "../Effect.ts"
-import type { Inspectable } from "../interfaces/Inspectable.ts"
-import { format, NodeInspectSymbol, toJson } from "../interfaces/Inspectable.ts"
-import type { Pipeable } from "../interfaces/Pipeable.ts"
-import { pipeArguments } from "../interfaces/Pipeable.ts"
+import { format, type Inspectable, NodeInspectSymbol, toJson } from "../interfaces/Inspectable.ts"
+import { type Pipeable, pipeArguments } from "../interfaces/Pipeable.ts"
 import type { NoInfer } from "../types/Types.ts"
 import * as TxRef from "./TxRef.ts"
 
