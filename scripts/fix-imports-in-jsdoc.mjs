@@ -6,8 +6,6 @@
 import { readdirSync, readFileSync, statSync, writeFileSync } from "fs"
 import { join } from "path"
 
-const EFFECT_IMPORT_REGEX = /^\s*\*?\s*import\s+{[^}]+}\s+from\s+["'](@?effect[^"']*?)["']/gm
-
 function findTsFiles(dir) {
   const files = []
 
@@ -33,40 +31,91 @@ function findTsFiles(dir) {
   return files
 }
 
-function extractJSDocExamples(content) {
-  const examples = []
+function cleanJSDocCodeContent(codeContent) {
+  // Remove JSDoc comment prefixes (* ) from each line
+  return codeContent
+    .split("\n")
+    .map((line) => line.replace(/^\s*\*\s?/, ""))
+    .join("\n")
+    .trim()
+}
+
+function addJSDocPrefixes(codeContent) {
+  // Add JSDoc comment prefixes (* ) to each line
+  return codeContent
+    .split("\n")
+    .map((line) => line.length > 0 ? ` * ${line}` : " *")
+    .join("\n")
+}
+
+function extractAndFixJSDocExamples(content) {
+  const issues = []
+  let hasChanges = false
+  let modifiedContent = content
+
+  // Find all JSDoc blocks
   const jsdocBlocks = content.match(/\/\*\*[\s\S]*?\*\//g) || []
 
   for (const block of jsdocBlocks) {
+    // Find @example sections with code blocks
     const exampleMatches = block.match(/@example[\s\S]*?(?=@\w+|$|\*\/)/g) || []
 
     for (const example of exampleMatches) {
-      const codeBlocks = example.match(/```ts\n([\s\S]*?)```/g) || []
-      for (const block of codeBlocks) {
-        examples.push(block)
+      const codeBlockMatch = example.match(/(```ts\n)([\s\S]*?)(```)/g)
+
+      if (codeBlockMatch) {
+        for (const fullCodeBlock of codeBlockMatch) {
+          const codeMatch = fullCodeBlock.match(/```ts\n([\s\S]*?)```/)
+          if (codeMatch) {
+            const rawCodeContent = codeMatch[1]
+            const cleanCodeContent = cleanJSDocCodeContent(rawCodeContent)
+            const duplicates = findDuplicatedImports(cleanCodeContent)
+
+            if (duplicates.length > 0) {
+              issues.push({
+                duplicates,
+                codeBlock: fullCodeBlock
+              })
+
+              // Fix the code block
+              const fixedCodeContent = consolidateImports(cleanCodeContent, duplicates)
+              const fixedCodeWithPrefixes = addJSDocPrefixes(fixedCodeContent)
+              const fixedCodeBlock = `\`\`\`ts\n${fixedCodeWithPrefixes}\n * \`\`\``
+
+              modifiedContent = modifiedContent.replace(fullCodeBlock, fixedCodeBlock)
+              hasChanges = true
+            }
+          }
+        }
       }
     }
   }
 
-  return examples
+  return { issues, hasChanges, modifiedContent }
 }
 
-function findDuplicatedImports(codeBlock) {
+function findDuplicatedImports(codeContent) {
   const imports = []
-  let match
+  const lines = codeContent.split("\n")
 
-  // Reset regex
-  EFFECT_IMPORT_REGEX.lastIndex = 0
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim()
+    const importMatch = line.match(/^import\s+\{([^}]+)\}\s+from\s+["'](@?effect[^"']*?)["']/)
 
-  while ((match = EFFECT_IMPORT_REGEX.exec(codeBlock)) !== null) {
-    const packageName = match[1]
-    const fullImport = match[0]
+    if (importMatch) {
+      const packageName = importMatch[2]
+      const importedNames = importMatch[1]
+        .split(",")
+        .map((name) => name.trim())
+        .filter((name) => name.length > 0)
 
-    imports.push({
-      packageName,
-      fullImport,
-      line: codeBlock.substring(0, match.index).split("\n").length
-    })
+      imports.push({
+        packageName,
+        importedNames,
+        line: i + 1,
+        fullLine: line
+      })
+    }
   }
 
   // Group by package name and find duplicates
@@ -92,99 +141,60 @@ function findDuplicatedImports(codeBlock) {
   return duplicates
 }
 
-function consolidateImports(codeBlock, duplicates) {
-  let fixedCode = codeBlock
+function consolidateImports(codeContent, duplicates) {
+  const lines = codeContent.split("\n")
+  const linesToRemove = new Set()
 
   // Process each package with duplicates
   for (const duplicate of duplicates) {
-    const { imports } = duplicate
+    const { imports, packageName } = duplicate
 
-    // Extract all imported names from all imports of this package
+    // Collect all imported names
     const allImportedNames = new Set()
-    const importLines = []
+    let firstImportLineIndex = -1
 
     for (const imp of imports) {
-      importLines.push(imp.fullImport)
+      if (firstImportLineIndex === -1) {
+        firstImportLineIndex = imp.line - 1 // Convert to 0-based index
+      } else {
+        linesToRemove.add(imp.line - 1) // Mark duplicate lines for removal
+      }
 
-      // Extract imported names - handle semicolons and whitespace variations
-      const cleanImport = imp.fullImport.replace(/;?\s*$/, "")
-      const importMatch = cleanImport.match(/import\s+\{([^}]+)\}/)
-      if (importMatch) {
-        const names = importMatch[1]
-          .split(",")
-          .map((name) => name.trim())
-          .filter((name) => name.length > 0)
-
-        for (const name of names) {
-          allImportedNames.add(name)
-        }
+      for (const name of imp.importedNames) {
+        allImportedNames.add(name)
       }
     }
 
-    // Create consolidated import statement using the format of the first import
-    const firstImport = importLines[0]
+    // Create consolidated import
     const sortedNames = Array.from(allImportedNames).sort()
-    const consolidatedImport = firstImport
-      .replace(/;?\s*$/, "") // Remove trailing semicolon/whitespace
-      .replace(/\{[^}]+\}/, `{ ${sortedNames.join(", ")} }`)
+    const consolidatedImport = `import { ${sortedNames.join(", ")} } from "${packageName}"`
 
-    // Remove all existing import lines for this package
-    for (const line of importLines) {
-      // Create flexible regex that handles whitespace variations
-      const escapedLine = line.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "\\s*")
-      const lineRegex = new RegExp(`^\\s*\\*?\\s*${escapedLine}\\s*$`, "gm")
-      fixedCode = fixedCode.replace(lineRegex, "")
-    }
-
-    // Insert the consolidated import at the position of the first import
-    const firstLineRegex = new RegExp(
-      `^(\\s*\\*?\\s*)${importLines[0].replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "\\s*")}\\s*$`,
-      "m"
-    )
-
-    if (!fixedCode.includes(consolidatedImport)) {
-      fixedCode = fixedCode.replace(firstLineRegex, `$1${consolidatedImport}`)
+    // Replace the first import line with the consolidated one
+    if (firstImportLineIndex >= 0) {
+      lines[firstImportLineIndex] = consolidatedImport
     }
   }
 
-  // Clean up any empty lines that might have been left behind
-  fixedCode = fixedCode.replace(/(\n\s*\*\s*\n)\s*\*\s*\n/g, "$1")
+  // Remove duplicate import lines (in reverse order to maintain indices)
+  const sortedLinesToRemove = Array.from(linesToRemove).sort((a, b) => b - a)
+  for (const lineIndex of sortedLinesToRemove) {
+    lines.splice(lineIndex, 1)
+  }
 
-  return fixedCode
+  return lines.join("\n")
 }
 
 function analyzeFile(filePath, shouldFix = false) {
   try {
     const originalContent = readFileSync(filePath, "utf8")
-    const examples = extractJSDocExamples(originalContent)
-    const issues = []
-    let modifiedContent = originalContent
-    let hasChanges = false
-
-    for (let i = 0; i < examples.length; i++) {
-      const duplicates = findDuplicatedImports(examples[i])
-      if (duplicates.length > 0) {
-        issues.push({
-          exampleIndex: i + 1,
-          duplicates,
-          codeBlock: examples[i]
-        })
-
-        if (shouldFix) {
-          // Fix this example
-          const fixedExample = consolidateImports(examples[i], duplicates)
-          modifiedContent = modifiedContent.replace(examples[i], fixedExample)
-          hasChanges = true
-        }
-      }
-    }
+    const result = extractAndFixJSDocExamples(originalContent)
 
     // Write back the fixed content if there were changes
-    if (shouldFix && hasChanges) {
-      writeFileSync(filePath, modifiedContent, "utf8")
+    if (shouldFix && result.hasChanges) {
+      writeFileSync(filePath, result.modifiedContent, "utf8")
     }
 
-    return { issues, hasChanges }
+    return { issues: result.issues, hasChanges: result.hasChanges }
   } catch (error) {
     console.error(`Error reading file ${filePath}: ${error.message}`)
     return { issues: [], hasChanges: false }
@@ -226,14 +236,15 @@ function main() {
       }
 
       if (!shouldFix) {
-        for (const issue of issues) {
+        for (let i = 0; i < issues.length; i++) {
+          const issue = issues[i]
           totalIssues++
-          console.log(`  └─ Example #${issue.exampleIndex}:`)
+          console.log(`  └─ Example #${i + 1}:`)
 
           for (const duplicate of issue.duplicates) {
             console.log(`     🔸 Package "${duplicate.packageName}" imported ${duplicate.count} times:`)
             for (const imp of duplicate.imports) {
-              console.log(`       • Line ${imp.line}: ${imp.fullImport}`)
+              console.log(`       • Line ${imp.line}: ${imp.fullLine}`)
             }
           }
 
