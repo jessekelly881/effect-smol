@@ -1,4 +1,4 @@
-import * as Duration from "#dist/effect/Duration"
+import * as Duration from "#dist/effect/data/Duration"
 import * as Effect from "#dist/effect/Effect"
 import * as Schema from "#dist/effect/schema/Schema"
 import * as Transformation from "#dist/effect/schema/Transformation"
