@@ -130,17 +130,17 @@ export interface HashContext {
   /**
    * Computes a hash value for an array by hashing all of its elements.
    */
-  readonly array: <A>(arr: ReadonlyArray<A>) => number
+  readonly array: <A>(arr: Iterable<A>) => number
 
   /**
    * Computes a hash value for a Map by hashing all of its key-value pairs.
    */
-  readonly map: <K, V>(map: Map<K, V>) => number
+  readonly map: <K, V>(map: Iterable<readonly [K, V]>) => number
 
   /**
    * Computes a hash value for a Set by hashing all of its values.
    */
-  readonly set: <V>(set: Set<V>) => number
+  readonly set: <V>(set: Iterable<V>) => number
 }
 
 /**
@@ -515,10 +515,10 @@ export const structure = <A extends object>(o: A) => {
  * @category hashing
  * @since 2.0.0
  */
-export const array = <A>(arr: ReadonlyArray<A>) => {
+export const array = <A>(arr: Iterable<A>) => {
   let h = 6151
-  for (let i = 0; i < arr.length; i++) {
-    h = pipe(h, combine(hash(arr[i])))
+  for (const value of arr) {
+    h = pipe(h, combine(hash(value)))
   }
   return optimize(h)
 }
@@ -550,7 +550,7 @@ export const array = <A>(arr: ReadonlyArray<A>) => {
  * @category hashing
  * @since 2.0.0
  */
-export const map = <K, V>(map: Map<K, V>) => {
+export const map = <K, V>(map: Iterable<readonly [K, V]>) => {
   let h = string("Map")
   for (const [key, value] of map) {
     h ^= combine(hash(key), hash(value))
@@ -584,7 +584,7 @@ export const map = <K, V>(map: Map<K, V>) => {
  * @category hashing
  * @since 2.0.0
  */
-export const set = <V>(set: Set<V>) => {
+export const set = <V>(set: Iterable<V>) => {
   let h = string("Set")
   for (const value of set) {
     h ^= hash(value)
