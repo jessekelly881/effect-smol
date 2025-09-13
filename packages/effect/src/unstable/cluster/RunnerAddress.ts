@@ -33,7 +33,7 @@ export class RunnerAddress extends Schema.Class<RunnerAddress>(TypeId)({
    * @since 4.0.0
    */
   [Hash.symbol]() {
-    return Hash.cached(this, () => Hash.string(`${this.host}:${this.port}`))
+    return Hash.string(`${this.host}:${this.port}`)
   }
 
   /**
